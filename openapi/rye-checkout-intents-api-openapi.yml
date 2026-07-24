@@ -1,0 +1,1592 @@
+openapi: 3.0.0
+info:
+  title: Universal Checkout Betas Checkout Intents API
+  version: 1.0.5
+  description: 'Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.
+
+
+    View the [Rye API docs](https://docs.rye.com).'
+  termsOfService: https://rye.com/terms-of-service
+  license:
+    name: UNLICENSED
+  contact:
+    name: Rye
+    email: dev@rye.com
+    url: https://docs.rye.com
+servers:
+- url: https://staging.api.rye.com
+tags:
+- name: Checkout Intents
+paths:
+  /api/v1/checkout-intents:
+    get:
+      operationId: ListCheckoutIntents
+      responses:
+        '200':
+          description: Paginated checkout intents response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutIntentListResponse'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+      description: 'Retrieve a paginated list of checkout intents
+
+
+        Enables developers to query checkout intents associated with their account, with filters and cursor-based pagination.'
+      summary: List checkout intents
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:read
+      parameters:
+      - description: Maximum number of results to return (default 100)
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 20
+      - in: query
+        name: after
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: before
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: id
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
+            type: string
+      - in: query
+        name: state
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutIntentState'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const checkoutIntent of client.checkoutIntents.list()) {\n  console.log(checkoutIntent);\n}"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\npage = client.checkout_intents.list()\npage = page.data[0]\nprint(page)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.CheckoutIntentListPage;\nimport com.rye.models.checkoutintents.CheckoutIntentListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        CheckoutIntentListPage page = client.checkoutIntents().list();\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
+    post:
+      operationId: CreateCheckoutIntent
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutIntent'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeError'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmazonUnavailableError'
+      description: Create a checkout intent with the given request body.
+      summary: Create checkout intent
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutIntentPostParams'
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\nconst checkoutIntent = await client.checkoutIntents.create({\n  buyer: {\n    address1: '123 Main St',\n    city: 'New York',\n    country: 'US',\n    email: 'john.doe@example.com',\n    firstName: 'John',\n    lastName: 'Doe',\n    phone: '1234567890',\n    postalCode: '10001',\n    province: 'NY',\n  },\n  productUrl: 'https://www.amazon.com/dp/B0DFC9MT8Q',\n  quantity: 1,\n});\n\nconsole.log(checkoutIntent);"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\ncheckout_intent = client.checkout_intents.create(\n    buyer={\n        \"address1\": \"123 Main St\",\n        \"city\": \"New York\",\n        \"country\": \"US\",\n        \"email\": \"john.doe@example.com\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"phone\": \"1234567890\",\n        \"postal_code\": \"10001\",\n        \"province\": \"NY\",\n    },\n    product_url=\"https://www.amazon.com/dp/B0DFC9MT8Q\",\n    quantity=1,\n)\nprint(checkout_intent)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.Buyer;\nimport com.rye.models.checkoutintents.CheckoutIntent;\nimport com.rye.models.checkoutintents.CheckoutIntentCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        CheckoutIntentCreateParams params = CheckoutIntentCreateParams.builder()\n            .buyer(Buyer.builder()\n                .address1(\"123 Main St\")\n                .city(\"New York\")\n                .country(\"US\")\n                .email(\"john.doe@example.com\")\n                .firstName(\"John\")\n                .lastName(\"Doe\")\n                .phone(\"1234567890\")\n                .postalCode(\"10001\")\n                .province(\"NY\")\n                .build())\n            .productUrl(\"https://www.amazon.com/dp/B0DFC9MT8Q\")\n            .quantity(1)\n            .build();\n        CheckoutIntent checkoutIntent = client.checkoutIntents().create(params);\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"buyer\": {\n            \"address1\": \"123 Main St\",\n            \"city\": \"New York\",\n            \"country\": \"US\",\n            \"email\": \"john.doe@example.com\",\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"phone\": \"1234567890\",\n            \"postalCode\": \"10001\",\n            \"province\": \"NY\"\n          },\n          \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n          \"quantity\": 1,\n          \"referenceId\": \"order-1234\"\n        }'"
+  /api/v1/checkout-intents/{id}:
+    get:
+      operationId: GetCheckoutIntent
+      responses:
+        '200':
+          description: Checkout intent information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutIntent'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      description: 'Retrieve a checkout intent by id
+
+
+        Returns checkout intent information if the lookup succeeds.'
+      summary: Retrieve checkout intent
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:read
+      parameters:
+      - description: The id of the checkout intent to look up
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\nconst checkoutIntent = await client.checkoutIntents.retrieve('id');\n\nconsole.log(checkoutIntent);"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\ncheckout_intent = client.checkout_intents.retrieve(\n    \"id\",\n)\nprint(checkout_intent)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.CheckoutIntent;\nimport com.rye.models.checkoutintents.CheckoutIntentRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        CheckoutIntent checkoutIntent = client.checkoutIntents().retrieve(\"id\");\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents/$ID \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
+  /api/v1/checkout-intents/{id}/order:
+    get:
+      operationId: GetCheckoutIntentOrder
+      responses:
+        '200':
+          description: The order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      description: 'Retrieve the order associated with a checkout intent.
+
+
+        Returns the single order created when the checkout intent reached the
+
+        `completed` state. 404 if the intent has not produced an order yet.'
+      summary: Retrieve order
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:read
+      parameters:
+      - description: The id of the checkout intent to look up
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\nconst order = await client.checkoutIntents.retrieveOrder('id');\n\nconsole.log(order.id);"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\norder = client.checkout_intents.retrieve_order(\n    \"id\",\n)\nprint(order.id)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.CheckoutIntentRetrieveOrderParams;\nimport com.rye.models.orders.Order;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        Order order = client.checkoutIntents().retrieveOrder(\"id\");\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents/$ID/order \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
+  /api/v1/checkout-intents/{id}/confirm:
+    post:
+      operationId: ConfirmCheckoutIntent
+      responses:
+        '200':
+          description: The confirmed checkout intent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutIntent'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCheckoutIntentStateError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeError'
+      description: 'Confirm a checkout intent with provided payment information
+
+
+        Confirm means we have buyer''s name, address and payment info, so we can
+
+        move forward to place the order.'
+      summary: Confirm checkout intent
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:write
+      parameters:
+      - description: The id of the checkout intent to confirm
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The request body containing the payment information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutIntentConfirmParams'
+              description: ''
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\nconst checkoutIntent = await client.checkoutIntents.confirm('id', {\n  paymentMethod: { stripeToken: 'tok_1RkrWWHGDlstla3f1Fc7ZrhH', type: 'stripe_token' },\n});\n\nconsole.log(checkoutIntent);"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\ncheckout_intent = client.checkout_intents.confirm(\n    id=\"id\",\n    payment_method={\n        \"stripe_token\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n        \"type\": \"stripe_token\",\n    },\n)\nprint(checkout_intent)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.CheckoutIntent;\nimport com.rye.models.checkoutintents.CheckoutIntentConfirmParams;\nimport com.rye.models.checkoutintents.PaymentMethod;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        CheckoutIntentConfirmParams params = CheckoutIntentConfirmParams.builder()\n            .id(\"id\")\n            .paymentMethod(PaymentMethod.StripeTokenPaymentMethod.builder()\n                .stripeToken(\"tok_1RkrWWHGDlstla3f1Fc7ZrhH\")\n                .type(PaymentMethod.StripeTokenPaymentMethod.Type.STRIPE_TOKEN)\n                .build())\n            .build();\n        CheckoutIntent checkoutIntent = client.checkoutIntents().confirm(params);\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents/$ID/confirm \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"paymentMethod\": {\n            \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n            \"type\": \"stripe_token\"\n          }\n        }'"
+  /api/v1/checkout-intents/{id}/shipments:
+    get:
+      operationId: GetShipments
+      responses:
+        '200':
+          description: Shipments list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentsListResponse'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+      description: List shipments for a checkout intent
+      summary: List shipments for checkout intent
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:read
+      parameters:
+      - description: The id of the checkout intent
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of results to return (default 100)
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 20
+      - in: query
+        name: after
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: before
+        required: false
+        schema:
+          type: string
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const shipment of client.checkoutIntents.shipments.list('id')) {\n  console.log(shipment);\n}"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\npage = client.checkout_intents.shipments.list(\n    id=\"id\",\n)\npage = page.data[0]\nprint(page)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.shipments.ShipmentListPage;\nimport com.rye.models.checkoutintents.shipments.ShipmentListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        ShipmentListPage page = client.checkoutIntents().shipments().list(\"id\");\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents/$ID/shipments \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
+  /api/v1/checkout-intents/purchase:
+    post:
+      operationId: Purchase
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutIntent'
+        '401':
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeError'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmazonUnavailableError'
+      description: 'Create a checkout intent and immediately trigger the purchase workflow.
+
+
+        This is a "fire-and-forget" endpoint that combines create + confirm in one step.
+
+        The workflow handles offer retrieval, payment authorization, and order placement
+
+        asynchronously. Poll the GET endpoint to check status.'
+      summary: Purchase product
+      tags:
+      - Checkout Intents
+      security:
+      - bearerAuth:
+        - checkout_intents:write
+      parameters: []
+      requestBody:
+        description: The request body containing the checkout intent purchase parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutIntentPurchaseParams'
+              description: ''
+      x-codeSamples:
+      - lang: JavaScript
+        source: "import CheckoutIntents from 'checkout-intents';\n\nconst client = new CheckoutIntents({\n  apiKey: process.env['CHECKOUT_INTENTS_API_KEY'], // This is the default and can be omitted\n});\n\nconst checkoutIntent = await client.checkoutIntents.purchase({\n  buyer: {\n    address1: '123 Main St',\n    city: 'New York',\n    country: 'US',\n    email: 'john.doe@example.com',\n    firstName: 'John',\n    lastName: 'Doe',\n    phone: '1234567890',\n    postalCode: '10001',\n    province: 'NY',\n  },\n  paymentMethod: { stripeToken: 'tok_1RkrWWHGDlstla3f1Fc7ZrhH', type: 'stripe_token' },\n  productUrl: 'https://www.amazon.com/dp/B0DFC9MT8Q',\n  quantity: 1,\n});\n\nconsole.log(checkoutIntent);"
+      - lang: Python
+        source: "import os\nfrom checkout_intents import CheckoutIntents\n\nclient = CheckoutIntents(\n    api_key=os.environ.get(\"CHECKOUT_INTENTS_API_KEY\"),  # This is the default and can be omitted\n)\ncheckout_intent = client.checkout_intents.purchase(\n    buyer={\n        \"address1\": \"123 Main St\",\n        \"city\": \"New York\",\n        \"country\": \"US\",\n        \"email\": \"john.doe@example.com\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"phone\": \"1234567890\",\n        \"postal_code\": \"10001\",\n        \"province\": \"NY\",\n    },\n    payment_method={\n        \"stripe_token\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n        \"type\": \"stripe_token\",\n    },\n    product_url=\"https://www.amazon.com/dp/B0DFC9MT8Q\",\n    quantity=1,\n)\nprint(checkout_intent)"
+      - lang: Java
+        source: "package com.rye.example;\n\nimport com.rye.client.CheckoutIntentsClient;\nimport com.rye.client.okhttp.CheckoutIntentsOkHttpClient;\nimport com.rye.models.checkoutintents.Buyer;\nimport com.rye.models.checkoutintents.CheckoutIntent;\nimport com.rye.models.checkoutintents.CheckoutIntentPurchaseParams;\nimport com.rye.models.checkoutintents.PaymentMethod;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        CheckoutIntentsClient client = CheckoutIntentsOkHttpClient.fromEnv();\n\n        CheckoutIntentPurchaseParams params = CheckoutIntentPurchaseParams.builder()\n            .buyer(Buyer.builder()\n                .address1(\"123 Main St\")\n                .city(\"New York\")\n                .country(\"US\")\n                .email(\"john.doe@example.com\")\n                .firstName(\"John\")\n                .lastName(\"Doe\")\n                .phone(\"1234567890\")\n                .postalCode(\"10001\")\n                .province(\"NY\")\n                .build())\n            .paymentMethod(PaymentMethod.StripeTokenPaymentMethod.builder()\n                .stripeToken(\"tok_1RkrWWHGDlstla3f1Fc7ZrhH\")\n                .type(PaymentMethod.StripeTokenPaymentMethod.Type.STRIPE_TOKEN)\n                .build())\n            .productUrl(\"https://www.amazon.com/dp/B0DFC9MT8Q\")\n            .quantity(1)\n            .build();\n        CheckoutIntent checkoutIntent = client.checkoutIntents().purchase(params);\n    }\n}"
+      - lang: cURL
+        source: "curl https://staging.api.rye.com/api/v1/checkout-intents/purchase \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"buyer\": {\n            \"address1\": \"123 Main St\",\n            \"city\": \"New York\",\n            \"country\": \"US\",\n            \"email\": \"john.doe@example.com\",\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"phone\": \"1234567890\",\n            \"postalCode\": \"10001\",\n            \"province\": \"NY\"\n          },\n          \"paymentMethod\": {\n            \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n            \"type\": \"stripe_token\"\n          },\n          \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n          \"quantity\": 1,\n          \"referenceId\": \"order-1234\"\n        }'"
+components:
+  schemas:
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    PaymentMethod:
+      anyOf:
+      - $ref: '#/components/schemas/StripeTokenPaymentMethod'
+      - $ref: '#/components/schemas/BasisTheoryPaymentMethod'
+      - $ref: '#/components/schemas/DrawdownPaymentMethod'
+      - $ref: '#/components/schemas/X402PaymentMethod'
+    AmazonUnavailableError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    ShippedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
+      title: Shipped
+    CheckoutConstraints:
+      properties:
+        offerRetrievalEffort:
+          $ref: '#/components/schemas/OfferRetrievalEffort'
+          example: max
+        maxShippingPrice:
+          type: integer
+          format: int32
+          example: 500
+          minimum: 0
+        maxTotalPrice:
+          type: integer
+          format: int32
+          example: 100000
+          minimum: 0
+      type: object
+    CompletedCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          estimatedDeliveryDate:
+            type: string
+            format: date-time
+            nullable: true
+            deprecated: true
+          orderId:
+            type: string
+            nullable: true
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - completed
+            nullable: false
+        required:
+        - orderId
+        - paymentMethod
+        - offer
+        - state
+        type: object
+      title: Completed
+    ShipmentUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
+      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
+    WithStatus_BaseShipmentWithTracking.delayed_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delayed
+            nullable: false
+        required:
+        - status
+        type: object
+    X402NextAction:
+      properties:
+        x402:
+          properties:
+            expiresAt:
+              type: string
+            recipient:
+              type: string
+            currency:
+              type: string
+              enum:
+              - USDC
+              nullable: false
+            maxAmountRequired:
+              type: string
+            network:
+              type: string
+            scheme:
+              type: string
+              enum:
+              - exact
+              nullable: false
+          required:
+          - expiresAt
+          - recipient
+          - currency
+          - maxAmountRequired
+          - network
+          - scheme
+          type: object
+        type:
+          type: string
+          enum:
+          - x402
+          nullable: false
+      required:
+      - x402
+      - type
+      type: object
+    FailedCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          failureReason:
+            $ref: '#/components/schemas/FailureReason'
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - failed
+            nullable: false
+        required:
+        - failureReason
+        - state
+        type: object
+      title: Failed
+    Shipping:
+      properties:
+        availableOptions:
+          items:
+            $ref: '#/components/schemas/ShippingOption'
+          type: array
+        selectedOptionId:
+          type: string
+      required:
+      - availableOptions
+      type: object
+    CancellationReason:
+      properties:
+        message:
+          type: string
+          description: 'Optional free-text note explaining the cancellation, forwarded to the
+
+            merchant when possible.'
+          maxLength: 256
+        code:
+          $ref: '#/components/schemas/CancellationReasonCode'
+      required:
+      - code
+      type: object
+    OrderedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
+      title: Ordered
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    Offer:
+      properties:
+        commission:
+          $ref: '#/components/schemas/CommissionPotential'
+        shipping:
+          $ref: '#/components/schemas/Shipping'
+        cost:
+          $ref: '#/components/schemas/Cost'
+        appliedPromoCodes:
+          items:
+            type: string
+          type: array
+      required:
+      - shipping
+      - cost
+      type: object
+    DeniedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          denialReason:
+            $ref: '#/components/schemas/CancellationDenialReason'
+          state:
+            type: string
+            enum:
+            - denied
+            nullable: false
+        required:
+        - denialReason
+        - state
+        type: object
+    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - out_for_delivery
+            nullable: false
+        required:
+        - status
+        type: object
+    NextAction:
+      $ref: '#/components/schemas/X402NextAction'
+    ShipmentTracking:
+      properties:
+        carrierName:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+        deliveryDate:
+          allOf:
+          - $ref: '#/components/schemas/DeliveryDate'
+          nullable: true
+        url:
+          type: string
+          nullable: true
+      required:
+      - number
+      type: object
+    CheckoutIntentListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/CheckoutIntent'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+    BaseCheckoutIntent:
+      properties:
+        referenceId:
+          type: string
+          example: order-1234
+          maxLength: 255
+        discoverPromoCodes:
+          type: boolean
+        constraints:
+          $ref: '#/components/schemas/CheckoutConstraints'
+        promoCodes:
+          items:
+            $ref: '#/components/schemas/PromoCode'
+          type: array
+        variantSelections:
+          items:
+            $ref: '#/components/schemas/VariantSelection'
+          type: array
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        quantity:
+          type: integer
+          format: int32
+          minimum: 0
+        productUrl:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+      required:
+      - buyer
+      - quantity
+      - productUrl
+      - createdAt
+      - id
+      type: object
+    OfferRetrievalEffort:
+      type: string
+      enum:
+      - max
+      - low
+      description: 'Controls how much effort the system should spend retrieving an offer.
+
+        - ''max'': Full effort including AI agent fallback (slower, higher success rate)
+
+        - ''low'': Fast API-only retrieval, fails if API unavailable (faster, lower success rate)
+
+
+        Default: ''max'''
+    CancellationReasonCode:
+      type: string
+      enum:
+      - requested_by_customer
+      - fraud
+      - inventory
+      - payment_issue
+      - staff_error
+      - other
+    TrackingEvent:
+      properties:
+        status:
+          $ref: '#/components/schemas/ShipmentStatus'
+        location:
+          $ref: '#/components/schemas/EventLocation'
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/TrackingEventTimestamp'
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      required:
+      - status
+      - location
+      - timestamp
+      - description
+      type: object
+    TrackingEventTimestamp:
+      properties:
+        local:
+          type: string
+          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
+        utc:
+          type: string
+          format: date-time
+          description: UTC timestamp
+      required:
+      - local
+      - utc
+      type: object
+    Buyer:
+      properties:
+        postalCode:
+          type: string
+          example: '10001'
+          maxLength: 255
+        country:
+          type: string
+          example: US
+        province:
+          type: string
+          example: NY
+          maxLength: 255
+        city:
+          type: string
+          example: New York
+          maxLength: 255
+        address2:
+          type: string
+          example: Apt 1
+          maxLength: 255
+        address1:
+          type: string
+          example: 123 Main St
+          maxLength: 255
+        phone:
+          type: string
+          example: '1234567890'
+        email:
+          type: string
+          example: john.doe@example.com
+        lastName:
+          type: string
+          example: Doe
+          maxLength: 255
+        firstName:
+          type: string
+          example: John
+          maxLength: 255
+      required:
+      - postalCode
+      - country
+      - province
+      - city
+      - address1
+      - phone
+      - email
+      - lastName
+      - firstName
+      type: object
+    CanceledShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
+      title: Canceled
+    VariantSelection:
+      properties:
+        value:
+          anyOf:
+          - type: string
+          - type: number
+            format: double
+          example: Small, Red, XS, L, etc.
+          maxLength: 60
+        label:
+          type: string
+          example: Size, Color, etc.
+          maxLength: 30
+      required:
+      - value
+      - label
+      type: object
+    StripeTokenPaymentMethod:
+      properties:
+        stripeToken:
+          type: string
+          example: tok_1RkrWWHGDlstla3f1Fc7ZrhH
+        type:
+          type: string
+          enum:
+          - stripe_token
+          nullable: false
+          example: stripe_token
+      required:
+      - stripeToken
+      - type
+      type: object
+      title: Stripe
+    AwaitingConfirmationCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - awaiting_confirmation
+            nullable: false
+        required:
+        - offer
+        - state
+        type: object
+      title: Awaiting Confirmation
+    FailureReason:
+      properties:
+        message:
+          type: string
+        code:
+          $ref: '#/components/schemas/FailureReasonCode'
+      required:
+      - message
+      - code
+      type: object
+    ShipmentsListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/Shipment'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    WithStatus_BaseShipmentWithTracking.delivered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delivered
+            nullable: false
+        required:
+        - status
+        type: object
+    X402PaymentMethod:
+      properties:
+        network:
+          type: string
+          enum:
+          - base
+          - solana
+          - tempo
+        type:
+          type: string
+          enum:
+          - x402
+          nullable: false
+      required:
+      - network
+      - type
+      type: object
+      title: X402
+    CancellationDenialReason:
+      properties:
+        code:
+          $ref: '#/components/schemas/CancellationDenialReasonCode'
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    Shipment:
+      $ref: '#/components/schemas/ShipmentUnion'
+    CompletedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          state:
+            type: string
+            enum:
+            - completed
+            nullable: false
+        required:
+        - state
+        type: object
+    Money:
+      properties:
+        currencyCode:
+          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
+      required:
+      - currencyCode
+      - amountSubunits
+      type: object
+    CheckoutIntentConfirmParams:
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+      required:
+      - paymentMethod
+      type: object
+    RequestedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          state:
+            type: string
+            enum:
+            - requested
+            nullable: false
+        required:
+        - state
+        type: object
+    WithStatus_BaseShipmentWithTracking.shipped_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - shipped
+            nullable: false
+        required:
+        - status
+        type: object
+    DeliveryEstimate:
+      properties:
+        latest:
+          type: string
+          format: date-time
+          description: Latest date that items will be delivered by.
+          example: '2026-03-28T00:00:00Z'
+        earliest:
+          type: string
+          format: date-time
+          description: Earliest date that items will be delivered by.
+          example: '2026-03-25T00:00:00Z'
+      type: object
+      description: 'Estimated range of dates that items will be delivered in. At least one of
+
+        `earliest` or `latest` are guaranteed to be set.
+
+
+        Interpretation:
+
+
+        * If both `earliest` and `latest` are set, then the delivery estimate is the range between the two dates.
+
+        * If only `earliest` is set, then the delivery estimate is any date after that date.
+
+        * If only `latest` is set, then the delivery estimate is any date before that date.'
+    BasisTheoryPaymentMethod:
+      properties:
+        basisTheoryToken:
+          type: string
+        type:
+          type: string
+          enum:
+          - basis_theory_token
+          nullable: false
+      required:
+      - basisTheoryToken
+      - type
+      type: object
+      title: Basis Theory
+    ShippingDetails:
+      properties:
+        trackingEvents:
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+          type: array
+        shippedAt:
+          type: string
+          format: date-time
+        tracking:
+          $ref: '#/components/schemas/ShipmentTracking'
+        externalId:
+          type: string
+          description: The external ID is provided by the marketplace and matches the shipment to their system.
+      required:
+      - trackingEvents
+      - shippedAt
+      - tracking
+      - externalId
+      type: object
+    CancellationDenialReasonCode:
+      type: string
+      enum:
+      - other
+      - already_shipped
+      - non_cancellable_item
+      - cancellation_window_expired
+    BaseShipment:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        id:
+          type: string
+      required:
+      - updatedAt
+      - createdAt
+      - marketplaceOrderId
+      - checkoutIntentId
+      - id
+      type: object
+    CheckoutIntent:
+      anyOf:
+      - $ref: '#/components/schemas/RetrievingOfferCheckoutIntent'
+      - $ref: '#/components/schemas/AwaitingConfirmationCheckoutIntent'
+      - $ref: '#/components/schemas/RequiresActionCheckoutIntent'
+      - $ref: '#/components/schemas/PlacingOrderCheckoutIntent'
+      - $ref: '#/components/schemas/CompletedCheckoutIntent'
+      - $ref: '#/components/schemas/FailedCheckoutIntent'
+    Cancellation:
+      anyOf:
+      - $ref: '#/components/schemas/RequestedCancellation'
+      - $ref: '#/components/schemas/CompletedCancellation'
+      - $ref: '#/components/schemas/DeniedCancellation'
+    OutForDeliveryShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
+      title: Out for Delivery
+    DrawdownPaymentMethod:
+      properties:
+        type:
+          type: string
+          enum:
+          - drawdown
+          nullable: false
+      required:
+      - type
+      type: object
+      title: Drawdown
+    RequiresActionCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          nextAction:
+            $ref: '#/components/schemas/NextAction'
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - requires_action
+            nullable: false
+        required:
+        - nextAction
+        - paymentMethod
+        - offer
+        - state
+        type: object
+      title: Requires Action
+    PlacingOrderCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - placing_order
+            nullable: false
+        required:
+        - paymentMethod
+        - offer
+        - state
+        type: object
+      title: Placing Order
+    CheckoutIntentPostParams:
+      properties:
+        referenceId:
+          type: string
+          example: order-1234
+          maxLength: 255
+        discoverPromoCodes:
+          type: boolean
+        constraints:
+          $ref: '#/components/schemas/CheckoutConstraints'
+        promoCodes:
+          items:
+            $ref: '#/components/schemas/PromoCode'
+          type: array
+          maxItems: 16
+        variantSelections:
+          items:
+            $ref: '#/components/schemas/VariantSelection'
+          type: array
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        quantity:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+        productUrl:
+          type: string
+          example: https://www.amazon.com/dp/B0DFC9MT8Q
+      required:
+      - buyer
+      - quantity
+      - productUrl
+      type: object
+    Cost:
+      properties:
+        total:
+          $ref: '#/components/schemas/Money'
+        surcharge:
+          $ref: '#/components/schemas/Money'
+        discount:
+          $ref: '#/components/schemas/Money'
+        tax:
+          $ref: '#/components/schemas/Money'
+        shipping:
+          $ref: '#/components/schemas/Money'
+        subtotal:
+          $ref: '#/components/schemas/Money'
+      required:
+      - total
+      - subtotal
+      type: object
+    DeliveredShipment:
+      allOf:
+      - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
+      - properties:
+          deliveredAt:
+            type: string
+            format: date-time
+        required:
+        - deliveredAt
+        type: object
+      title: Delivered
+    WithStatus_BaseShipment.canceled_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
+            type: string
+            enum:
+            - canceled
+            nullable: false
+        required:
+        - status
+        type: object
+    PromoCode:
+      type: string
+      example: SAVE20
+      description: 'Promo code string with validation constraints.
+
+        - Must contain only letters, digits, underscores, or hyphens
+
+        - Maximum length of 32 characters'
+      pattern: ^[a-zA-Z0-9_\-]+$
+      maxLength: 32
+    CheckoutIntentPurchaseParams:
+      allOf:
+      - $ref: '#/components/schemas/CheckoutIntentPostParams'
+      - $ref: '#/components/schemas/CheckoutIntentConfirmParams'
+      description: 'Post body for the purchase endpoint - combines create + confirm in one step.
+
+        Triggers the durable workflow that handles offer retrieval and order placement.'
+    ShipmentWithTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShippedShipment'
+      - $ref: '#/components/schemas/DeliveredShipment'
+      - $ref: '#/components/schemas/DelayedShipment'
+      - $ref: '#/components/schemas/OutForDeliveryShipment'
+      description: Shipments that have tracking information (shipped, delayed, or delivered states)
+      title: With Tracking
+    CommissionPotential:
+      properties:
+        estimate:
+          type: boolean
+        amount:
+          $ref: '#/components/schemas/Money'
+      required:
+      - estimate
+      - amount
+      type: object
+      description: The commission a developer would earn if this offer is placed.
+    WithStatus_BaseShipment.ordered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
+            type: string
+            enum:
+            - ordered
+            nullable: false
+        required:
+        - status
+        type: object
+    ShipmentStatus:
+      type: string
+      enum:
+      - out_for_delivery
+      - delivered
+      - shipped
+      - canceled
+      - delayed
+      - ordered
+    InvalidCheckoutIntentStateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        state:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    DelayedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
+      title: Delayed
+    RetrievingOfferCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          state:
+            type: string
+            enum:
+            - retrieving_offer
+            nullable: false
+        required:
+        - state
+        type: object
+      title: Retrieving Offer
+    ShipmentWithoutTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/OrderedShipment'
+      - $ref: '#/components/schemas/CanceledShipment'
+      description: Shipments without tracking information
+      title: Without Tracking
+    RuntimeError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    FailureReasonCode:
+      type: string
+      enum:
+      - unknown
+      - checkout_intent_expired
+      - payment_failed
+      - payment_cvc_expired
+      - insufficient_stock
+      - product_out_of_stock
+      - offer_retrieval_failed
+      - order_placement_failed
+      - developer_not_found
+      - missing_shipping_method
+      - unsupported_currency
+      - invalid_input
+      - incorrect_cost_breakdown
+      - unsupported_store_no_guest_checkout
+      - workflow_invocation_failed
+      - variant_selections_invalid
+      - variant_selections_required
+      - form_validation_error
+      - captcha_blocked
+      - bot_protection_blocked
+      - constraint_total_price_exceeded
+      - constraint_shipping_cost_exceeded
+      - promo_code_discovery_not_enabled
+      - product_not_found
+      description: Type derived from runtime array - always in sync
+    CheckoutIntentState:
+      type: string
+      enum:
+      - completed
+      - failed
+      - retrieving_offer
+      - awaiting_confirmation
+      - requires_action
+      - placing_order
+    BaseShipmentWithTracking:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - $ref: '#/components/schemas/ShippingDetails'
+    EventLocation:
+      properties:
+        country:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+      type: object
+    BaseCancellation:
+      properties:
+        reason:
+          $ref: '#/components/schemas/CancellationReason'
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+      required:
+      - reason
+      - marketplaceOrderId
+      - checkoutIntentId
+      - createdAt
+      - id
+      type: object
+    OrderResponse:
+      description: 'Represents a completed order. Orders are created after a checkout intent reaches
+
+        the `completed` state.'
+      properties:
+        id:
+          type: string
+        checkoutIntentId:
+          type: string
+          description: ID of the checkout intent that was responsible for creating this order.
+          example: ci_aaa8af5c5aae4c0e8ef0172c26c65c13
+        createdAt:
+          type: string
+          description: Timestamp the order was persisted to Rye.
+          example: '2026-03-25T00:00:00Z'
+        updatedAt:
+          type: string
+          description: Timestamp the order was last updated at
+          example: '2026-03-27T00:00:00Z'
+        referenceId:
+          type: string
+          description: 'The `referenceId` you supplied on the checkout intent, echoed back so you
+
+            can reconcile this order against your own records. Absent when none was
+
+            supplied.'
+          example: order-1234
+        cancellation:
+          allOf:
+          - $ref: '#/components/schemas/Cancellation'
+          nullable: true
+          description: 'The cancellation for this order, or `null` if none has been requested.
+
+            Populated by joining the separate cancellations collection on the order''s
+
+            marketplace order id.'
+      required:
+      - id
+      - checkoutIntentId
+      - createdAt
+      - updatedAt
+      - cancellation
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    ShippingOption:
+      properties:
+        deliveryEstimate:
+          allOf:
+          - $ref: '#/components/schemas/DeliveryEstimate'
+          nullable: true
+        discount:
+          $ref: '#/components/schemas/Money'
+        cost:
+          $ref: '#/components/schemas/Money'
+        id:
+          type: string
+      required:
+      - cost
+      - id
+      type: object
+    DeliveryDate:
+      properties:
+        estimated:
+          type: string
+          format: date-time
+      required:
+      - estimated
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Rye API key
