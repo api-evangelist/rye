@@ -1,0 +1,619 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/rye-checkout-intents-openapi-original.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 39
+  by_action_class:
+    connected: 20
+    acting: 19
+  by_consequence:
+    read: 20
+    write: 9
+    physical: 10
+  human_in_the_loop_required: 0
+operations:
+- path: /api/v1/billing/balance
+  method: get
+  operationId: GetBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/billing
+  method: get
+  operationId: GetSettings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/billing/drawdown
+  method: post
+  operationId: SetupDrawdown
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/billing/drawdown/topup
+  method: post
+  operationId: CreateTopUpInvoice
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/billing/drawdown/topup/{invoiceId}
+  method: delete
+  operationId: CancelTopUpInvoice
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - billing:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/billing/transactions
+  method: get
+  operationId: ListTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/brands/domain/{domain}
+  method: get
+  operationId: GetBrandByDomain
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/checkout-intents
+  method: get
+  operationId: ListCheckoutIntents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/checkout-intents
+  method: post
+  operationId: CreateCheckoutIntent
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/checkout-intents/{id}
+  method: get
+  operationId: GetCheckoutIntent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/checkout-intents/{id}/order
+  method: get
+  operationId: GetCheckoutIntentOrder
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/checkout-intents/{id}/confirm
+  method: post
+  operationId: ConfirmCheckoutIntent
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/checkout-intents/{id}/shipments
+  method: get
+  operationId: GetShipments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/checkout-intents/purchase
+  method: post
+  operationId: Purchase
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/betas/checkout-sessions
+  method: post
+  operationId: Create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/commissions/{id}
+  method: get
+  operationId: GetCommission
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/commissions
+  method: get
+  operationId: ListCommissions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - billing:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/events
+  method: get
+  operationId: List
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - events:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/events/{id}
+  method: get
+  operationId: Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - events:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/events/trigger
+  method: post
+  operationId: Trigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - events:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/merchant-connectors/{connector}/installation-link
+  method: get
+  operationId: CreateInstallationLink
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/orders
+  method: get
+  operationId: ListOrders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/orders/{id}
+  method: get
+  operationId: GetOrder
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/orders/{id}/cancel
+  method: post
+  operationId: CancelOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/payment-gateways/{gateway}/session
+  method: post
+  operationId: CreateSession
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/products/lookup
+  method: get
+  operationId: Lookup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - products:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/products/subscriptions
+  method: get
+  operationId: ListSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - products:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/products/subscribe
+  method: post
+  operationId: Subscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - products:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/products/unsubscribe
+  method: post
+  operationId: Unsubscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - products:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/returns
+  method: post
+  operationId: RequestReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - checkout_intents:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/returns/{returnId}
+  method: get
+  operationId: GetReturn
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/shipments
+  method: get
+  operationId: ListShipments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/shipments/{id}
+  method: get
+  operationId: GetShipment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - checkout_intents:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/test-helpers/checkout-intents/{checkoutIntentId}/shipments/advance
+  method: post
+  operationId: AdvanceShipment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/test-helpers/returns
+  method: post
+  operationId: CreateSimulatedReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/test-helpers/returns/{returnId}/approve
+  method: post
+  operationId: ApproveReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/test-helpers/returns/{returnId}/deny
+  method: post
+  operationId: DenyReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/test-helpers/returns/{returnId}/refund
+  method: post
+  operationId: RefundReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/test-helpers/returns/{returnId}/fail
+  method: post
+  operationId: FailReturn
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - test_helpers:write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

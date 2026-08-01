@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/rye-checkout-intents-openapi-original.yml
+docs: https://rye.com/docs/api-v2/checkout-intent-lifecycle
+description: >-
+  Entity-relationship graph for the Rye Universal Checkout API, derived from the
+  OpenAPI schemas ($ref links and id-reference fields). The CheckoutIntent is the
+  central aggregate: it resolves an Offer for a product, is confirmed into an
+  Order, which produces Shipments and can spawn Returns and Commissions. Events
+  reference any source resource by {type,id}.
+id_prefixes:
+  checkout_intent: ci_
+  event: evt_
+  webhook_endpoint: we_
+entities:
+  - name: CheckoutIntent
+    id_prefix: ci_
+    states: [retrieving_offer, requires_action, awaiting_confirmation, placing_order, completed, failed]
+    description: Central aggregate turning a product URL + buyer into a completed order.
+  - name: Offer
+    description: Resolved price/tax/shipping/delivery estimate for a product, embedded on the intent.
+  - name: Order
+    description: The placed order resulting from a confirmed checkout intent.
+  - name: Shipment
+    description: A shipment against an order/checkout intent.
+  - name: Return
+    id_prefix: null
+    description: A whole-order return submitted for approval, progressing to refund.
+  - name: Commission
+    description: Commission earned on a checkout intent / order.
+  - name: Product
+    description: A merchant product looked up by URL.
+  - name: Brand
+    description: Brand information retrieved by domain.
+  - name: Buyer
+    description: Buyer identity + shipping/contact details supplied on the intent.
+  - name: PaymentMethod
+    variants: [StripeTokenPaymentMethod, BasisTheoryPaymentMethod, DrawdownPaymentMethod, X402PaymentMethod]
+    description: Tokenized payment method attached at confirmation.
+  - name: Event
+    id_prefix: evt_
+    description: Webhook/event referencing a source resource by {type,id}.
+  - name: Invoice
+    description: Drawdown top-up invoice.
+  - name: Transaction
+    description: Drawdown balance transaction.
+relationships:
+  - {from: CheckoutIntent, type: has_one, to: Offer, via: offer}
+  - {from: CheckoutIntent, type: has_one, to: Order, via: order}
+  - {from: CheckoutIntent, type: has_one, to: Buyer, via: buyer}
+  - {from: CheckoutIntent, type: has_one, to: PaymentMethod, via: paymentMethod}
+  - {from: CheckoutIntent, type: has_many, to: Shipment, via: checkoutIntentId}
+  - {from: Order, type: belongs_to, to: CheckoutIntent, via: checkoutIntentId}
+  - {from: Return, type: belongs_to, to: Order, via: orderId}
+  - {from: Commission, type: belongs_to, to: CheckoutIntent, via: checkoutIntentId}
+  - {from: Shipment, type: belongs_to, to: Order, via: orderId}
+  - {from: Event, type: references, to: any, via: source.id}
+  - {from: Transaction, type: belongs_to, to: Invoice, via: invoiceId}

@@ -1,0 +1,617 @@
+{
+  "info": {
+    "_postman_id": "ce497c43-be0a-49c8-b000-fe0b4c8dd024",
+    "name": "Universal Checkout Betas Returns API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:33.000Z",
+    "updatedAt": "2026-07-28T02:49:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ce497c43-be0a-49c8-b000-fe0b4c8dd024"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "returns",
+              "item": [
+                {
+                  "name": "{returnId}",
+                  "item": [
+                    {
+                      "name": "Get return",
+                      "id": "0090c027-d6e1-4054-b1ad-9e60c1eb2991",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/returns/:returnId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "returns",
+                            ":returnId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "43908c72-2c4a-487d-a5c9-87a36c2fc8f8",
+                              "key": "returnId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Fetch a Return by id. Tenancy is scoped to the authenticated developer."
+                      },
+                      "response": [
+                        {
+                          "id": "3b276a3f-1a81-42f9-a52f-3088d16b4a05",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/returns/:returnId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "returns",
+                                ":returnId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "returnId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"other\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"requested\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"drawdown_credit_failed\"\n  },\n  \"denial\": {\n    \"reason\": \"final_sale\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:49:34.000Z",
+                          "updatedAt": "2026-07-28T02:49:34.000Z",
+                          "uid": "35240-3b276a3f-1a81-42f9-a52f-3088d16b4a05"
+                        },
+                        {
+                          "id": "834df30b-82c4-4c08-a256-303b3de9cd33",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/returns/:returnId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "returns",
+                                ":returnId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "returnId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:34.000Z",
+                          "updatedAt": "2026-07-28T02:49:34.000Z",
+                          "uid": "35240-834df30b-82c4-4c08-a256-303b3de9cd33"
+                        },
+                        {
+                          "id": "6f98ce79-3e7f-49b9-a7ed-5dbbd2410b27",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/returns/:returnId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "returns",
+                                ":returnId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "returnId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:34.000Z",
+                          "updatedAt": "2026-07-28T02:49:34.000Z",
+                          "uid": "35240-6f98ce79-3e7f-49b9-a7ed-5dbbd2410b27"
+                        },
+                        {
+                          "id": "8c74a214-abb5-4c36-b265-34c4a21fd49f",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/returns/:returnId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "returns",
+                                ":returnId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "returnId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:34.000Z",
+                          "updatedAt": "2026-07-28T02:49:34.000Z",
+                          "uid": "35240-8c74a214-abb5-4c36-b265-34c4a21fd49f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:34.000Z",
+                      "updatedAt": "2026-07-28T02:49:34.000Z",
+                      "uid": "35240-0090c027-d6e1-4054-b1ad-9e60c1eb2991"
+                    }
+                  ],
+                  "id": "58704154-261b-4898-876a-9443e56a7fbb",
+                  "createdAt": "2026-07-28T02:49:34.000Z",
+                  "updatedAt": "2026-07-28T02:49:34.000Z",
+                  "uid": "35240-58704154-261b-4898-876a-9443e56a7fbb"
+                },
+                {
+                  "name": "Create return",
+                  "id": "4ccbffec-64f2-4d50-8ac8-0e40f3e27121",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"reason\": \"wrong_item\",\n  \"orderId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/returns",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "returns"
+                      ]
+                    },
+                    "description": "Create a return for a completed order. Whole-order returns only \u2014 the\norder's line items are enumerated for you. The return is submitted for\napproval and then progresses asynchronously toward the refund; poll the\nreturned return id (or listen for webhooks) to follow its state."
+                  },
+                  "response": [
+                    {
+                      "id": "e8abc16c-2896-459c-8e83-696b158760d2",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"wrong_item\",\n  \"orderId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/returns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "returns"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"other\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"requested\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"drawdown_credit_failed\"\n  },\n  \"denial\": {\n    \"reason\": \"final_sale\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:49:34.000Z",
+                      "updatedAt": "2026-07-28T02:49:34.000Z",
+                      "uid": "35240-e8abc16c-2896-459c-8e83-696b158760d2"
+                    },
+                    {
+                      "id": "60f15de2-f562-48fe-854a-060406aa37ad",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"wrong_item\",\n  \"orderId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/returns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "returns"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:34.000Z",
+                      "updatedAt": "2026-07-28T02:49:34.000Z",
+                      "uid": "35240-60f15de2-f562-48fe-854a-060406aa37ad"
+                    },
+                    {
+                      "id": "b5a46c71-c297-4dad-9d62-695b931a17de",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"wrong_item\",\n  \"orderId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/returns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "returns"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"eiusmod0\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:34.000Z",
+                      "updatedAt": "2026-07-28T02:49:34.000Z",
+                      "uid": "35240-b5a46c71-c297-4dad-9d62-695b931a17de"
+                    },
+                    {
+                      "id": "a5a23863-c3b5-4643-a641-e5d4efa5ffa9",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"wrong_item\",\n  \"orderId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/returns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "returns"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:34.000Z",
+                      "updatedAt": "2026-07-28T02:49:34.000Z",
+                      "uid": "35240-a5a23863-c3b5-4643-a641-e5d4efa5ffa9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:34.000Z",
+                  "updatedAt": "2026-07-28T02:49:34.000Z",
+                  "uid": "35240-4ccbffec-64f2-4d50-8ac8-0e40f3e27121"
+                }
+              ],
+              "id": "59fe8e1a-3b82-4477-bcf7-78199b0eb22a",
+              "createdAt": "2026-07-28T02:49:34.000Z",
+              "updatedAt": "2026-07-28T02:49:34.000Z",
+              "uid": "35240-59fe8e1a-3b82-4477-bcf7-78199b0eb22a"
+            }
+          ],
+          "id": "c0fe52f4-a206-45df-9b17-5ade14298a4f",
+          "createdAt": "2026-07-28T02:49:34.000Z",
+          "updatedAt": "2026-07-28T02:49:34.000Z",
+          "uid": "35240-c0fe52f4-a206-45df-9b17-5ade14298a4f"
+        }
+      ],
+      "id": "295a0ca9-f833-445f-92f1-290a5de610b7",
+      "createdAt": "2026-07-28T02:49:34.000Z",
+      "updatedAt": "2026-07-28T02:49:34.000Z",
+      "uid": "35240-295a0ca9-f833-445f-92f1-290a5de610b7"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

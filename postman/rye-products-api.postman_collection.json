@@ -1,0 +1,1527 @@
+{
+  "info": {
+    "_postman_id": "fa7b9f43-f96e-481b-b26a-f4cc020f7ee8",
+    "name": "Universal Checkout Betas Products API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:32.000Z",
+    "updatedAt": "2026-07-28T02:49:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fa7b9f43-f96e-481b-b26a-f4cc020f7ee8"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "products",
+              "item": [
+                {
+                  "name": "lookup",
+                  "item": [
+                    {
+                      "name": "Lookup product",
+                      "id": "6da03a75-f3cc-4d7d-937c-173377f65d79",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "products",
+                            "lookup"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "url",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Lookup a product's information by URL."
+                      },
+                      "response": [
+                        {
+                          "id": "c93df137-df7d-4172-8c29-38af5ec16a13",
+                          "name": "Product information",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "lookup"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "url",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isPurchasable\": \"<boolean>\",\n  \"availability\": \"in_stock\",\n  \"price\": {\n    \"currencyCode\": \"<string>\",\n    \"amountSubunits\": \"<integer>\"\n  },\n  \"images\": [\n    {\n      \"isFeatured\": \"<boolean>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"isFeatured\": \"<boolean>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"brand\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sku\": \"<string>\",\n  \"retailer\": \"<string>\",\n  \"url\": \"<string>\",\n  \"id\": \"<string>\",\n  \"variants\": [\n    {\n      \"availability\": \"unknown\",\n      \"images\": [\n        {\n          \"isFeatured\": \"<boolean>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"isFeatured\": \"<boolean>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"price\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"dimensions\": [\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"availability\": \"unknown\",\n      \"images\": [\n        {\n          \"isFeatured\": \"<boolean>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"isFeatured\": \"<boolean>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"price\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"dimensions\": [\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"variantDimensions\": [\n    {\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"label\": \"<string>\"\n    },\n    {\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-c93df137-df7d-4172-8c29-38af5ec16a13"
+                        },
+                        {
+                          "id": "ce723470-bf21-4cb4-970d-568d6b2c7649",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "lookup"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "url",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-ce723470-bf21-4cb4-970d-568d6b2c7649"
+                        },
+                        {
+                          "id": "12b99b12-8974-4cbb-b513-01594fe4510c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "lookup"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "url",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-12b99b12-8974-4cbb-b513-01594fe4510c"
+                        },
+                        {
+                          "id": "bbe6575f-daed-4d0e-8b56-bd771b5759bb",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "lookup"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "url",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"reprehenderita8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"ullamco_8d8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-bbe6575f-daed-4d0e-8b56-bd771b5759bb"
+                        },
+                        {
+                          "id": "88b972e3-1b61-4645-8cb1-aa16f98ce798",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/lookup?url=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "lookup"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "url",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-88b972e3-1b61-4645-8cb1-aa16f98ce798"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:33.000Z",
+                      "updatedAt": "2026-07-28T02:49:33.000Z",
+                      "uid": "35240-6da03a75-f3cc-4d7d-937c-173377f65d79"
+                    }
+                  ],
+                  "id": "61890c7b-1447-40ab-8f50-bcde2bcc171d",
+                  "createdAt": "2026-07-28T02:49:33.000Z",
+                  "updatedAt": "2026-07-28T02:49:33.000Z",
+                  "uid": "35240-61890c7b-1447-40ab-8f50-bcde2bcc171d"
+                },
+                {
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "List product subscriptions",
+                      "id": "3fa0a06f-5ccf-40dd-ac73-de18d5ba01a0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "products",
+                            "subscriptions"
+                          ]
+                        },
+                        "description": "Retrieve product subscription rules."
+                      },
+                      "response": [
+                        {
+                          "id": "d8777e70-57f8-49fa-9cd0-b6faf9711cce",
+                          "name": "Product subscriptions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscriptions"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"type\": \"product\",\n      \"id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"subscribed\": \"<boolean>\"\n    },\n    {\n      \"type\": \"product\",\n      \"id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"subscribed\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-d8777e70-57f8-49fa-9cd0-b6faf9711cce"
+                        },
+                        {
+                          "id": "307ef165-2dc2-4329-8c97-cdf4b125f678",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscriptions"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-307ef165-2dc2-4329-8c97-cdf4b125f678"
+                        },
+                        {
+                          "id": "00f7afb7-523a-43b4-ad85-7a69316c2be1",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscriptions"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-00f7afb7-523a-43b4-ad85-7a69316c2be1"
+                        },
+                        {
+                          "id": "8d8ab89f-8cc0-414e-b77d-3fcd8a16c9a4",
+                          "name": "Too Many Requests",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscriptions"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\",\n  \"retryAfter\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-8d8ab89f-8cc0-414e-b77d-3fcd8a16c9a4"
+                        },
+                        {
+                          "id": "581cd828-c858-4263-92aa-ade8a3b3a900",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscriptions"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-581cd828-c858-4263-92aa-ade8a3b3a900"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:33.000Z",
+                      "updatedAt": "2026-07-28T02:49:33.000Z",
+                      "uid": "35240-3fa0a06f-5ccf-40dd-ac73-de18d5ba01a0"
+                    }
+                  ],
+                  "id": "cb3e3b77-9003-4859-8fca-0d0ee613357e",
+                  "createdAt": "2026-07-28T02:49:33.000Z",
+                  "updatedAt": "2026-07-28T02:49:33.000Z",
+                  "uid": "35240-cb3e3b77-9003-4859-8fca-0d0ee613357e"
+                },
+                {
+                  "name": "subscribe",
+                  "item": [
+                    {
+                      "name": "Subscribe to product events",
+                      "id": "b099bea0-71b6-42b8-b73b-408d2d3d6cff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "products",
+                            "subscribe"
+                          ]
+                        },
+                        "description": "Subscribe to product events from a store."
+                      },
+                      "response": [
+                        {
+                          "id": "c127df4a-d9a7-4c14-8f12-61457443a736",
+                          "name": "Product subscription",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"product\",\n  \"id\": \"<string>\",\n  \"url\": \"<string>\",\n  \"subscribed\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-c127df4a-d9a7-4c14-8f12-61457443a736"
+                        },
+                        {
+                          "id": "a7d3df37-6efe-4a48-9723-d664b8373dbb",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-a7d3df37-6efe-4a48-9723-d664b8373dbb"
+                        },
+                        {
+                          "id": "8c275d17-6cc4-474f-86a0-21ea823e6598",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-8c275d17-6cc4-474f-86a0-21ea823e6598"
+                        },
+                        {
+                          "id": "75c7a0fb-6dd9-40ff-8ed4-9f8ef3106c30",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"reprehenderita8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"ullamco_8d8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-75c7a0fb-6dd9-40ff-8ed4-9f8ef3106c30"
+                        },
+                        {
+                          "id": "af15cc96-aec0-41fe-ae2b-3b8f2568d5b9",
+                          "name": "Too Many Requests",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\",\n  \"retryAfter\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-af15cc96-aec0-41fe-ae2b-3b8f2568d5b9"
+                        },
+                        {
+                          "id": "543ac865-d313-45b0-a22a-d5d81b3cebc8",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/subscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "subscribe"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-543ac865-d313-45b0-a22a-d5d81b3cebc8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:33.000Z",
+                      "updatedAt": "2026-07-28T02:49:33.000Z",
+                      "uid": "35240-b099bea0-71b6-42b8-b73b-408d2d3d6cff"
+                    }
+                  ],
+                  "id": "1ba649ea-6e35-4e9d-94a7-edea2dfb10c5",
+                  "createdAt": "2026-07-28T02:49:33.000Z",
+                  "updatedAt": "2026-07-28T02:49:33.000Z",
+                  "uid": "35240-1ba649ea-6e35-4e9d-94a7-edea2dfb10c5"
+                },
+                {
+                  "name": "unsubscribe",
+                  "item": [
+                    {
+                      "name": "Unsubscribe from product events",
+                      "id": "1a28c5db-2abf-4a8f-ac12-ae5d9d2d4e51",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "products",
+                            "unsubscribe"
+                          ]
+                        },
+                        "description": "Unsubscribe from product events from a store."
+                      },
+                      "response": [
+                        {
+                          "id": "258c1d1e-d1e3-4a4f-8146-59bcd15bb757",
+                          "name": "Product subscription",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"product\",\n  \"id\": \"<string>\",\n  \"url\": \"<string>\",\n  \"subscribed\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-258c1d1e-d1e3-4a4f-8146-59bcd15bb757"
+                        },
+                        {
+                          "id": "cd0754e6-5963-4297-83ab-6ee47c5b5402",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-cd0754e6-5963-4297-83ab-6ee47c5b5402"
+                        },
+                        {
+                          "id": "5002bcc8-e80c-4c0a-be01-cc605e374680",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-5002bcc8-e80c-4c0a-be01-cc605e374680"
+                        },
+                        {
+                          "id": "6f3af823-2858-475c-a154-4c2975d77147",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"reprehenderita8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"ullamco_8d8\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-6f3af823-2858-475c-a154-4c2975d77147"
+                        },
+                        {
+                          "id": "ee2d33ca-4bba-42d3-8f09-2ee88d51832e",
+                          "name": "Too Many Requests",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\",\n  \"retryAfter\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-ee2d33ca-4bba-42d3-8f09-2ee88d51832e"
+                        },
+                        {
+                          "id": "1371ac8b-6e0f-4af6-b7c9-20a67a3614a5",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"url\": \"<string>\",\n  \"type\": \"product\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/products/unsubscribe",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "products",
+                                "unsubscribe"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:33.000Z",
+                          "updatedAt": "2026-07-28T02:49:33.000Z",
+                          "uid": "35240-1371ac8b-6e0f-4af6-b7c9-20a67a3614a5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:33.000Z",
+                      "updatedAt": "2026-07-28T02:49:33.000Z",
+                      "uid": "35240-1a28c5db-2abf-4a8f-ac12-ae5d9d2d4e51"
+                    }
+                  ],
+                  "id": "27e6729f-2164-4c5c-988d-59f4ca3ebc1d",
+                  "createdAt": "2026-07-28T02:49:33.000Z",
+                  "updatedAt": "2026-07-28T02:49:33.000Z",
+                  "uid": "35240-27e6729f-2164-4c5c-988d-59f4ca3ebc1d"
+                }
+              ],
+              "id": "fffe1b23-fdef-49fc-b08a-ff50b1799490",
+              "createdAt": "2026-07-28T02:49:33.000Z",
+              "updatedAt": "2026-07-28T02:49:33.000Z",
+              "uid": "35240-fffe1b23-fdef-49fc-b08a-ff50b1799490"
+            }
+          ],
+          "id": "d314b8ff-4dda-4f7e-bcf6-1f89414cd1a1",
+          "createdAt": "2026-07-28T02:49:33.000Z",
+          "updatedAt": "2026-07-28T02:49:33.000Z",
+          "uid": "35240-d314b8ff-4dda-4f7e-bcf6-1f89414cd1a1"
+        }
+      ],
+      "id": "1a197c5b-f6f1-4a98-83c5-00cc63a3a755",
+      "createdAt": "2026-07-28T02:49:33.000Z",
+      "updatedAt": "2026-07-28T02:49:33.000Z",
+      "uid": "35240-1a197c5b-f6f1-4a98-83c5-00cc63a3a755"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

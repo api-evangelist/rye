@@ -1,8 +1,31 @@
 aid: rye
 name: Rye
-description: Rye is a company surfaced as a portfolio company of a16z and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Rye is agentic commerce infrastructure - a Universal Checkout API that turns any
+  product URL into a completed order without redirecting the shopper. Developers pass
+  a product URL and buyer details and receive price, tax, shipping and delivery
+  estimates, then confirm with a tokenized payment method (Stripe, Basis Theory,
+  pre-funded drawdown balance, or x402/USDC) to place the order across thousands of
+  merchants including Shopify stores and Amazon. Rye combines AI browser automation
+  with fraud-mitigation and caches successful flows as deterministic workflows,
+  advertising 90%+ order reliability, sub-35s offer resolution, and 99.9% uptime. The
+  platform ships official TypeScript, Python, and Java SDKs, HMAC-signed webhooks, a
+  staging sandbox with test products and simulated shipment/return helpers, Rewards UI
+  React components, and a returns/refunds lifecycle. Rye is an a16z portfolio company.
 url: https://raw.githubusercontent.com/api-evangelist/rye/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://rye.com/favicon.ico
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,12 +34,314 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Commerce
+- E-Commerce
+- Checkout
+- Payments
+- Agentic Commerce
+- AI Agents
+- Universal Checkout
+- Shopping
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: rye:rye-betas-api
+  name: Rye Betas API
+  description: The Betas API from Rye — 1 operation(s) for betas.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Betas
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-betas-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-billing-api
+  name: Rye Billing API
+  description: The Billing API from Rye — 6 operation(s) for billing.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-billing-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-brands-api
+  name: Rye Brands API
+  description: The Brands API from Rye — 1 operation(s) for brands.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Brands
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-brands-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-checkout-intents-api
+  name: Rye Checkout Intents API
+  description: The Checkout Intents API from Rye — 6 operation(s) for checkout intents.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Checkout Intents
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-checkout-intents-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-commissions-api
+  name: Rye Commissions API
+  description: The Commissions API from Rye — 2 operation(s) for commissions.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Commissions
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-commissions-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-events-api
+  name: Rye Events API
+  description: The Events API from Rye — 3 operation(s) for events.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-events-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-merchant-connectors-api
+  name: Rye Merchant Connectors API
+  description: The Merchant Connectors API from Rye — 1 operation(s) for merchant connectors.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Merchant Connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-merchant-connectors-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-orders-api
+  name: Rye Orders API
+  description: The Orders API from Rye — 3 operation(s) for orders.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-orders-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-payment-gateways-api
+  name: Rye Payment Gateways API
+  description: The Payment Gateways API from Rye — 1 operation(s) for payment gateways.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Payment Gateways
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-payment-gateways-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-products-api
+  name: Rye Products API
+  description: The Products API from Rye — 4 operation(s) for products.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-products-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-returns-api
+  name: Rye Returns API
+  description: The Returns API from Rye — 2 operation(s) for returns.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Returns
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-returns-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-shipments-api
+  name: Rye Shipments API
+  description: The Shipments API from Rye — 2 operation(s) for shipments.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Shipments
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-shipments-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- aid: rye:rye-test-helpers-api
+  name: Rye Test Helpers API
+  description: The Test Helpers API from Rye — 6 operation(s) for test helpers.
+  humanURL: https://rye.com/docs/api-v2/introduction
+  baseURL: https://api.rye.com/api/v1/
+  tags:
+  - Test Helpers
+  properties:
+  - type: OpenAPI
+    url: openapi/rye-test-helpers-api-openapi.yml
+  - type: Documentation
+    url: https://rye.com/docs/api-v2/introduction
+  - type: APIReference
+    url: https://rye.com/docs/api-v2-experimental/api-reference
+  - type: GettingStarted
+    url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/rye/overview
+- type: DeveloperPortal
+  url: https://rye.com/docs
+- type: Documentation
+  url: https://rye.com/docs/api-v2/introduction
+- type: APIReference
+  url: https://rye.com/docs/api-v2-experimental/api-reference
+- type: GettingStarted
+  url: https://rye.com/docs/api-v2/example-flows/simple-checkout
+- type: Support
+  url: https://rye.com/docs/api-v2/support
+- type: Blog
+  url: https://rye.com/blog
+- type: GitHubOrganization
+  url: https://github.com/rye-com
+- type: Pricing
+  url: https://rye.com/pricing
+- type: SignUp
+  url: https://console.rye.com
+- type: TermsOfService
+  url: https://rye.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://rye.com/privacy-policy
+- type: Postman
+  url: https://app.getpostman.com/run-collection/41015610-24cc0f8a-4b7f-4aa2-9f52-8d7ba30a67b7
+- type: StatusPage
+  url: https://ryestatus.com
+- type: TrustCenter
+  url: https://trust.rye.com/
+- type: Authentication
+  url: authentication/rye-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/rye-agentic-access.yml
+- type: Packages
+  url: packages/rye-packages.yml
+- type: SDKs
+  url: packages/rye-packages.yml
+- type: MCPServer
+  url: mcp/rye-mcp.yml
+- type: LLMsTxt
+  url: llms/rye-llms.txt
+- type: WellKnown
+  url: well-known/rye-well-known.yml
+- type: SecurityTxt
+  url: well-known/rye-security.txt
+- type: Conformance
+  url: conformance/rye-conformance.yml
+- type: Compliance
+  url: security/rye-trust-center.yml
+- type: ErrorCatalog
+  url: errors/rye-problem-types.yml
+- type: DeclineCodes
+  url: errors/rye-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/rye-lifecycle.yml
+- type: Deprecation
+  url: https://rye.com/docs/api-v2/migrate-from-v1
+- type: VulnerabilityDisclosure
+  url: security/rye-vulnerability-disclosure.yml
+- type: Security
+  url: https://rye.com/docs/api-v2/security
+- type: DomainSecurity
+  url: security/rye-domain-security.yml
+- type: Conventions
+  url: conventions/rye-conventions.yml
+- type: RateLimits
+  url: rate-limits/rye-rate-limits.yml
+- type: ChangeLog
+  url: changelog/rye-changelog.yml
+- type: Components
+  url: components/rye-components.yml
+- type: DataModel
+  url: data-model/rye-data-model.yml
+- type: Sandbox
+  url: sandbox/rye-sandbox.yml
+- type: Webhooks
+  url: asyncapi/rye-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v1

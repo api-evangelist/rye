@@ -1,0 +1,207 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/rye-checkout-intents-openapi-original.yml
+description: >-
+  No official hosted/remote Rye MCP server was found. This is a candidate MCP
+  tool surface derived one-to-one from the Universal Checkout API OpenAPI
+  operations, for forging an MCP server (e.g. via the AE Toolsmith).
+server:
+  name: rye
+  transport: http
+tools:
+  - name: GetBalance
+    description: Get drawdown balance
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetBalance
+    method: GET
+    path: /api/v1/billing/balance
+  - name: GetSettings
+    description: Get billing info
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetSettings
+    method: GET
+    path: /api/v1/billing
+  - name: SetupDrawdown
+    description: Setup drawdown billing
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#SetupDrawdown
+    method: POST
+    path: /api/v1/billing/drawdown
+  - name: CreateTopUpInvoice
+    description: Create on-demand top-up invoice
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CreateTopUpInvoice
+    method: POST
+    path: /api/v1/billing/drawdown/topup
+  - name: CancelTopUpInvoice
+    description: Cancel top-up invoice
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CancelTopUpInvoice
+    method: DELETE
+    path: /api/v1/billing/drawdown/topup/{invoiceId}
+  - name: ListTransactions
+    description: List drawdown transactions
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListTransactions
+    method: GET
+    path: /api/v1/billing/transactions
+  - name: GetBrandByDomain
+    description: Retrieve brand
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetBrandByDomain
+    method: GET
+    path: /api/v1/brands/domain/{domain}
+  - name: ListCheckoutIntents
+    description: List checkout intents
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListCheckoutIntents
+    method: GET
+    path: /api/v1/checkout-intents
+  - name: CreateCheckoutIntent
+    description: Create checkout intent
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CreateCheckoutIntent
+    method: POST
+    path: /api/v1/checkout-intents
+  - name: GetCheckoutIntent
+    description: Retrieve checkout intent
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetCheckoutIntent
+    method: GET
+    path: /api/v1/checkout-intents/{id}
+  - name: GetCheckoutIntentOrder
+    description: Retrieve order
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetCheckoutIntentOrder
+    method: GET
+    path: /api/v1/checkout-intents/{id}/order
+  - name: ConfirmCheckoutIntent
+    description: Confirm checkout intent
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ConfirmCheckoutIntent
+    method: POST
+    path: /api/v1/checkout-intents/{id}/confirm
+  - name: GetShipments
+    description: List shipments for checkout intent
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetShipments
+    method: GET
+    path: /api/v1/checkout-intents/{id}/shipments
+  - name: Purchase
+    description: Purchase product
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Purchase
+    method: POST
+    path: /api/v1/checkout-intents/purchase
+  - name: Create
+    description: Create checkout session
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Create
+    method: POST
+    path: /api/v1/betas/checkout-sessions
+  - name: GetCommission
+    description: Retrieve commission
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetCommission
+    method: GET
+    path: /api/v1/commissions/{id}
+  - name: ListCommissions
+    description: List commissions
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListCommissions
+    method: GET
+    path: /api/v1/commissions
+  - name: List
+    description: List events
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#List
+    method: GET
+    path: /api/v1/events
+  - name: Get
+    description: Retrieve event
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Get
+    method: GET
+    path: /api/v1/events/{id}
+  - name: Trigger
+    description: Trigger event
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Trigger
+    method: POST
+    path: /api/v1/events/trigger
+  - name: CreateInstallationLink
+    description: Create merchant connector installation link
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CreateInstallationLink
+    method: GET
+    path: /api/v1/merchant-connectors/{connector}/installation-link
+  - name: ListOrders
+    description: List orders
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListOrders
+    method: GET
+    path: /api/v1/orders
+  - name: GetOrder
+    description: Get order
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetOrder
+    method: GET
+    path: /api/v1/orders/{id}
+  - name: CancelOrder
+    description: Cancel order
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CancelOrder
+    method: POST
+    path: /api/v1/orders/{id}/cancel
+  - name: CreateSession
+    description: Create payment gateway session
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CreateSession
+    method: POST
+    path: /api/v1/payment-gateways/{gateway}/session
+  - name: Lookup
+    description: Lookup product
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Lookup
+    method: GET
+    path: /api/v1/products/lookup
+  - name: ListSubscriptions
+    description: List product subscriptions
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListSubscriptions
+    method: GET
+    path: /api/v1/products/subscriptions
+  - name: Subscribe
+    description: Subscribe to product events
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Subscribe
+    method: POST
+    path: /api/v1/products/subscribe
+  - name: Unsubscribe
+    description: Unsubscribe from product events
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#Unsubscribe
+    method: POST
+    path: /api/v1/products/unsubscribe
+  - name: RequestReturn
+    description: Create return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#RequestReturn
+    method: POST
+    path: /api/v1/returns
+  - name: GetReturn
+    description: Get return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetReturn
+    method: GET
+    path: /api/v1/returns/{returnId}
+  - name: ListShipments
+    description: List shipments
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ListShipments
+    method: GET
+    path: /api/v1/shipments
+  - name: GetShipment
+    description: Retrieve shipment by id
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#GetShipment
+    method: GET
+    path: /api/v1/shipments/{id}
+  - name: AdvanceShipment
+    description: Advance simulated shipment
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#AdvanceShipment
+    method: POST
+    path: /api/v1/test-helpers/checkout-intents/{checkoutIntentId}/shipments/advance
+  - name: CreateSimulatedReturn
+    description: Create simulated return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#CreateSimulatedReturn
+    method: POST
+    path: /api/v1/test-helpers/returns
+  - name: ApproveReturn
+    description: Approve simulated return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#ApproveReturn
+    method: POST
+    path: /api/v1/test-helpers/returns/{returnId}/approve
+  - name: DenyReturn
+    description: Deny simulated return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#DenyReturn
+    method: POST
+    path: /api/v1/test-helpers/returns/{returnId}/deny
+  - name: RefundReturn
+    description: Refund simulated return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#RefundReturn
+    method: POST
+    path: /api/v1/test-helpers/returns/{returnId}/refund
+  - name: FailReturn
+    description: Fail simulated return
+    source_operation: openapi/rye-checkout-intents-openapi-original.yml#FailReturn
+    method: POST
+    path: /api/v1/test-helpers/returns/{returnId}/fail

@@ -1,0 +1,52 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Rye
+providerId: rye
+generated: '2026-07-21'
+method: searched
+reconciled: true
+tags:
+  - Rate Limiting
+  - Commerce
+description: >-
+  Rye Universal Checkout API rate limits, enforced per account (all of an
+  account's API keys share the same buckets). Responses carry IETF draft-8
+  RateLimit headers (RateLimit-Policy, RateLimit); throttled requests return 429.
+sources:
+  - https://rye.com/docs/api-v2/rate-limits
+headers:
+  policy: RateLimit-Policy
+  remaining: RateLimit
+responseCodes:
+  throttled: 429
+limits:
+  - name: Mutations
+    scope: account
+    metric: requests_per_second
+    limit: 5
+    timeFrame: second
+    covers: State-changing endpoints (create/confirm/purchase checkout intents, payment gateway sessions).
+  - name: Reads
+    scope: account
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+    covers: General GET endpoints (events, shipments, brands, merchants, settings).
+  - name: Product lookup
+    scope: account
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+    covers: The product lookup endpoint (separate bucket).
+  - name: Checkout intents
+    scope: account
+    metric: checkout_intents
+    limit: 50
+    timeFrame: day
+    covers: Total checkout intents created per day (create + purchase).
+  - name: Concurrent agents
+    scope: account
+    metric: in_flight_orders
+    limit: 10
+    timeFrame: concurrent
+    covers: In-progress checkout intents whose orders are being placed by Rye's agent.

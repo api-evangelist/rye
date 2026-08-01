@@ -1,0 +1,2288 @@
+{
+  "info": {
+    "_postman_id": "6045cac2-19b4-4317-8c1d-f2e1735f485b",
+    "name": "Universal Checkout Betas Checkout Intents API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:25.000Z",
+    "updatedAt": "2026-07-28T02:49:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6045cac2-19b4-4317-8c1d-f2e1735f485b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "checkout-intents",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "order",
+                      "item": [
+                        {
+                          "name": "Retrieve order",
+                          "id": "9cf7374c-1855-4d9e-94b1-992c31eca848",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/order",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id",
+                                "order"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e1ced0be-be29-42d9-9498-85728e4adf23",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) The id of the checkout intent to look up"
+                                }
+                              ]
+                            },
+                            "description": "Retrieve the order associated with a checkout intent.\n\nReturns the single order created when the checkout intent reached the\n`completed` state. 404 if the intent has not produced an order yet."
+                          },
+                          "response": [
+                            {
+                              "id": "05120d30-17ed-4546-9b7e-445cc19f6129",
+                              "name": "The order",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/order",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "order"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"checkoutIntentId\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"cancellation\": {\n    \"checkoutIntentId\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"marketplaceOrderId\": \"<string>\",\n    \"reason\": {\n      \"code\": \"requested_by_customer\",\n      \"message\": \"<string>\"\n    },\n    \"state\": \"requested\"\n  },\n  \"referenceId\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-05120d30-17ed-4546-9b7e-445cc19f6129"
+                            },
+                            {
+                              "id": "2424cbae-ec94-41d7-89b1-0145980b4b25",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/order",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "order"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-2424cbae-ec94-41d7-89b1-0145980b4b25"
+                            },
+                            {
+                              "id": "772b695c-0270-4991-80f2-39a81dd7a83d",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/order",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "order"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-772b695c-0270-4991-80f2-39a81dd7a83d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-9cf7374c-1855-4d9e-94b1-992c31eca848"
+                        }
+                      ],
+                      "id": "010f6302-da13-470d-8843-d99a2f9d58f7",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-010f6302-da13-470d-8843-d99a2f9d58f7"
+                    },
+                    {
+                      "name": "confirm",
+                      "item": [
+                        {
+                          "name": "Confirm checkout intent",
+                          "id": "ce7be306-d50d-49f5-9c16-40f223667707",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id",
+                                "confirm"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a29f27bb-2e70-4205-9d15-621aa2be7271",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) The id of the checkout intent to confirm"
+                                }
+                              ]
+                            },
+                            "description": "Confirm a checkout intent with provided payment information\n\nConfirm means we have buyer's name, address and payment info, so we can\nmove forward to place the order."
+                          },
+                          "response": [
+                            {
+                              "id": "dc70f140-7882-4d27-b0ca-f7734e61d8d3",
+                              "name": "The confirmed checkout intent",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "confirm"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"63bR0srKZU\",\n    \"KUjH7YtTM\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-dc70f140-7882-4d27-b0ca-f7734e61d8d3"
+                            },
+                            {
+                              "id": "c519f1c7-f2cc-48bb-9b0b-ce67d17427df",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "confirm"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-c519f1c7-f2cc-48bb-9b0b-ce67d17427df"
+                            },
+                            {
+                              "id": "1806e557-0002-413f-a503-9c1df96b21c8",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "confirm"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-1806e557-0002-413f-a503-9c1df96b21c8"
+                            },
+                            {
+                              "id": "aae68409-58df-4edc-91d8-29bbf0bbb35c",
+                              "name": "Conflict",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "confirm"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-aae68409-58df-4edc-91d8-29bbf0bbb35c"
+                            },
+                            {
+                              "id": "a6affa47-fb39-4317-9092-5c40f01c4087",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/confirm",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "confirm"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-a6affa47-fb39-4317-9092-5c40f01c4087"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-ce7be306-d50d-49f5-9c16-40f223667707"
+                        }
+                      ],
+                      "id": "b9419fe7-7ca0-4555-b6e5-fa7e69581790",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-b9419fe7-7ca0-4555-b6e5-fa7e69581790"
+                    },
+                    {
+                      "name": "shipments",
+                      "item": [
+                        {
+                          "name": "List shipments for checkout intent",
+                          "id": "54ea7810-1932-4075-9ac5-eecb16b9e464",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/shipments?limit=<integer>&after=<string>&before=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id",
+                                "shipments"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return (default 100)",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "before",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1f04e877-6434-47d9-a06e-ba402dc7dd9a",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) The id of the checkout intent"
+                                }
+                              ]
+                            },
+                            "description": "List shipments for a checkout intent"
+                          },
+                          "response": [
+                            {
+                              "id": "ed597c50-1561-47f3-b2b4-283ba96796ae",
+                              "name": "Shipments list response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/shipments?limit=<integer>&after=<string>&before=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "shipments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return (default 100)",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "key": "after",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "before",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"marketplaceOrderId\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\",\n      \"status\": \"shipped\",\n      \"tracking\": {\n        \"number\": \"<string>\",\n        \"carrierName\": \"<string>\",\n        \"deliveryDate\": {\n          \"estimated\": \"<dateTime>\"\n        },\n        \"url\": \"<string>\"\n      },\n      \"trackingEvents\": [\n        {\n          \"status\": \"out_for_delivery\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        },\n        {\n          \"status\": \"delayed\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"marketplaceOrderId\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\",\n      \"status\": \"shipped\",\n      \"tracking\": {\n        \"number\": \"<string>\",\n        \"carrierName\": \"<string>\",\n        \"deliveryDate\": {\n          \"estimated\": \"<dateTime>\"\n        },\n        \"url\": \"<string>\"\n      },\n      \"trackingEvents\": [\n        {\n          \"status\": \"delayed\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        },\n        {\n          \"status\": \"out_for_delivery\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-ed597c50-1561-47f3-b2b4-283ba96796ae"
+                            },
+                            {
+                              "id": "d5260d59-c556-4546-b984-dba9c67428d6",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/shipments?limit=<integer>&after=<string>&before=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "shipments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return (default 100)",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "key": "after",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "before",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-d5260d59-c556-4546-b984-dba9c67428d6"
+                            },
+                            {
+                              "id": "071aef26-d59a-47b6-8196-e57ad7f63d56",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/shipments?limit=<integer>&after=<string>&before=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "shipments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return (default 100)",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "key": "after",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "before",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-071aef26-d59a-47b6-8196-e57ad7f63d56"
+                            },
+                            {
+                              "id": "6fc9c6f0-465d-4050-9f4f-d4eaa6ffdaff",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/checkout-intents/:id/shipments?limit=<integer>&after=<string>&before=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "checkout-intents",
+                                    ":id",
+                                    "shipments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of results to return (default 100)",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "key": "after",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "before",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"occaecat5c\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"culpaf64\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:26.000Z",
+                              "updatedAt": "2026-07-28T02:49:26.000Z",
+                              "uid": "35240-6fc9c6f0-465d-4050-9f4f-d4eaa6ffdaff"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-54ea7810-1932-4075-9ac5-eecb16b9e464"
+                        }
+                      ],
+                      "id": "a18df3d6-2768-4ded-b071-9adb25644d95",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-a18df3d6-2768-4ded-b071-9adb25644d95"
+                    },
+                    {
+                      "name": "Retrieve checkout intent",
+                      "id": "40740553-01fe-44c1-a4eb-55f9bfa78c72",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "79d03bad-7b8f-427d-9309-4c3bbf7a2b82",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The id of the checkout intent to look up"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a checkout intent by id\n\nReturns checkout intent information if the lookup succeeds."
+                      },
+                      "response": [
+                        {
+                          "id": "e2960c15-f0da-432e-85e8-d06dca195a7b",
+                          "name": "Checkout intent information",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"63bR0srKZU\",\n    \"KUjH7YtTM\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-e2960c15-f0da-432e-85e8-d06dca195a7b"
+                        },
+                        {
+                          "id": "fdd3426f-4581-4c7b-a10b-c1ea97a807b7",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-fdd3426f-4581-4c7b-a10b-c1ea97a807b7"
+                        },
+                        {
+                          "id": "4b2b92d1-c24c-4494-a452-309aca9dd9b2",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-4b2b92d1-c24c-4494-a452-309aca9dd9b2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-40740553-01fe-44c1-a4eb-55f9bfa78c72"
+                    }
+                  ],
+                  "id": "f1173d8a-5030-499b-afdb-a5ba2746fa5c",
+                  "createdAt": "2026-07-28T02:49:26.000Z",
+                  "updatedAt": "2026-07-28T02:49:26.000Z",
+                  "uid": "35240-f1173d8a-5030-499b-afdb-a5ba2746fa5c"
+                },
+                {
+                  "name": "purchase",
+                  "item": [
+                    {
+                      "name": "Purchase product",
+                      "id": "e70b440f-9f60-47f2-bfd7-74ea8f36fd7a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents",
+                            "purchase"
+                          ]
+                        },
+                        "description": "Create a checkout intent and immediately trigger the purchase workflow.\n\nThis is a \"fire-and-forget\" endpoint that combines create + confirm in one step.\nThe workflow handles offer retrieval, payment authorization, and order placement\nasynchronously. Poll the GET endpoint to check status."
+                      },
+                      "response": [
+                        {
+                          "id": "3876cd32-afc8-4410-bc06-029c905b983f",
+                          "name": "Created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                "purchase"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"63bR0srKZU\",\n    \"KUjH7YtTM\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-3876cd32-afc8-4410-bc06-029c905b983f"
+                        },
+                        {
+                          "id": "26ff1702-eedb-4fdb-9591-c370f230f3bc",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                "purchase"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-26ff1702-eedb-4fdb-9591-c370f230f3bc"
+                        },
+                        {
+                          "id": "6f722a3d-fe53-4c5b-81f1-ed471d1b668e",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                "purchase"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"occaecat5c\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"culpaf64\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-6f722a3d-fe53-4c5b-81f1-ed471d1b668e"
+                        },
+                        {
+                          "id": "84f02469-f2b0-4265-9b17-340e4cd6e98a",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                "purchase"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-84f02469-f2b0-4265-9b17-340e4cd6e98a"
+                        },
+                        {
+                          "id": "2bf930b4-8e9a-403b-9775-936b03424fe7",
+                          "name": "Service Unavailable",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"97wNl\",\n    \"MUkknIElxdZ\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/checkout-intents/purchase",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "checkout-intents",
+                                "purchase"
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:26.000Z",
+                          "updatedAt": "2026-07-28T02:49:26.000Z",
+                          "uid": "35240-2bf930b4-8e9a-403b-9775-936b03424fe7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-e70b440f-9f60-47f2-bfd7-74ea8f36fd7a"
+                    }
+                  ],
+                  "id": "08d70d50-6349-4b9f-aa94-e271117dd15d",
+                  "createdAt": "2026-07-28T02:49:26.000Z",
+                  "updatedAt": "2026-07-28T02:49:26.000Z",
+                  "uid": "35240-08d70d50-6349-4b9f-aa94-e271117dd15d"
+                },
+                {
+                  "name": "List checkout intents",
+                  "id": "9b602c08-2dd0-4fd9-b9f7-986dfeb41495",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/checkout-intents?limit=<integer>&after=<string>&before=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "checkout-intents"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (default 100)",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "before",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a paginated list of checkout intents\n\nEnables developers to query checkout intents associated with their account, with filters and cursor-based pagination."
+                  },
+                  "response": [
+                    {
+                      "id": "c24a742c-b8d6-46ce-bf0d-3674ea073e53",
+                      "name": "Paginated checkout intents response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"buyer\": {\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"province\": \"<string>\",\n        \"city\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"email\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"address2\": \"<string>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"state\": \"retrieving_offer\",\n      \"referenceId\": \"<string>\",\n      \"discoverPromoCodes\": \"<boolean>\",\n      \"constraints\": {\n        \"offerRetrievalEffort\": \"low\",\n        \"maxShippingPrice\": \"<integer>\",\n        \"maxTotalPrice\": \"<integer>\"\n      },\n      \"promoCodes\": [\n        \"yx\",\n        \"DI\"\n      ],\n      \"variantSelections\": [\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"buyer\": {\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"province\": \"<string>\",\n        \"city\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"email\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"address2\": \"<string>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"state\": \"retrieving_offer\",\n      \"referenceId\": \"<string>\",\n      \"discoverPromoCodes\": \"<boolean>\",\n      \"constraints\": {\n        \"offerRetrievalEffort\": \"low\",\n        \"maxShippingPrice\": \"<integer>\",\n        \"maxTotalPrice\": \"<integer>\"\n      },\n      \"promoCodes\": [\n        \"eT0tDg\",\n        \"GOYHr5RDL\"\n      ],\n      \"variantSelections\": [\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\",\n          \"label\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-c24a742c-b8d6-46ce-bf0d-3674ea073e53"
+                    },
+                    {
+                      "id": "f32a92a9-713b-4cdd-bc8e-b3d5113b1914",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-f32a92a9-713b-4cdd-bc8e-b3d5113b1914"
+                    },
+                    {
+                      "id": "d4e3794e-1c37-4327-b9c2-7f7c7e284f09",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-d4e3794e-1c37-4327-b9c2-7f7c7e284f09"
+                    },
+                    {
+                      "id": "2c5cd1d5-6b12-4c31-ae89-fb65672a5250",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"occaecat5c\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"culpaf64\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-2c5cd1d5-6b12-4c31-ae89-fb65672a5250"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:26.000Z",
+                  "updatedAt": "2026-07-28T02:49:26.000Z",
+                  "uid": "35240-9b602c08-2dd0-4fd9-b9f7-986dfeb41495"
+                },
+                {
+                  "name": "Create checkout intent",
+                  "id": "06726a5f-2073-4528-9eaf-118e61a0be42",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "checkout-intents"
+                      ]
+                    },
+                    "description": "Create a checkout intent with the given request body."
+                  },
+                  "response": [
+                    {
+                      "id": "69b59b5a-09c6-4869-8d5c-423d53ddef6e",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"63bR0srKZU\",\n    \"KUjH7YtTM\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-69b59b5a-09c6-4869-8d5c-423d53ddef6e"
+                    },
+                    {
+                      "id": "51d54a8f-19ef-45af-9a5b-aa6f55175eed",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-51d54a8f-19ef-45af-9a5b-aa6f55175eed"
+                    },
+                    {
+                      "id": "e2d5cf46-d6d9-4e6a-94fb-5c3fd171c2be",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"occaecat5c\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"culpaf64\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-e2d5cf46-d6d9-4e6a-94fb-5c3fd171c2be"
+                    },
+                    {
+                      "id": "efbc3149-6f1b-455f-a446-eae58dbaca4c",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-efbc3149-6f1b-455f-a446-eae58dbaca4c"
+                    },
+                    {
+                      "id": "12fcadcf-5d46-4668-835a-1a79acffa6b9",
+                      "name": "Service Unavailable",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"NSYCOMbKM9d\",\n    \"hK\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/checkout-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "checkout-intents"
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:26.000Z",
+                      "updatedAt": "2026-07-28T02:49:26.000Z",
+                      "uid": "35240-12fcadcf-5d46-4668-835a-1a79acffa6b9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:26.000Z",
+                  "updatedAt": "2026-07-28T02:49:26.000Z",
+                  "uid": "35240-06726a5f-2073-4528-9eaf-118e61a0be42"
+                }
+              ],
+              "id": "c86fb011-bb97-4fa0-94f4-145ed2ed9eb2",
+              "createdAt": "2026-07-28T02:49:26.000Z",
+              "updatedAt": "2026-07-28T02:49:26.000Z",
+              "uid": "35240-c86fb011-bb97-4fa0-94f4-145ed2ed9eb2"
+            }
+          ],
+          "id": "f041d070-86dc-4a42-ba4a-8eaaf4c41fb5",
+          "createdAt": "2026-07-28T02:49:26.000Z",
+          "updatedAt": "2026-07-28T02:49:26.000Z",
+          "uid": "35240-f041d070-86dc-4a42-ba4a-8eaaf4c41fb5"
+        }
+      ],
+      "id": "9214317d-a031-4701-90a4-08aa62ef39bc",
+      "createdAt": "2026-07-28T02:49:26.000Z",
+      "updatedAt": "2026-07-28T02:49:26.000Z",
+      "uid": "35240-9214317d-a031-4701-90a4-08aa62ef39bc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

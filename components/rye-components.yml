@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/rewards/introduction
+description: >-
+  Rye Rewards UI - drop-in React components for points-redemption, mixed-tender
+  checkout, and post-purchase tracking flows built on the Universal Checkout API.
+  Distributed as source via the shadcn CLI (files copy into your repo; you own
+  them thereafter), so they are client-side UI components rather than a hosted
+  widget.
+distribution:
+  method: shadcn CLI
+  install_docs: https://rye.com/docs/rewards/install
+  note: Source files copy into your repo via the shadcn CLI - not a hosted script tag.
+families:
+  - name: Rewards UI
+    version: v1
+    docs: https://rye.com/docs/rewards/components
+    cookbook: https://rye.com/docs/rewards/cookbook
+    purpose: Points-redemption, mixed-tender (points/fiat) checkout, and post-purchase order tracking.
+    built_on: Universal Checkout API

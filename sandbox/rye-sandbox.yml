@@ -1,0 +1,72 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/api-v2/environments
+description: >-
+  Rye's sandbox / test-data surface. The staging environment acts as a sandbox:
+  no real orders are placed through /confirm and payments use Stripe test cards.
+  Staging and production are completely isolated and use separate API keys. Rye
+  publishes a dedicated Shopify test store plus edge-case test products and
+  simulated-shipment / simulated-return test helpers to exercise the full order
+  lifecycle. Values below are published verbatim by Rye.
+docs:
+  - https://rye.com/docs/api-v2/environments
+  - https://rye.com/docs/api-v2/testing/test-products
+  - https://rye.com/docs/api-v2/testing/with-shopify
+modes:
+  - name: staging
+    base_url: https://staging.api.rye.com/api/v1/
+    console: https://staging.console.rye.com
+    notes: Sandbox. No real orders placed via /confirm; Stripe test cards only; isolated from production.
+  - name: production
+    base_url: https://api.rye.com/api/v1/
+    console: https://console.rye.com
+test_payments:
+  provider: Stripe (test mode)
+  test_cards: https://docs.stripe.com/testing
+  stripe_publishable_test_key: pk_test_51LgDhrHGDlstla3fdqlULAne0rAf4Ho6aBV2cobkYQ4m863Sy0W8DNu2HOnUeYTQzQnE4DZGyzvCB8Yzl1r38isl00H9sVKEMu
+  note: Publishable (non-secret) key published by Rye docs to tokenize test cards in staging.
+test_stores:
+  - url: rye-test-store.myshopify.com
+    notes: Hosts all documented test products; use with Stripe test cards.
+  - url: rye-protocol.myshopify.com
+    notes: Production test store on a live payment gateway - payments are not captured; funds auto-returned after ~1 week.
+test_products:
+  - name: Standard product (baseline)
+    url: https://rye-test-store.myshopify.com/products/product-published-to-rye-channel
+  - name: 3PL carrier-calculated shipping
+    url: https://rye-test-store.myshopify.com/products/test-product-3pl
+  - name: Digital product ($9.99, free shipping)
+    url: https://rye-test-store.myshopify.com/products/digital-product
+  - name: Heavyweight / oversized (100 lbs, $199.99)
+    url: https://rye-test-store.myshopify.com/products/heavyweight-product
+  - name: Delayed shipping (use with shipment advance helper)
+    url: https://rye-test-store.myshopify.com/products/delayed-shipping-product
+  - name: Canceled shipping (use with shipment advance helper)
+    url: https://rye-test-store.myshopify.com/products/canceled-shipping-product
+  - name: Sold out (fails product_out_of_stock)
+    url: https://rye-test-store.myshopify.com/products/sold-out-product
+  - name: Partial-stock variants (S/M in stock, L/XL sold out)
+    url: https://rye-test-store.myshopify.com/products/partial-stock-variants
+  - name: Unpublished / draft (404 -> offer_retrieval_failed)
+    url: https://rye-test-store.myshopify.com/products/unpublished-draft
+  - name: Different variant prices
+    url: https://rye-test-store.myshopify.com/products/test-product-with-different-variant-prices
+  - name: Many variants (25+)
+    url: https://rye-test-store.myshopify.com/products/many-variants
+  - name: High-value ($9,999.99 -> subtotal 999999 subunits)
+    url: https://rye-test-store.myshopify.com/products/high-value-product
+  - name: Sale / compare-at price ($19.99, compare-at $39.99)
+    url: https://rye-test-store.myshopify.com/products/on-sale-compare-at
+  - name: Tax-exempt ($25.00, tax 0)
+    url: https://rye-test-store.myshopify.com/products/tax-exempt-product
+  - name: Gift card ($25/$50/$100)
+    url: https://rye-test-store.myshopify.com/products/test-gift-card
+test_helpers:
+  description: Staging-only endpoints to drive simulated shipment and return lifecycles.
+  operations:
+    - AdvanceShipment (POST /api/v1/test-helpers/checkout-intents/{checkoutIntentId}/shipments/advance)
+    - CreateSimulatedReturn (POST /api/v1/test-helpers/returns)
+    - ApproveReturn (POST /api/v1/test-helpers/returns/{returnId}/approve)
+    - DenyReturn (POST /api/v1/test-helpers/returns/{returnId}/deny)
+    - RefundReturn (POST /api/v1/test-helpers/returns/{returnId}/refund)
+    - FailReturn (POST /api/v1/test-helpers/returns/{returnId}/fail)

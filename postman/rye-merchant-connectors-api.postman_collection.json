@@ -1,0 +1,455 @@
+{
+  "info": {
+    "_postman_id": "85e22ba0-5a27-48ad-914b-e7fe83f48185",
+    "name": "Universal Checkout Betas Merchant Connectors API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:29.000Z",
+    "updatedAt": "2026-07-28T02:49:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-85e22ba0-5a27-48ad-914b-e7fe83f48185"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "merchant-connectors",
+              "item": [
+                {
+                  "name": "{connector}",
+                  "item": [
+                    {
+                      "name": "installation-link",
+                      "item": [
+                        {
+                          "name": "Create merchant connector installation link",
+                          "id": "fff00b98-d0e4-442d-8eca-b3d07db3f91d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "merchant-connectors",
+                                ":connector",
+                                "installation-link"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                  "key": "storeUrl",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                  "key": "private",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f89c0ad1-1c33-4b2f-964e-c74c784abd2f",
+                                  "key": "connector",
+                                  "value": "shopify",
+                                  "description": "(Required) The merchant connector to generate an installation link for"
+                                }
+                              ]
+                            },
+                            "description": "Generate an installation link for a merchant connector (e.g. Shopify).\n\nThe returned URL begins the connector's OAuth handshake. Direct the\nmerchant to it; once they authorize the Rye app, the connector redirects\nback to Rye to complete the install. The merchant is attributed to the\ncalling developer and becomes available for checkout via this account."
+                          },
+                          "response": [
+                            {
+                              "id": "23dcbeed-d803-464a-a2b1-89e0a66ff5db",
+                              "name": "OAuth authorization URL for the requested connector",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant-connectors",
+                                    ":connector",
+                                    "installation-link"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                      "key": "storeUrl",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                      "key": "private",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"url\": \"<string>\",\n  \"connector\": \"shopify\"\n}",
+                              "createdAt": "2026-07-28T02:49:29.000Z",
+                              "updatedAt": "2026-07-28T02:49:29.000Z",
+                              "uid": "35240-23dcbeed-d803-464a-a2b1-89e0a66ff5db"
+                            },
+                            {
+                              "id": "e02a6baf-773a-4ef7-8eaf-bfb535f3b6a4",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant-connectors",
+                                    ":connector",
+                                    "installation-link"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                      "key": "storeUrl",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                      "key": "private",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:29.000Z",
+                              "updatedAt": "2026-07-28T02:49:29.000Z",
+                              "uid": "35240-e02a6baf-773a-4ef7-8eaf-bfb535f3b6a4"
+                            },
+                            {
+                              "id": "1937a815-4568-48ea-84d6-a8d5e9df22ee",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant-connectors",
+                                    ":connector",
+                                    "installation-link"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                      "key": "storeUrl",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                      "key": "private",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"adipisicing_3\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"esse_983\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:29.000Z",
+                              "updatedAt": "2026-07-28T02:49:29.000Z",
+                              "uid": "35240-1937a815-4568-48ea-84d6-a8d5e9df22ee"
+                            },
+                            {
+                              "id": "710159b8-77e1-429a-a797-bb7c2d715ed6",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant-connectors",
+                                    ":connector",
+                                    "installation-link"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                      "key": "storeUrl",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                      "key": "private",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:29.000Z",
+                              "updatedAt": "2026-07-28T02:49:29.000Z",
+                              "uid": "35240-710159b8-77e1-429a-a797-bb7c2d715ed6"
+                            },
+                            {
+                              "id": "4c37805e-d0bc-452f-ae05-1dfc8523fe4c",
+                              "name": "Not Implemented",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant-connectors/:connector/installation-link?storeUrl=<string>&private=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant-connectors",
+                                    ":connector",
+                                    "installation-link"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) Domain or URL of the merchant store to generate the installation link for",
+                                      "key": "storeUrl",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "If true, the merchant onboarded via this link is exclusive to the calling developer",
+                                      "key": "private",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "connector"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Implemented",
+                              "code": 501,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:29.000Z",
+                              "updatedAt": "2026-07-28T02:49:29.000Z",
+                              "uid": "35240-4c37805e-d0bc-452f-ae05-1dfc8523fe4c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:29.000Z",
+                          "updatedAt": "2026-07-28T02:49:29.000Z",
+                          "uid": "35240-fff00b98-d0e4-442d-8eca-b3d07db3f91d"
+                        }
+                      ],
+                      "id": "5a8eefaa-995e-4609-9094-4d78fc6d0ab7",
+                      "createdAt": "2026-07-28T02:49:29.000Z",
+                      "updatedAt": "2026-07-28T02:49:29.000Z",
+                      "uid": "35240-5a8eefaa-995e-4609-9094-4d78fc6d0ab7"
+                    }
+                  ],
+                  "id": "fd90ad92-1ab4-4a64-a7f0-a01afb0bdce9",
+                  "createdAt": "2026-07-28T02:49:29.000Z",
+                  "updatedAt": "2026-07-28T02:49:29.000Z",
+                  "uid": "35240-fd90ad92-1ab4-4a64-a7f0-a01afb0bdce9"
+                }
+              ],
+              "id": "f432bf90-82e5-4f18-af30-fd95ce7e693b",
+              "createdAt": "2026-07-28T02:49:29.000Z",
+              "updatedAt": "2026-07-28T02:49:29.000Z",
+              "uid": "35240-f432bf90-82e5-4f18-af30-fd95ce7e693b"
+            }
+          ],
+          "id": "7c3f0a5d-4551-4855-90a3-2415813eeb4c",
+          "createdAt": "2026-07-28T02:49:29.000Z",
+          "updatedAt": "2026-07-28T02:49:29.000Z",
+          "uid": "35240-7c3f0a5d-4551-4855-90a3-2415813eeb4c"
+        }
+      ],
+      "id": "fbbcceae-3bbf-4822-ba40-c4e0e14c792b",
+      "createdAt": "2026-07-28T02:49:29.000Z",
+      "updatedAt": "2026-07-28T02:49:29.000Z",
+      "uid": "35240-fbbcceae-3bbf-4822-ba40-c4e0e14c792b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

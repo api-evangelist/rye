@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/api-v2/environments
+description: >-
+  Versioning, environments, deprecation and status posture for the Rye Universal
+  Checkout API. Rye versions via URI path (/api/v1). The prior "Sync API" (V1) is
+  superseded by the V2 Universal Checkout API, with a published migration guide.
+  Staging and production are fully isolated with separate keys.
+versioning:
+  scheme: uri-path
+  current: v1
+  api: Universal Checkout API (v2 generation)
+  docs: https://rye.com/docs/api-v2/introduction
+deprecation:
+  policy_url: https://rye.com/docs/api-v2/migrate-from-v1
+  superseded: Sync API (V1) -> Universal Checkout API
+  sunset_header: false
+sla:
+  uptime_target: "99.9%"
+  source: https://rye.com
+status_page: https://ryestatus.com
+environments:
+  - name: staging
+    console: https://staging.console.rye.com
+    base_url: https://staging.api.rye.com/api/v1/
+    notes: Sandbox - no real orders placed, Stripe test cards only.
+  - name: production
+    console: https://console.rye.com
+    base_url: https://api.rye.com/api/v1/
+deprecated_operations: []

@@ -1,0 +1,958 @@
+{
+  "info": {
+    "_postman_id": "478113f6-de61-4abc-ba11-f42e36e3332d",
+    "name": "Universal Checkout Betas Test Helpers API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:36.000Z",
+    "updatedAt": "2026-07-28T02:49:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-478113f6-de61-4abc-ba11-f42e36e3332d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "test-helpers",
+              "item": [
+                {
+                  "name": "checkout-intents",
+                  "item": [
+                    {
+                      "name": "{checkoutIntentId}",
+                      "item": [
+                        {
+                          "name": "shipments",
+                          "item": [
+                            {
+                              "name": "advance",
+                              "item": [
+                                {
+                                  "name": "Advance simulated shipment",
+                                  "id": "fc0ce639-4758-4ac4-a64b-46e901eca9a2",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "auth": {
+                                      "type": "apikey",
+                                      "apikey": [
+                                        {
+                                          "key": "key",
+                                          "value": "Authorization",
+                                          "type": "string"
+                                        },
+                                        {
+                                          "key": "value",
+                                          "value": "{{apiKey}}",
+                                          "type": "string"
+                                        },
+                                        {
+                                          "key": "in",
+                                          "value": "header",
+                                          "type": "string"
+                                        }
+                                      ]
+                                    },
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/test-helpers/checkout-intents/:checkoutIntentId/shipments/advance",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "test-helpers",
+                                        "checkout-intents",
+                                        ":checkoutIntentId",
+                                        "shipments",
+                                        "advance"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2536b981-eb60-4483-9f27-95210241cbd9",
+                                          "key": "checkoutIntentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Advance the simulated shipment for a checkout intent. To trigger delayed or\ncanceled shipping scenarios, create the checkout intent with a matching\nshipping and delivery test product:\nhttps://rye.com/docs/api-v2/testing/test-products#shipping-&-delivery"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "05d1c3d9-6212-4d9b-aadc-8f64b879776d",
+                                      "name": "The advanced simulated shipment state",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "Authorization",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/test-helpers/checkout-intents/:checkoutIntentId/shipments/advance",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "test-helpers",
+                                            "checkout-intents",
+                                            ":checkoutIntentId",
+                                            "shipments",
+                                            "advance"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "checkoutIntentId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"shipment\": {\n    \"checkoutIntentId\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"externalId\": \"<string>\",\n    \"id\": \"<string>\",\n    \"marketplaceOrderId\": \"<string>\",\n    \"shippedAt\": \"<dateTime>\",\n    \"status\": \"shipped\",\n    \"tracking\": {\n      \"number\": \"<string>\",\n      \"carrierName\": \"<string>\",\n      \"deliveryDate\": {\n        \"estimated\": \"<dateTime>\"\n      },\n      \"url\": \"<string>\"\n    },\n    \"trackingEvents\": [\n      {\n        \"status\": \"canceled\",\n        \"location\": {\n          \"country\": \"<string>\",\n          \"province\": \"<string>\",\n          \"city\": \"<string>\"\n        },\n        \"timestamp\": {\n          \"local\": \"<string>\",\n          \"utc\": \"<dateTime>\"\n        },\n        \"description\": \"<string>\"\n      },\n      {\n        \"status\": \"canceled\",\n        \"location\": {\n          \"country\": \"<string>\",\n          \"province\": \"<string>\",\n          \"city\": \"<string>\"\n        },\n        \"timestamp\": {\n          \"local\": \"<string>\",\n          \"utc\": \"<dateTime>\"\n        },\n        \"description\": \"<string>\"\n      }\n    ],\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T02:49:36.000Z",
+                                      "updatedAt": "2026-07-28T02:49:36.000Z",
+                                      "uid": "35240-05d1c3d9-6212-4d9b-aadc-8f64b879776d"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:49:36.000Z",
+                                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                                  "uid": "35240-fc0ce639-4758-4ac4-a64b-46e901eca9a2"
+                                }
+                              ],
+                              "id": "d66f5813-aeb0-4f7b-83f4-a3a620c03235",
+                              "createdAt": "2026-07-28T02:49:36.000Z",
+                              "updatedAt": "2026-07-28T02:49:36.000Z",
+                              "uid": "35240-d66f5813-aeb0-4f7b-83f4-a3a620c03235"
+                            }
+                          ],
+                          "id": "cf874155-1509-432c-bbb7-dc8d9952df5b",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-cf874155-1509-432c-bbb7-dc8d9952df5b"
+                        }
+                      ],
+                      "id": "b8313ba9-9957-4939-8e7a-cf18e5bb3217",
+                      "createdAt": "2026-07-28T02:49:36.000Z",
+                      "updatedAt": "2026-07-28T02:49:36.000Z",
+                      "uid": "35240-b8313ba9-9957-4939-8e7a-cf18e5bb3217"
+                    }
+                  ],
+                  "id": "b92ed50e-a9b1-498c-8ee2-cc3bacf52282",
+                  "createdAt": "2026-07-28T02:49:36.000Z",
+                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                  "uid": "35240-b92ed50e-a9b1-498c-8ee2-cc3bacf52282"
+                },
+                {
+                  "name": "returns",
+                  "item": [
+                    {
+                      "name": "{returnId}",
+                      "item": [
+                        {
+                          "name": "approve",
+                          "item": [
+                            {
+                              "name": "Approve simulated return",
+                              "id": "8bfaca47-118e-4f0e-a4f8-06c6d50c0c2c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "Authorization",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "{{apiKey}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"nextAction\": \"ship_items_to_merchant\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/approve",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "test-helpers",
+                                    "returns",
+                                    ":returnId",
+                                    "approve"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "43f60adc-fdd2-49fc-b9aa-31e491d67832",
+                                      "key": "returnId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Approve a simulated return."
+                              },
+                              "response": [
+                                {
+                                  "id": "686d96ff-4692-4c7e-b0fe-66e9bfca928c",
+                                  "name": "The approved simulated return",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"nextAction\": \"ship_items_to_merchant\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/approve",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "test-helpers",
+                                        "returns",
+                                        ":returnId",
+                                        "approve"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "returnId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"defective\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"processing\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"other\"\n  },\n  \"denial\": {\n    \"reason\": \"other\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:49:36.000Z",
+                                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                                  "uid": "35240-686d96ff-4692-4c7e-b0fe-66e9bfca928c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:49:36.000Z",
+                              "updatedAt": "2026-07-28T02:49:36.000Z",
+                              "uid": "35240-8bfaca47-118e-4f0e-a4f8-06c6d50c0c2c"
+                            }
+                          ],
+                          "id": "c2d670b0-3b67-4208-beaf-e381943c3225",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-c2d670b0-3b67-4208-beaf-e381943c3225"
+                        },
+                        {
+                          "name": "deny",
+                          "item": [
+                            {
+                              "name": "Deny simulated return",
+                              "id": "ca541e16-ac3a-4b15-aef2-61990cd7c4ff",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "Authorization",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "{{apiKey}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"note\": \"<string>\",\n  \"reason\": \"return_period_ended\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/deny",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "test-helpers",
+                                    "returns",
+                                    ":returnId",
+                                    "deny"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "45814dc3-13fa-4720-ba78-1fcf541f2f94",
+                                      "key": "returnId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Deny a simulated return."
+                              },
+                              "response": [
+                                {
+                                  "id": "7dca7383-5dea-4ff1-abcd-00733f441925",
+                                  "name": "The denied simulated return",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"note\": \"<string>\",\n  \"reason\": \"return_period_ended\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/deny",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "test-helpers",
+                                        "returns",
+                                        ":returnId",
+                                        "deny"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "returnId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"defective\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"processing\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"other\"\n  },\n  \"denial\": {\n    \"reason\": \"other\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:49:36.000Z",
+                                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                                  "uid": "35240-7dca7383-5dea-4ff1-abcd-00733f441925"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:49:36.000Z",
+                              "updatedAt": "2026-07-28T02:49:36.000Z",
+                              "uid": "35240-ca541e16-ac3a-4b15-aef2-61990cd7c4ff"
+                            }
+                          ],
+                          "id": "16c7d31c-1bf8-4e83-bae6-933270599f2b",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-16c7d31c-1bf8-4e83-bae6-933270599f2b"
+                        },
+                        {
+                          "name": "refund",
+                          "item": [
+                            {
+                              "name": "Refund simulated return",
+                              "id": "9dcd8ccd-be71-4138-ac3e-b0fea94e7e97",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "Authorization",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "{{apiKey}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"costBearer\": \"developer\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "test-helpers",
+                                    "returns",
+                                    ":returnId",
+                                    "refund"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c36b2bbf-c06b-467c-958e-1aa0c1143077",
+                                      "key": "returnId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Refund a simulated return using the order total as the simulated refund\namount."
+                              },
+                              "response": [
+                                {
+                                  "id": "d06be833-7f73-4c73-b28f-6ab0400ac390",
+                                  "name": "The refunded simulated return",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"costBearer\": \"developer\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/refund",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "test-helpers",
+                                        "returns",
+                                        ":returnId",
+                                        "refund"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "returnId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"defective\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"processing\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"other\"\n  },\n  \"denial\": {\n    \"reason\": \"other\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:49:36.000Z",
+                                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                                  "uid": "35240-d06be833-7f73-4c73-b28f-6ab0400ac390"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:49:36.000Z",
+                              "updatedAt": "2026-07-28T02:49:36.000Z",
+                              "uid": "35240-9dcd8ccd-be71-4138-ac3e-b0fea94e7e97"
+                            }
+                          ],
+                          "id": "e834a3c0-681b-432f-9391-52f6f42b44d3",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-e834a3c0-681b-432f-9391-52f6f42b44d3"
+                        },
+                        {
+                          "name": "fail",
+                          "item": [
+                            {
+                              "name": "Fail simulated return",
+                              "id": "979d7286-b581-4b1d-83b8-acdfbbef72d9",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "Authorization",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "{{apiKey}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"note\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/fail",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "test-helpers",
+                                    "returns",
+                                    ":returnId",
+                                    "fail"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "51b63d53-e0fc-4652-ba13-a1aa210dc846",
+                                      "key": "returnId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Mark a simulated return as failed."
+                              },
+                              "response": [
+                                {
+                                  "id": "b67bd9ac-385a-4303-bf96-06cc3fc3bb18",
+                                  "name": "The failed simulated return",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"note\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/test-helpers/returns/:returnId/fail",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "test-helpers",
+                                        "returns",
+                                        ":returnId",
+                                        "fail"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "returnId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"defective\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"processing\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"other\"\n  },\n  \"denial\": {\n    \"reason\": \"other\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:49:36.000Z",
+                                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                                  "uid": "35240-b67bd9ac-385a-4303-bf96-06cc3fc3bb18"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:49:36.000Z",
+                              "updatedAt": "2026-07-28T02:49:36.000Z",
+                              "uid": "35240-979d7286-b581-4b1d-83b8-acdfbbef72d9"
+                            }
+                          ],
+                          "id": "6f763327-94bd-4e20-8d7e-d675e351dab0",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-6f763327-94bd-4e20-8d7e-d675e351dab0"
+                        }
+                      ],
+                      "id": "d413012b-c930-4da9-8916-52bda5f4d88f",
+                      "createdAt": "2026-07-28T02:49:36.000Z",
+                      "updatedAt": "2026-07-28T02:49:36.000Z",
+                      "uid": "35240-d413012b-c930-4da9-8916-52bda5f4d88f"
+                    },
+                    {
+                      "name": "Create simulated return",
+                      "id": "94e4eb26-8212-4338-8ba1-c5a8370a163e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"orderId\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"orderLineItemId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<integer>\",\n      \"orderLineItemId\": \"<string>\"\n    }\n  ],\n  \"reason\": \"wrong_item\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/test-helpers/returns",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "test-helpers",
+                            "returns"
+                          ]
+                        },
+                        "description": "Create a simulated return for an order, then drive it through its lifecycle\nwith the approve/deny/refund/fail helpers below."
+                      },
+                      "response": [
+                        {
+                          "id": "1e60f6a0-3da7-448c-9e39-9fa0734b8809",
+                          "name": "Created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orderId\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"quantity\": \"<integer>\",\n      \"orderLineItemId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<integer>\",\n      \"orderLineItemId\": \"<string>\"\n    }\n  ],\n  \"reason\": \"wrong_item\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/test-helpers/returns",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "test-helpers",
+                                "returns"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"timeline\": {\n    \"requestedAt\": \"<dateTime>\",\n    \"failedAt\": \"<dateTime>\",\n    \"deniedAt\": \"<dateTime>\",\n    \"refundedAt\": \"<dateTime>\",\n    \"refundIssuedAt\": \"<dateTime>\",\n    \"returnApprovedAt\": \"<dateTime>\"\n  },\n  \"reason\": \"defective\",\n  \"checkoutIntentId\": \"<string>\",\n  \"orderId\": \"<string>\",\n  \"state\": \"processing\",\n  \"id\": \"<string>\",\n  \"refunds\": [\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"shopperRefundTotal\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"refundedAt\": \"<dateTime>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"failure\": {\n    \"message\": \"<string>\",\n    \"code\": \"other\"\n  },\n  \"denial\": {\n    \"reason\": \"other\",\n    \"note\": \"<string>\"\n  },\n  \"nextAction\": {\n    \"type\": \"no_action_required\",\n    \"shipItemsToMerchant\": {\n      \"label\": {\n        \"url\": \"<string>\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:49:36.000Z",
+                          "updatedAt": "2026-07-28T02:49:36.000Z",
+                          "uid": "35240-1e60f6a0-3da7-448c-9e39-9fa0734b8809"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:36.000Z",
+                      "updatedAt": "2026-07-28T02:49:36.000Z",
+                      "uid": "35240-94e4eb26-8212-4338-8ba1-c5a8370a163e"
+                    }
+                  ],
+                  "id": "3be52533-37d9-41f6-b0fe-c18a0ee6f067",
+                  "createdAt": "2026-07-28T02:49:36.000Z",
+                  "updatedAt": "2026-07-28T02:49:36.000Z",
+                  "uid": "35240-3be52533-37d9-41f6-b0fe-c18a0ee6f067"
+                }
+              ],
+              "id": "d2e13b58-a0c3-468c-97e4-64fd41c25b36",
+              "createdAt": "2026-07-28T02:49:36.000Z",
+              "updatedAt": "2026-07-28T02:49:36.000Z",
+              "uid": "35240-d2e13b58-a0c3-468c-97e4-64fd41c25b36"
+            }
+          ],
+          "id": "93aba2f2-ee3a-4591-91c6-248db5bce829",
+          "createdAt": "2026-07-28T02:49:36.000Z",
+          "updatedAt": "2026-07-28T02:49:36.000Z",
+          "uid": "35240-93aba2f2-ee3a-4591-91c6-248db5bce829"
+        }
+      ],
+      "id": "19db0a6f-9be9-4857-9ec0-eda8d21429e9",
+      "createdAt": "2026-07-28T02:49:36.000Z",
+      "updatedAt": "2026-07-28T02:49:36.000Z",
+      "uid": "35240-19db0a6f-9be9-4857-9ec0-eda8d21429e9"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/rye-checkout-intents-openapi-original.yml
+docs: https://rye.com/docs/api-v2/checkout-intent-lifecycle
+description: >-
+  Checkout failure / decline codes for the Rye Universal Checkout API. When a
+  checkout intent transitions to the "failed" state, the failure reason carries a
+  FailureReasonCode. This is the commerce equivalent of a card decline-code table:
+  it explains why an order could not be placed. Cancellation reason codes (for
+  orders cancelled after placement) are listed separately.
+envelope:
+  field: failureReason.code
+  state: failed
+  type: FailureReasonCode
+decline_codes:
+  - code: unknown
+    meaning: Unclassified failure.
+    action: Retry or contact support.
+  - code: checkout_intent_expired
+    meaning: The intent expired before it was confirmed; any card authorization is released.
+    action: Create a new checkout intent.
+  - code: payment_failed
+    meaning: The payment could not be processed.
+    action: Verify the payment method / card token and retry.
+  - code: payment_cvc_expired
+    meaning: The card CVC token expired.
+    action: Re-tokenize the card and retry.
+  - code: insufficient_stock
+    meaning: Not enough inventory for the requested quantity.
+    action: Reduce quantity or choose another product.
+  - code: product_out_of_stock
+    meaning: The product (or selected variant) is sold out.
+    action: Select an in-stock variant or product.
+  - code: offer_retrieval_failed
+    meaning: Rye could not retrieve an offer for the product URL (e.g. draft/unpublished product).
+    action: Verify the product URL is public and purchasable.
+  - code: order_placement_failed
+    meaning: The order could not be placed at the merchant.
+    action: Retry; if persistent, contact support.
+  - code: developer_not_found
+    meaning: The authenticated developer account was not found.
+    action: Verify credentials and account status.
+  - code: missing_shipping_method
+    meaning: No shipping method was available/selected.
+    action: Ensure a valid shipping address; select a shipping option.
+  - code: unsupported_currency
+    meaning: The requested currency is not supported.
+    action: Use a supported currency.
+  - code: invalid_input
+    meaning: The request contained invalid input.
+    action: Fix the flagged fields (see 422 ValidateError).
+  - code: incorrect_cost_breakdown
+    meaning: The supplied cost breakdown did not match the computed cost.
+    action: Recompute against the returned offer before confirming.
+  - code: unsupported_store_no_guest_checkout
+    meaning: The store requires an account and does not support guest checkout.
+    action: Choose a supported store.
+  - code: workflow_invocation_failed
+    meaning: The internal checkout workflow failed to run.
+    action: Retry; contact support if persistent.
+  - code: variant_selections_invalid
+    meaning: The provided variant selections are invalid.
+    action: Correct variantSelections to match available options.
+  - code: variant_selections_required
+    meaning: Variant selections are required but were not provided.
+    action: Supply variantSelections or a deep-link variant URL.
+  - code: form_validation_error
+    meaning: Merchant checkout form validation failed.
+    action: Verify buyer fields (country uppercase, phone format 010-010-0101).
+  - code: captcha_blocked
+    meaning: A CAPTCHA blocked the automated checkout.
+    action: Retry; Rye mitigates automatically where possible.
+  - code: bot_protection_blocked
+    meaning: Merchant bot protection blocked the checkout.
+    action: Retry; Rye mitigates automatically where possible.
+  - code: constraint_total_price_exceeded
+    meaning: Order total exceeded the maxTotalPrice constraint in the request.
+    action: Raise the constraint or accept the higher total.
+  - code: constraint_shipping_cost_exceeded
+    meaning: Shipping cost exceeded the maxShippingCost constraint in the request.
+    action: Raise the constraint or accept the higher shipping cost.
+  - code: promo_code_discovery_not_enabled
+    meaning: Automatic promo-code discovery was requested but not enabled.
+    action: Enable promo-code discovery or omit the request.
+  - code: product_not_found
+    meaning: The product could not be found at the merchant (e.g. Amazon product not found).
+    action: Verify the product URL / availability.
+cancellation_reason_codes:
+  - {code: requested_by_customer, meaning: Cancellation requested by the buyer.}
+  - {code: fraud, meaning: Cancelled due to suspected fraud.}
+  - {code: inventory, meaning: Cancelled due to inventory issues.}
+  - {code: payment_issue, meaning: Cancelled due to a payment problem.}
+  - {code: staff_error, meaning: Cancelled due to merchant staff error.}
+  - {code: other, meaning: Other cancellation reason.}
+cancellation_denial_reason_codes:
+  - {code: already_shipped, meaning: Order already shipped; cannot cancel.}
+  - {code: non_cancellable_item, meaning: Item is non-cancellable.}
+  - {code: cancellation_window_expired, meaning: The cancellation window has closed.}
+  - {code: other, meaning: Other denial reason.}

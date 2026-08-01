@@ -1,0 +1,572 @@
+{
+  "info": {
+    "_postman_id": "b2c8fa35-ad2e-4f84-907f-7e9a5fa78dd0",
+    "name": "Universal Checkout Betas Shipments API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:35.000Z",
+    "updatedAt": "2026-07-28T02:49:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2c8fa35-ad2e-4f84-907f-7e9a5fa78dd0"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "shipments",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve shipment by id",
+                      "id": "346d0935-87ee-45cc-af2a-cc9be1055dc6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/shipments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "shipments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b6296b0c-4d80-4120-8f4a-5e3bbcc99e64",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The id of the shipment to look up"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a shipment by id\n\nReturns shipment information if the lookup succeeds."
+                      },
+                      "response": [
+                        {
+                          "id": "d5799778-2349-4790-a78a-361f92785b0f",
+                          "name": "Shipment information",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/shipments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "shipments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"checkoutIntentId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"marketplaceOrderId\": \"<string>\",\n  \"shippedAt\": \"<dateTime>\",\n  \"status\": \"shipped\",\n  \"tracking\": {\n    \"number\": \"<string>\",\n    \"carrierName\": \"<string>\",\n    \"deliveryDate\": {\n      \"estimated\": \"<dateTime>\"\n    },\n    \"url\": \"<string>\"\n  },\n  \"trackingEvents\": [\n    {\n      \"status\": \"shipped\",\n      \"location\": {\n        \"country\": \"<string>\",\n        \"province\": \"<string>\",\n        \"city\": \"<string>\"\n      },\n      \"timestamp\": {\n        \"local\": \"<string>\",\n        \"utc\": \"<dateTime>\"\n      },\n      \"description\": \"<string>\"\n    },\n    {\n      \"status\": \"shipped\",\n      \"location\": {\n        \"country\": \"<string>\",\n        \"province\": \"<string>\",\n        \"city\": \"<string>\"\n      },\n      \"timestamp\": {\n        \"local\": \"<string>\",\n        \"utc\": \"<dateTime>\"\n      },\n      \"description\": \"<string>\"\n    }\n  ],\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:49:35.000Z",
+                          "updatedAt": "2026-07-28T02:49:35.000Z",
+                          "uid": "35240-d5799778-2349-4790-a78a-361f92785b0f"
+                        },
+                        {
+                          "id": "c897be1e-0363-4a61-aa2d-0d7c1fe579ce",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/shipments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "shipments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:35.000Z",
+                          "updatedAt": "2026-07-28T02:49:35.000Z",
+                          "uid": "35240-c897be1e-0363-4a61-aa2d-0d7c1fe579ce"
+                        },
+                        {
+                          "id": "0c7e4b33-0e35-49d3-85ff-3e39dcacc659",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/shipments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "shipments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:35.000Z",
+                          "updatedAt": "2026-07-28T02:49:35.000Z",
+                          "uid": "35240-0c7e4b33-0e35-49d3-85ff-3e39dcacc659"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:35.000Z",
+                      "updatedAt": "2026-07-28T02:49:35.000Z",
+                      "uid": "35240-346d0935-87ee-45cc-af2a-cc9be1055dc6"
+                    }
+                  ],
+                  "id": "9c5df3eb-5538-49df-a658-f7d8fefcb6b9",
+                  "createdAt": "2026-07-28T02:49:35.000Z",
+                  "updatedAt": "2026-07-28T02:49:35.000Z",
+                  "uid": "35240-9c5df3eb-5538-49df-a658-f7d8fefcb6b9"
+                },
+                {
+                  "name": "List shipments",
+                  "id": "ccdb42ac-69d8-4919-a775-e7989cb38f52",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/shipments?limit=<integer>&after=<string>&before=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "shipments"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (default 100)",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "before",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a paginated list of shipments\n\nEnables developers to query shipments associated with their account, with filters and cursor-based pagination."
+                  },
+                  "response": [
+                    {
+                      "id": "91e1e0f9-f84c-4c80-b0c3-973ea6ef677d",
+                      "name": "Paginated shipments response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/shipments?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "shipments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"marketplaceOrderId\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\",\n      \"status\": \"shipped\",\n      \"tracking\": {\n        \"number\": \"<string>\",\n        \"carrierName\": \"<string>\",\n        \"deliveryDate\": {\n          \"estimated\": \"<dateTime>\"\n        },\n        \"url\": \"<string>\"\n      },\n      \"trackingEvents\": [\n        {\n          \"status\": \"delivered\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        },\n        {\n          \"status\": \"delivered\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"marketplaceOrderId\": \"<string>\",\n      \"shippedAt\": \"<dateTime>\",\n      \"status\": \"shipped\",\n      \"tracking\": {\n        \"number\": \"<string>\",\n        \"carrierName\": \"<string>\",\n        \"deliveryDate\": {\n          \"estimated\": \"<dateTime>\"\n        },\n        \"url\": \"<string>\"\n      },\n      \"trackingEvents\": [\n        {\n          \"status\": \"ordered\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        },\n        {\n          \"status\": \"canceled\",\n          \"location\": {\n            \"country\": \"<string>\",\n            \"province\": \"<string>\",\n            \"city\": \"<string>\"\n          },\n          \"timestamp\": {\n            \"local\": \"<string>\",\n            \"utc\": \"<dateTime>\"\n          },\n          \"description\": \"<string>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:35.000Z",
+                      "updatedAt": "2026-07-28T02:49:35.000Z",
+                      "uid": "35240-91e1e0f9-f84c-4c80-b0c3-973ea6ef677d"
+                    },
+                    {
+                      "id": "32f84435-881e-4826-a557-fcaa83c97d58",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/shipments?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "shipments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:35.000Z",
+                      "updatedAt": "2026-07-28T02:49:35.000Z",
+                      "uid": "35240-32f84435-881e-4826-a557-fcaa83c97d58"
+                    },
+                    {
+                      "id": "edc40223-a30d-4d1f-8d76-e1b147496dd1",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/shipments?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "shipments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:35.000Z",
+                      "updatedAt": "2026-07-28T02:49:35.000Z",
+                      "uid": "35240-edc40223-a30d-4d1f-8d76-e1b147496dd1"
+                    },
+                    {
+                      "id": "edf802aa-cc94-43e9-b293-326a467ee41d",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/shipments?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "shipments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"esse_6ca\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"laboris_e\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:35.000Z",
+                      "updatedAt": "2026-07-28T02:49:35.000Z",
+                      "uid": "35240-edf802aa-cc94-43e9-b293-326a467ee41d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:35.000Z",
+                  "updatedAt": "2026-07-28T02:49:35.000Z",
+                  "uid": "35240-ccdb42ac-69d8-4919-a775-e7989cb38f52"
+                }
+              ],
+              "id": "f2ea078b-be8d-4d02-b2ba-f72f37944dad",
+              "createdAt": "2026-07-28T02:49:35.000Z",
+              "updatedAt": "2026-07-28T02:49:35.000Z",
+              "uid": "35240-f2ea078b-be8d-4d02-b2ba-f72f37944dad"
+            }
+          ],
+          "id": "72ccbc16-4e64-4b82-8fbe-7b94a82f49d2",
+          "createdAt": "2026-07-28T02:49:35.000Z",
+          "updatedAt": "2026-07-28T02:49:35.000Z",
+          "uid": "35240-72ccbc16-4e64-4b82-8fbe-7b94a82f49d2"
+        }
+      ],
+      "id": "372a2e71-6681-4124-a768-b66e8158b920",
+      "createdAt": "2026-07-28T02:49:35.000Z",
+      "updatedAt": "2026-07-28T02:49:35.000Z",
+      "uid": "35240-372a2e71-6681-4124-a768-b66e8158b920"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

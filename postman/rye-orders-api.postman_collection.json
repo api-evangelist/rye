@@ -1,0 +1,924 @@
+{
+  "info": {
+    "_postman_id": "bbf1293a-6026-4477-8a60-7112045388ab",
+    "name": "Universal Checkout Betas Orders API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:30.000Z",
+    "updatedAt": "2026-07-28T02:49:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bbf1293a-6026-4477-8a60-7112045388ab"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "orders",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Cancel order",
+                          "id": "4df1ce0d-084f-4227-b636-5f54594612d2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "orders",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "45eb087d-6dd3-46d6-b8cf-81504ee64d34",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) The order id"
+                                }
+                              ]
+                            },
+                            "description": "Request cancellation of an order.\n\nOrder cancellations are subject to each merchant's cancellation policy."
+                          },
+                          "response": [
+                            {
+                              "id": "05a9c2c8-ad20-44d5-bb16-b46dd008ae33",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "orders",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"checkoutIntentId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"marketplaceOrderId\": \"<string>\",\n  \"reason\": {\n    \"code\": \"staff_error\",\n    \"message\": \"<string>\"\n  },\n  \"state\": \"requested\"\n}",
+                              "createdAt": "2026-07-28T02:49:30.000Z",
+                              "updatedAt": "2026-07-28T02:49:30.000Z",
+                              "uid": "35240-05a9c2c8-ad20-44d5-bb16-b46dd008ae33"
+                            },
+                            {
+                              "id": "4cb5c68e-ab16-45b4-a95e-5afde004ea23",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "orders",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:30.000Z",
+                              "updatedAt": "2026-07-28T02:49:30.000Z",
+                              "uid": "35240-4cb5c68e-ab16-45b4-a95e-5afde004ea23"
+                            },
+                            {
+                              "id": "11c3865e-5f6f-4ea3-ade8-eec53bef5687",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "orders",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:30.000Z",
+                              "updatedAt": "2026-07-28T02:49:30.000Z",
+                              "uid": "35240-11c3865e-5f6f-4ea3-ade8-eec53bef5687"
+                            },
+                            {
+                              "id": "ed24d695-5dc4-490f-95a4-3e235118fb5a",
+                              "name": "Conflict",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "orders",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"code\": \"order_value_above_limit\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:30.000Z",
+                              "updatedAt": "2026-07-28T02:49:30.000Z",
+                              "uid": "35240-ed24d695-5dc4-490f-95a4-3e235118fb5a"
+                            },
+                            {
+                              "id": "6fce7f91-b248-491b-b136-df742767eef5",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": {\n    \"code\": \"requested_by_customer\",\n    \"message\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/orders/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "orders",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"fugiat_e9\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"in_6\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"dolore6\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:30.000Z",
+                              "updatedAt": "2026-07-28T02:49:30.000Z",
+                              "uid": "35240-6fce7f91-b248-491b-b136-df742767eef5"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:30.000Z",
+                          "updatedAt": "2026-07-28T02:49:30.000Z",
+                          "uid": "35240-4df1ce0d-084f-4227-b636-5f54594612d2"
+                        }
+                      ],
+                      "id": "bff10667-5862-4758-b589-55e1a2917e8f",
+                      "createdAt": "2026-07-28T02:49:30.000Z",
+                      "updatedAt": "2026-07-28T02:49:30.000Z",
+                      "uid": "35240-bff10667-5862-4758-b589-55e1a2917e8f"
+                    },
+                    {
+                      "name": "Get order",
+                      "id": "e9dcfdba-6a0e-4aef-ae28-30110c902637",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/orders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "orders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4a731615-c3dc-417f-8611-c73e47003e70",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The order id"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve an order by id."
+                      },
+                      "response": [
+                        {
+                          "id": "ecc37c49-4fea-4fc7-b9f0-a515cab73ed1",
+                          "name": "The order",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/orders/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "orders",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"checkoutIntentId\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"cancellation\": {\n    \"checkoutIntentId\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"marketplaceOrderId\": \"<string>\",\n    \"reason\": {\n      \"code\": \"inventory\",\n      \"message\": \"<string>\"\n    },\n    \"state\": \"requested\"\n  },\n  \"referenceId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:30.000Z",
+                          "updatedAt": "2026-07-28T02:49:30.000Z",
+                          "uid": "35240-ecc37c49-4fea-4fc7-b9f0-a515cab73ed1"
+                        },
+                        {
+                          "id": "fa666fef-09f7-466a-a5a2-cff3869cee76",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/orders/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "orders",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:30.000Z",
+                          "updatedAt": "2026-07-28T02:49:30.000Z",
+                          "uid": "35240-fa666fef-09f7-466a-a5a2-cff3869cee76"
+                        },
+                        {
+                          "id": "816ebd7f-705c-447f-9e83-a9da359612bd",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/orders/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "orders",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:30.000Z",
+                          "updatedAt": "2026-07-28T02:49:30.000Z",
+                          "uid": "35240-816ebd7f-705c-447f-9e83-a9da359612bd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:30.000Z",
+                      "updatedAt": "2026-07-28T02:49:30.000Z",
+                      "uid": "35240-e9dcfdba-6a0e-4aef-ae28-30110c902637"
+                    }
+                  ],
+                  "id": "5621947c-3dd6-4bae-8b50-43e384d841dd",
+                  "createdAt": "2026-07-28T02:49:30.000Z",
+                  "updatedAt": "2026-07-28T02:49:30.000Z",
+                  "uid": "35240-5621947c-3dd6-4bae-8b50-43e384d841dd"
+                },
+                {
+                  "name": "List orders",
+                  "id": "89e30cef-dc9a-4037-8c5b-fc03bb924447",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/orders?limit=<integer>&after=<string>&before=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "orders"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (default 100)",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "before",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List orders for the authenticated developer with cursor-based pagination."
+                  },
+                  "response": [
+                    {
+                      "id": "9c2788ea-140e-4c49-ae0b-788e547ac28e",
+                      "name": "Paginated list of orders",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/orders?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "orders"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"cancellation\": {\n        \"checkoutIntentId\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"id\": \"<string>\",\n        \"marketplaceOrderId\": \"<string>\",\n        \"reason\": {\n          \"code\": \"staff_error\",\n          \"message\": \"<string>\"\n        },\n        \"state\": \"requested\"\n      },\n      \"referenceId\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"checkoutIntentId\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"cancellation\": {\n        \"checkoutIntentId\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"id\": \"<string>\",\n        \"marketplaceOrderId\": \"<string>\",\n        \"reason\": {\n          \"code\": \"fraud\",\n          \"message\": \"<string>\"\n        },\n        \"state\": \"requested\"\n      },\n      \"referenceId\": \"<string>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:49:30.000Z",
+                      "updatedAt": "2026-07-28T02:49:30.000Z",
+                      "uid": "35240-9c2788ea-140e-4c49-ae0b-788e547ac28e"
+                    },
+                    {
+                      "id": "5a3cb039-3175-453b-9028-5600d3c18c13",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/orders?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "orders"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:30.000Z",
+                      "updatedAt": "2026-07-28T02:49:30.000Z",
+                      "uid": "35240-5a3cb039-3175-453b-9028-5600d3c18c13"
+                    },
+                    {
+                      "id": "0a8d8346-65e4-4e98-9686-9ce657ffc45b",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/orders?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "orders"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"fugiat_e9\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"in_6\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"dolore6\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:30.000Z",
+                      "updatedAt": "2026-07-28T02:49:30.000Z",
+                      "uid": "35240-0a8d8346-65e4-4e98-9686-9ce657ffc45b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:30.000Z",
+                  "updatedAt": "2026-07-28T02:49:30.000Z",
+                  "uid": "35240-89e30cef-dc9a-4037-8c5b-fc03bb924447"
+                }
+              ],
+              "id": "33e175eb-644f-4a0b-9b39-513ad5b3c3df",
+              "createdAt": "2026-07-28T02:49:30.000Z",
+              "updatedAt": "2026-07-28T02:49:30.000Z",
+              "uid": "35240-33e175eb-644f-4a0b-9b39-513ad5b3c3df"
+            }
+          ],
+          "id": "7acf69bd-97e1-46b5-a4bb-1a7dbf3732e0",
+          "createdAt": "2026-07-28T02:49:30.000Z",
+          "updatedAt": "2026-07-28T02:49:30.000Z",
+          "uid": "35240-7acf69bd-97e1-46b5-a4bb-1a7dbf3732e0"
+        }
+      ],
+      "id": "83ff10b3-5c6c-42eb-9a4f-6053be6e099a",
+      "createdAt": "2026-07-28T02:49:30.000Z",
+      "updatedAt": "2026-07-28T02:49:30.000Z",
+      "uid": "35240-83ff10b3-5c6c-42eb-9a4f-6053be6e099a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

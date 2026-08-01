@@ -1,0 +1,31 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/api-v2/sdk
+description: >-
+  Official Rye Universal Checkout API client libraries. Rye publishes first-party
+  SDKs for TypeScript, Python, and Java (generated + hand-tuned via Stainless),
+  each with polling helpers, retry/backoff on 429s, and a webhook signature
+  verification helper (events.unwrap). Package name is "checkout-intents" on every
+  registry.
+packages:
+  - language: typescript
+    registry: npm
+    name: checkout-intents
+    url: https://www.npmjs.com/package/checkout-intents
+    install: npm install checkout-intents
+    repo: https://github.com/rye-com/checkout-intents-sdk
+    official: true
+  - language: python
+    registry: pypi
+    name: checkout-intents
+    url: https://pypi.org/project/checkout-intents/
+    install: pip install checkout-intents
+    repo: https://github.com/rye-com/checkout-intents-python
+    official: true
+  - language: java
+    registry: maven-central
+    name: com.rye:checkout-intents
+    url: https://central.sonatype.com/artifact/com.rye/checkout-intents
+    install: 'implementation("com.rye:checkout-intents")'
+    repo: https://github.com/rye-com/checkout-intents-java
+    official: true

@@ -1,0 +1,569 @@
+{
+  "info": {
+    "_postman_id": "8cbdff5b-01e8-4ab5-8e70-9ff7b727197d",
+    "name": "Universal Checkout Betas Commissions API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:27.000Z",
+    "updatedAt": "2026-07-28T02:49:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8cbdff5b-01e8-4ab5-8e70-9ff7b727197d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "commissions",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve commission",
+                      "id": "a26ada9a-66de-42fc-946f-9fb1e10e9b29",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/commissions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "commissions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6dc8cb90-db16-4483-9baf-da425114c216",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The id of the commission to look up"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a commission by id\n\nReturns commission details for the authenticated developer."
+                      },
+                      "response": [
+                        {
+                          "id": "fdf5cdca-777b-4820-9f09-d8ab44f3f75b",
+                          "name": "Commission details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/commissions/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "commissions",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"updatedAt\": \"<dateTime>\",\n  \"createdAt\": \"<dateTime>\",\n  \"ryeFee\": {\n    \"currencyCode\": \"<string>\",\n    \"amountSubunits\": \"<integer>\"\n  },\n  \"developerCommission\": {\n    \"currencyCode\": \"<string>\",\n    \"amountSubunits\": \"<integer>\"\n  },\n  \"settlementDirection\": \"developer_owes_rye\",\n  \"status\": \"finalized\",\n  \"type\": \"surcharge\",\n  \"checkoutIntentId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"finalizedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:49:27.000Z",
+                          "updatedAt": "2026-07-28T02:49:27.000Z",
+                          "uid": "35240-fdf5cdca-777b-4820-9f09-d8ab44f3f75b"
+                        },
+                        {
+                          "id": "0092c97d-8d67-4707-aa78-993a6a0e5b0c",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/commissions/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "commissions",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:27.000Z",
+                          "updatedAt": "2026-07-28T02:49:27.000Z",
+                          "uid": "35240-0092c97d-8d67-4707-aa78-993a6a0e5b0c"
+                        },
+                        {
+                          "id": "038e4303-f354-49a8-9788-537fdd7ebe2a",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/commissions/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "commissions",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:27.000Z",
+                          "updatedAt": "2026-07-28T02:49:27.000Z",
+                          "uid": "35240-038e4303-f354-49a8-9788-537fdd7ebe2a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:27.000Z",
+                      "updatedAt": "2026-07-28T02:49:27.000Z",
+                      "uid": "35240-a26ada9a-66de-42fc-946f-9fb1e10e9b29"
+                    }
+                  ],
+                  "id": "8edee89f-9ce4-47fc-a721-8a2696c34d5a",
+                  "createdAt": "2026-07-28T02:49:27.000Z",
+                  "updatedAt": "2026-07-28T02:49:27.000Z",
+                  "uid": "35240-8edee89f-9ce4-47fc-a721-8a2696c34d5a"
+                },
+                {
+                  "name": "List commissions",
+                  "id": "0d5c50df-8f1e-4d0e-9387-f872b9935cd4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/commissions?limit=<integer>&after=<string>&before=<string>&type=promo_arbitrage&status=expired&checkoutIntentId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "commissions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (default 100)",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Cursor from a previous response's `pageInfo.endCursor`",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Cursor from a previous response's `pageInfo.startCursor`",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "type",
+                          "value": "promo_arbitrage"
+                        },
+                        {
+                          "key": "status",
+                          "value": "expired"
+                        },
+                        {
+                          "key": "checkoutIntentId",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "List commissions for the authenticated developer\n\nReturns a paginated list of commissions with optional filters using\ncursor-based pagination. Pass the `endCursor` from a previous response\nas `after` to fetch the next page, or the `startCursor` as `before` to\nfetch the previous page. Specifying both `after` and `before` returns 422."
+                  },
+                  "response": [
+                    {
+                      "id": "8d0d3d1c-af28-447e-8dfc-2a194dbd8dc0",
+                      "name": "Paginated commissions response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/commissions?limit=<integer>&after=<string>&before=<string>&type=promo_arbitrage&status=expired&checkoutIntentId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "commissions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.endCursor`",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.startCursor`",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "type",
+                              "value": "promo_arbitrage"
+                            },
+                            {
+                              "key": "status",
+                              "value": "expired"
+                            },
+                            {
+                              "key": "checkoutIntentId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"updatedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"ryeFee\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"developerCommission\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"settlementDirection\": \"rye_owes_developer\",\n      \"status\": \"refunded\",\n      \"type\": \"surcharge\",\n      \"checkoutIntentId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"finalizedAt\": \"<dateTime>\"\n    },\n    {\n      \"updatedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"ryeFee\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"developerCommission\": {\n        \"currencyCode\": \"<string>\",\n        \"amountSubunits\": \"<integer>\"\n      },\n      \"settlementDirection\": \"rye_owes_developer\",\n      \"status\": \"finalized\",\n      \"type\": \"promo_arbitrage\",\n      \"checkoutIntentId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"finalizedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:27.000Z",
+                      "updatedAt": "2026-07-28T02:49:27.000Z",
+                      "uid": "35240-8d0d3d1c-af28-447e-8dfc-2a194dbd8dc0"
+                    },
+                    {
+                      "id": "2ae0dd39-2725-41c6-85b4-2084e38c0e3a",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/commissions?limit=<integer>&after=<string>&before=<string>&type=promo_arbitrage&status=expired&checkoutIntentId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "commissions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.endCursor`",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.startCursor`",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "type",
+                              "value": "promo_arbitrage"
+                            },
+                            {
+                              "key": "status",
+                              "value": "expired"
+                            },
+                            {
+                              "key": "checkoutIntentId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:27.000Z",
+                      "updatedAt": "2026-07-28T02:49:27.000Z",
+                      "uid": "35240-2ae0dd39-2725-41c6-85b4-2084e38c0e3a"
+                    },
+                    {
+                      "id": "0ff6607b-b852-44ae-b5ec-c2339accb830",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/commissions?limit=<integer>&after=<string>&before=<string>&type=promo_arbitrage&status=expired&checkoutIntentId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "commissions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.endCursor`",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Cursor from a previous response's `pageInfo.startCursor`",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "type",
+                              "value": "promo_arbitrage"
+                            },
+                            {
+                              "key": "status",
+                              "value": "expired"
+                            },
+                            {
+                              "key": "checkoutIntentId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"quis__b9\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:27.000Z",
+                      "updatedAt": "2026-07-28T02:49:27.000Z",
+                      "uid": "35240-0ff6607b-b852-44ae-b5ec-c2339accb830"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:27.000Z",
+                  "updatedAt": "2026-07-28T02:49:27.000Z",
+                  "uid": "35240-0d5c50df-8f1e-4d0e-9387-f872b9935cd4"
+                }
+              ],
+              "id": "a6be6157-55df-4720-9a24-4348c5f87f56",
+              "createdAt": "2026-07-28T02:49:27.000Z",
+              "updatedAt": "2026-07-28T02:49:27.000Z",
+              "uid": "35240-a6be6157-55df-4720-9a24-4348c5f87f56"
+            }
+          ],
+          "id": "62e61fa7-9bba-4802-b694-f8aa53d71163",
+          "createdAt": "2026-07-28T02:49:27.000Z",
+          "updatedAt": "2026-07-28T02:49:27.000Z",
+          "uid": "35240-62e61fa7-9bba-4802-b694-f8aa53d71163"
+        }
+      ],
+      "id": "c811cb36-8e8b-4b6e-a05c-36a9f49fed70",
+      "createdAt": "2026-07-28T02:49:27.000Z",
+      "updatedAt": "2026-07-28T02:49:27.000Z",
+      "uid": "35240-c811cb36-8e8b-4b6e-a05c-36a9f49fed70"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

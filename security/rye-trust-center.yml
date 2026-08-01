@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+url: https://trust.rye.com/
+description: >-
+  Rye operates a public Trust Center at trust.rye.com for requesting security
+  reports and reviewing its compliance posture. Its published security practices
+  state that all card data is tokenized and stored in PCI DSS Level 1 compliant
+  vaults, with encryption at rest (AES) and in transit (TLS), ongoing vulnerability
+  scanning (Dependabot, GCP Container Analysis, cubic), access reviews, and
+  reviewed production changes.
+certifications:
+  - PCI DSS Level 1
+evidence:
+  - source: https://trust.rye.com/
+    keywords: [trust center, security, compliance]
+  - source: https://rye.com/docs/api-v2/security
+    keywords: [pci dss level 1, encryption, tls, aes, tokenized]

@@ -1,0 +1,383 @@
+{
+  "info": {
+    "_postman_id": "6b923cb6-6570-4749-a50b-b41478cb3d5b",
+    "name": "Universal Checkout Betas Brands API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:19.000Z",
+    "updatedAt": "2026-07-28T02:49:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6b923cb6-6570-4749-a50b-b41478cb3d5b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "brands",
+              "item": [
+                {
+                  "name": "domain",
+                  "item": [
+                    {
+                      "name": "{domain}",
+                      "item": [
+                        {
+                          "name": "Retrieve brand",
+                          "id": "920a7b2a-7e2f-40b0-82ae-df4a1d5e1bed",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "brands",
+                                "domain",
+                                ":domain"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f8ae83bd-589d-4ba2-b359-4c5caab630f5",
+                                  "key": "domain",
+                                  "value": "",
+                                  "description": "(Required) The domain name to look up (e.g. \"aloyoga.com\", \"www.amazon.com\")"
+                                }
+                              ]
+                            },
+                            "description": "Retrieve brand information by domain name\n\nLook up a brand by its domain name (e.g. \"aloyoga.com\" or \"www.amazon.com\").\nReturns brand information including the marketplace type if the lookup succeeds."
+                          },
+                          "response": [
+                            {
+                              "id": "eda2f123-6fc3-4e9d-8efd-71f509cf4dfc",
+                              "name": "Brand information including marketplace classification",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "brands",
+                                    "domain",
+                                    ":domain"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "domain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"supported\": \"<boolean>\",\n  \"marketplace\": \"SEPHORA\",\n  \"id\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:20.000Z",
+                              "updatedAt": "2026-07-28T02:49:20.000Z",
+                              "uid": "35240-eda2f123-6fc3-4e9d-8efd-71f509cf4dfc"
+                            },
+                            {
+                              "id": "a9cb306f-fe4a-4f3e-9bb2-798bcefdc981",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "brands",
+                                    "domain",
+                                    ":domain"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "domain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:20.000Z",
+                              "updatedAt": "2026-07-28T02:49:20.000Z",
+                              "uid": "35240-a9cb306f-fe4a-4f3e-9bb2-798bcefdc981"
+                            },
+                            {
+                              "id": "f9a4a7a8-a8f6-4380-ad17-eb831ce1ec93",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "brands",
+                                    "domain",
+                                    ":domain"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "domain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:20.000Z",
+                              "updatedAt": "2026-07-28T02:49:20.000Z",
+                              "uid": "35240-f9a4a7a8-a8f6-4380-ad17-eb831ce1ec93"
+                            },
+                            {
+                              "id": "7b8a3e08-5f40-407e-a047-2bc63583fed8",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "brands",
+                                    "domain",
+                                    ":domain"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "domain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"aute_a10\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"incididunt_60\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"adipisicing_1\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:20.000Z",
+                              "updatedAt": "2026-07-28T02:49:20.000Z",
+                              "uid": "35240-7b8a3e08-5f40-407e-a047-2bc63583fed8"
+                            },
+                            {
+                              "id": "93770b38-64ef-43b6-9c47-f6b0cc6efadd",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/brands/domain/:domain",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "brands",
+                                    "domain",
+                                    ":domain"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "domain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:20.000Z",
+                              "updatedAt": "2026-07-28T02:49:20.000Z",
+                              "uid": "35240-93770b38-64ef-43b6-9c47-f6b0cc6efadd"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:20.000Z",
+                          "updatedAt": "2026-07-28T02:49:20.000Z",
+                          "uid": "35240-920a7b2a-7e2f-40b0-82ae-df4a1d5e1bed"
+                        }
+                      ],
+                      "id": "1bc78c2c-3a54-4a2a-a984-e798bbb07218",
+                      "createdAt": "2026-07-28T02:49:20.000Z",
+                      "updatedAt": "2026-07-28T02:49:20.000Z",
+                      "uid": "35240-1bc78c2c-3a54-4a2a-a984-e798bbb07218"
+                    }
+                  ],
+                  "id": "ffb504fe-e5c8-4367-aa3b-7f3156425b6c",
+                  "createdAt": "2026-07-28T02:49:20.000Z",
+                  "updatedAt": "2026-07-28T02:49:20.000Z",
+                  "uid": "35240-ffb504fe-e5c8-4367-aa3b-7f3156425b6c"
+                }
+              ],
+              "id": "dd5c17ba-8efe-4f20-a260-3ecd302f609e",
+              "createdAt": "2026-07-28T02:49:20.000Z",
+              "updatedAt": "2026-07-28T02:49:20.000Z",
+              "uid": "35240-dd5c17ba-8efe-4f20-a260-3ecd302f609e"
+            }
+          ],
+          "id": "b80becbd-181d-4bdb-a89a-9a4b62346896",
+          "createdAt": "2026-07-28T02:49:20.000Z",
+          "updatedAt": "2026-07-28T02:49:20.000Z",
+          "uid": "35240-b80becbd-181d-4bdb-a89a-9a4b62346896"
+        }
+      ],
+      "id": "0a8a57a5-fda7-4257-982c-68ad00dc15e7",
+      "createdAt": "2026-07-28T02:49:20.000Z",
+      "updatedAt": "2026-07-28T02:49:20.000Z",
+      "uid": "35240-0a8a57a5-fda7-4257-982c-68ad00dc15e7"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

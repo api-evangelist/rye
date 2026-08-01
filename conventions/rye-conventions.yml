@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/rye-checkout-intents-openapi-original.yml
+docs:
+  - https://rye.com/docs/api-v2/authorization
+  - https://rye.com/docs/api-v2/rate-limits
+  - https://rye.com/docs/api-v2/webhooks
+description: >-
+  Cross-cutting request/response conventions for the Rye Universal Checkout API,
+  from the OpenAPI plus the published docs. REST/JSON, API-key auth, cursor
+  pagination, IETF draft-8 RateLimit headers, and HMAC-signed thin-event webhooks.
+authentication:
+  style: api-key
+  header: Authorization
+  note: >-
+    API key passed in the Authorization header. Docs show both "Basic $RYE_API_KEY"
+    and "Bearer YOUR_API_KEY" forms; the OpenAPI declares it as an apiKey header.
+    Separate keys per environment (staging vs production).
+  see: authentication/rye-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No documented Idempotency-Key header or parameter. Checkout intents are the
+    idempotency unit by design - a created intent is confirmed/purchased explicitly,
+    and duplicate confirms return 409 Conflict rather than double-charging.
+pagination:
+  style: cursor
+  params: [after, before, limit]
+  note: List endpoints (checkout-intents, orders, events, shipments, commissions, transactions) use cursor-based pagination.
+versioning:
+  style: uri-path
+  current: v1
+  see: lifecycle/rye-lifecycle.yml
+rate_limiting:
+  headers: [RateLimit-Policy, RateLimit]
+  standard: IETF draft-8 RateLimit headers
+  throttled_status: 429
+  buckets:
+    - {name: mutations, limit: 5, window: second}
+    - {name: reads, limit: 10, window: second}
+    - {name: product_lookup, limit: 10, window: second}
+    - {name: checkout_intents, limit: 50, window: day}
+    - {name: concurrent_agents, limit: 10, unit: in-flight}
+error_envelope:
+  content_type: application/json
+  shape: '{ name, message, stack?, status?, fields? }'
+  see: errors/rye-problem-types.yml
+webhooks:
+  delivery: thin events (resource id + type; fetch resource for full state)
+  signature_header: x-rye-signature
+  signature_algorithm: HMAC-SHA256 (v0= prefix)
+  headers: [x-rye-signature, x-rye-event-id, x-rye-timestamp, x-rye-topic]
+  see: asyncapi/rye-webhooks.yml
+money:
+  representation: minor units
+  shape: '{ currencyCode, amountSubunits }'
+  note: Amounts are integers in currency subunits (e.g. $15.00 -> amountSubunits 1500).

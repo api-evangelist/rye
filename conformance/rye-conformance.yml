@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/rye-checkout-intents-openapi-original.yml
+description: >-
+  Cross-cutting standards conformance for the Rye Universal Checkout API,
+  derived from the OpenAPI plus published docs (security, rate-limits). Rye is a
+  key-authenticated REST API (no OAuth2/OIDC), uses cursor pagination, IETF
+  draft-8 RateLimit headers, HMAC-SHA256 signed webhooks, and stores card data in
+  PCI DSS Level 1 compliant vaults.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: openapi 3.0.0 document published at app.stainless.com (checkout-intents)
+  - id: oauth2
+    conforms: false
+    evidence: securitySchemes declares only apiKey (Authorization header)
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: error responses use application/json with a {name,message,stack} envelope, not application/problem+json
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: /.well-known/security.txt published on rye.com
+  - id: ietf-ratelimit-headers-draft8
+    conforms: true
+    evidence: responses return RateLimit-Policy and RateLimit headers (docs/api-v2/rate-limits)
+  - id: cursor-pagination
+    conforms: true
+    evidence: list endpoints use after/before/limit query parameters
+  - id: hmac-sha256-webhook-signing
+    conforms: true
+    evidence: webhooks signed with x-rye-signature (HMAC-SHA256, v0= prefix)
+  - id: pci-dss
+    conforms: true
+    evidence: card data tokenized and stored in PCI DSS Level 1 compliant vaults (docs/api-v2/security)
+  - id: x402
+    conforms: true
+    evidence: x402 pay-per-request over USDC supported (docs/api-v2/x402/overview)

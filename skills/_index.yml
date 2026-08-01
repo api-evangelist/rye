@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: generated
+source: >-
+  Packaged Agent Skills generated from Rye's Universal Checkout API OpenAPI. Every
+  step is grounded in an operationId verified verbatim in
+  openapi/rye-checkout-intents-openapi-original.yml; cross-cutting rules cite
+  conventions/, errors/, sandbox/, and asyncapi/ (webhooks). No provider-published
+  AGENTS.md/skill files were found.
+skills:
+  - file: rye-buy-a-product.md
+    name: Buy any product with Rye
+    api: openapi/rye-checkout-intents-openapi-original.yml
+    operations: [Lookup, CreateCheckoutIntent, GetCheckoutIntent, ConfirmCheckoutIntent, GetCheckoutIntentOrder]
+  - file: rye-single-step-purchase.md
+    name: One-shot purchase with Rye
+    api: openapi/rye-checkout-intents-openapi-original.yml
+    operations: [Purchase, GetCheckoutIntent, GetShipments, ListCheckoutIntents]
+  - file: rye-return-and-refund.md
+    name: Return an order and follow it to refund
+    api: openapi/rye-checkout-intents-openapi-original.yml
+    operations: [GetOrder, RequestReturn, GetReturn, CancelOrder]

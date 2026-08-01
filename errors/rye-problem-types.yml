@@ -1,0 +1,53 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/rye-checkout-intents-openapi-original.yml
+docs: https://rye.com/docs/api-v2/errors
+format: json
+description: >-
+  API-level error catalog for the Rye Universal Checkout API. Errors are returned
+  as application/json with a {name, message, stack?} envelope (ValidateError adds
+  status + fields). Standard HTTP status codes indicate success/failure. Derived
+  from the OpenAPI response set and enriched from the published error reference.
+envelope:
+  content_type: application/json
+  fields:
+    - name: the error class name (e.g. AuthenticationError, ValidateError, NotFoundError)
+    - message: human-readable description
+    - stack: optional stack detail
+    - status: numeric HTTP status (ValidateError only)
+    - fields: per-field validation errors (ValidateError only)
+problems:
+  - status: 400
+    title: Bad Request
+    remediation: Check your request payload and parameters for missing or invalid fields.
+  - status: 401
+    title: Unauthorized
+    schema: AuthenticationError
+    remediation: Ensure you are using the correct API key for the environment (staging vs production keys are not interchangeable).
+  - status: 403
+    title: Forbidden
+    remediation: Your API key does not have permission. Confirm access rights or contact support.
+  - status: 404
+    title: Not Found
+    schema: NotFoundError
+    remediation: Verify the endpoint URL and resource ID. A 404 on confirm can mean the intent has not yet reached awaiting_confirmation - poll before confirming.
+  - status: 409
+    title: Conflict
+    schema: InvalidCheckoutIntentStateError
+    remediation: The resource is in an invalid state (e.g. duplicate request or wrong checkout-intent state). Retry if safe.
+  - status: 422
+    title: Unprocessable Entity
+    schema: ValidateError
+    remediation: Input validation failed. Inspect the fields object for per-field errors. Note buyer.country must be uppercase; phone must match 010-010-0101 format.
+  - status: 429
+    title: Too Many Requests
+    remediation: Rate limit exceeded. Read the RateLimit header and back off. See lifecycle/ and rate-limits/.
+  - status: 500
+    title: Internal Server Error
+    schema: RuntimeError
+    remediation: Temporary server issue. Retry the request or contact support if persistent.
+  - status: 501
+    title: Not Implemented
+  - status: 503
+    title: Service Unavailable
+    remediation: API temporarily unavailable. Retry with exponential backoff.

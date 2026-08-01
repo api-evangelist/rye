@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/rye-checkout-intents-openapi-original.yml
+docs: https://rye.com/docs/api-v2/authorization
+notes: >-
+  API-key auth via the Authorization header. Docs show "Basic $RYE_API_KEY" and
+  "Bearer YOUR_API_KEY" forms; keys are per-environment (staging vs production keys
+  are not interchangeable). No OAuth2/OIDC - no scope surface.
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Rye API key
+  sources:
+  - openapi/rye-checkout-intents-openapi-original.yml

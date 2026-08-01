@@ -1,0 +1,1044 @@
+{
+  "info": {
+    "_postman_id": "3a71e879-a3cd-4954-bc2b-1a0216d87612",
+    "name": "Universal Checkout Betas Events API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:28.000Z",
+    "updatedAt": "2026-07-28T02:49:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3a71e879-a3cd-4954-bc2b-1a0216d87612"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve event",
+                      "id": "34e8f0de-3d6a-4c40-b0b8-b7384f6a90fb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7eb81f8c-6c33-4201-bc4d-715e9a037096",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves an event by ID."
+                      },
+                      "response": [
+                        {
+                          "id": "c130782b-c051-426b-ab73-1fef6e78c6e4",
+                          "name": "The event",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"object\": \"event\",\n  \"type\": \"checkout_intent.offer_failed\",\n  \"createdAt\": \"<string>\",\n  \"source\": {\n    \"id\": \"<string>\",\n    \"type\": \"shipment\"\n  },\n  \"data\": {\n    \"reprehenderit_94\": {},\n    \"nulla8\": {},\n    \"Excepteur__77\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-c130782b-c051-426b-ab73-1fef6e78c6e4"
+                        },
+                        {
+                          "id": "20a1d793-b1b9-4a31-bd0a-d432749f7b07",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-20a1d793-b1b9-4a31-bd0a-d432749f7b07"
+                        },
+                        {
+                          "id": "3284e438-7f4e-4dd2-bf35-dea8bbf35edf",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-3284e438-7f4e-4dd2-bf35-dea8bbf35edf"
+                        },
+                        {
+                          "id": "731d3407-12ea-48c6-91e7-ddd274345dc7",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"culpa_7\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"fugiat_3\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"occaecat_f6e\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-731d3407-12ea-48c6-91e7-ddd274345dc7"
+                        },
+                        {
+                          "id": "972c5ff7-cd5c-409e-a753-8916b2539fee",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-972c5ff7-cd5c-409e-a753-8916b2539fee"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-34e8f0de-3d6a-4c40-b0b8-b7384f6a90fb"
+                    }
+                  ],
+                  "id": "caa0e55e-e3c6-4e15-90b8-c100f0977aca",
+                  "createdAt": "2026-07-28T02:49:28.000Z",
+                  "updatedAt": "2026-07-28T02:49:28.000Z",
+                  "uid": "35240-caa0e55e-e3c6-4e15-90b8-c100f0977aca"
+                },
+                {
+                  "name": "trigger",
+                  "item": [
+                    {
+                      "name": "Trigger event",
+                      "id": "ed8b2c2a-447c-4c73-aadb-fae60c8e4389",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events/trigger",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events",
+                            "trigger"
+                          ]
+                        },
+                        "description": "Trigger a webhook event for a product on demand, in the shape your\nregistered destinations would normally receive. Use during integration\ntesting to exercise your handlers without waiting for an upstream update.\n\nThe event is targeted at the calling developer only. Pass an\n`Idempotency-Key` header so retried calls produce the same event ID and\nthe delivery layer dedups."
+                      },
+                      "response": [
+                        {
+                          "id": "f74b7f1d-6369-4e78-af69-aa456db0ef54",
+                          "name": "Created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/trigger",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                "trigger"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"object\": \"event\",\n  \"type\": \"checkout_intent.offer_failed\",\n  \"createdAt\": \"<string>\",\n  \"source\": {\n    \"id\": \"<string>\",\n    \"type\": \"shipment\"\n  },\n  \"data\": {\n    \"reprehenderit_94\": {},\n    \"nulla8\": {},\n    \"Excepteur__77\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-f74b7f1d-6369-4e78-af69-aa456db0ef54"
+                        },
+                        {
+                          "id": "4fdaa252-8d05-41fe-afe9-2c3869d945de",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/trigger",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                "trigger"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-4fdaa252-8d05-41fe-afe9-2c3869d945de"
+                        },
+                        {
+                          "id": "bfdf9e55-5e5e-4f13-8bbe-f1888edecdf8",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/trigger",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                "trigger"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-bfdf9e55-5e5e-4f13-8bbe-f1888edecdf8"
+                        },
+                        {
+                          "id": "2f7baaa0-1da0-4e44-8aa7-b314464ac7a8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/trigger",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                "trigger"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"culpa_7\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"fugiat_3\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"occaecat_f6e\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-2f7baaa0-1da0-4e44-8aa7-b314464ac7a8"
+                        },
+                        {
+                          "id": "7efc6a7f-6c0a-4de8-845e-8f99be546977",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"topic\": \"product.updated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/events/trigger",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "events",
+                                "trigger"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:28.000Z",
+                          "updatedAt": "2026-07-28T02:49:28.000Z",
+                          "uid": "35240-7efc6a7f-6c0a-4de8-845e-8f99be546977"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-ed8b2c2a-447c-4c73-aadb-fae60c8e4389"
+                    }
+                  ],
+                  "id": "6b5ce861-7998-4307-bd49-399e2dde5b88",
+                  "createdAt": "2026-07-28T02:49:28.000Z",
+                  "updatedAt": "2026-07-28T02:49:28.000Z",
+                  "uid": "35240-6b5ce861-7998-4307-bd49-399e2dde5b88"
+                },
+                {
+                  "name": "List events",
+                  "id": "bb47f00d-5ab9-4a58-97e3-02c76dbd606f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/events?limit=<integer>&after=<string>&before=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "events"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (default 100)",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "before",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a paginated list of events."
+                  },
+                  "response": [
+                    {
+                      "id": "c1e9c9d5-5386-48d3-8834-50ef2959f1df",
+                      "name": "Events list response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": \"<boolean>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"endCursor\": \"<string>\",\n    \"startCursor\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"object\": \"event\",\n      \"type\": \"checkout_intent.offer_retrieved\",\n      \"createdAt\": \"<string>\",\n      \"source\": {\n        \"id\": \"<string>\",\n        \"type\": \"checkout_intent\"\n      },\n      \"data\": {\n        \"ut741\": {},\n        \"ad377\": {},\n        \"minim_b\": {}\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"object\": \"event\",\n      \"type\": \"checkout_intent.offer_retrieved\",\n      \"createdAt\": \"<string>\",\n      \"source\": {\n        \"id\": \"<string>\",\n        \"type\": \"product\"\n      },\n      \"data\": {\n        \"Duis1\": {},\n        \"officia_93\": {}\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-c1e9c9d5-5386-48d3-8834-50ef2959f1df"
+                    },
+                    {
+                      "id": "d22f1c88-97c5-49fa-ae43-e0614779cfd3",
+                      "name": "Authentication Failed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-d22f1c88-97c5-49fa-ae43-e0614779cfd3"
+                    },
+                    {
+                      "id": "2a797e43-201d-4fa6-844e-28d1636f9488",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-2a797e43-201d-4fa6-844e-28d1636f9488"
+                    },
+                    {
+                      "id": "c2986aba-d7d0-4376-82a7-9bc5232bddfb",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/events?limit=<integer>&after=<string>&before=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return (default 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "before",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"culpa_7\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"fugiat_3\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"occaecat_f6e\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:49:28.000Z",
+                      "updatedAt": "2026-07-28T02:49:28.000Z",
+                      "uid": "35240-c2986aba-d7d0-4376-82a7-9bc5232bddfb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:49:28.000Z",
+                  "updatedAt": "2026-07-28T02:49:28.000Z",
+                  "uid": "35240-bb47f00d-5ab9-4a58-97e3-02c76dbd606f"
+                }
+              ],
+              "id": "bc0f4a03-b766-4d79-bd7a-1892392ba7af",
+              "createdAt": "2026-07-28T02:49:28.000Z",
+              "updatedAt": "2026-07-28T02:49:28.000Z",
+              "uid": "35240-bc0f4a03-b766-4d79-bd7a-1892392ba7af"
+            }
+          ],
+          "id": "8fd5bdb0-a34e-4eed-b428-bc9b269297bb",
+          "createdAt": "2026-07-28T02:49:28.000Z",
+          "updatedAt": "2026-07-28T02:49:28.000Z",
+          "uid": "35240-8fd5bdb0-a34e-4eed-b428-bc9b269297bb"
+        }
+      ],
+      "id": "48401ae6-2f52-40ac-85ef-26c19acd50dc",
+      "createdAt": "2026-07-28T02:49:28.000Z",
+      "updatedAt": "2026-07-28T02:49:28.000Z",
+      "uid": "35240-48401ae6-2f52-40ac-85ef-26c19acd50dc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

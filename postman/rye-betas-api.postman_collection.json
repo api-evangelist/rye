@@ -1,0 +1,360 @@
+{
+  "info": {
+    "_postman_id": "fdd6a43b-f51f-4f02-ae86-03ff5a2f02a2",
+    "name": "Universal Checkout Betas API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:16.000Z",
+    "updatedAt": "2026-07-28T02:49:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fdd6a43b-f51f-4f02-ae86-03ff5a2f02a2"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "betas",
+              "item": [
+                {
+                  "name": "checkout-sessions",
+                  "item": [
+                    {
+                      "name": "Create checkout session",
+                      "id": "1db90824-6dbb-44b0-ad3f-38a7f397cfef",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"default\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/betas/checkout-sessions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "betas",
+                            "checkout-sessions"
+                          ]
+                        },
+                        "description": "Create a new checkout session.\n\nCheckout sessions are hosted checkout forms your shoppers can use to complete their purchases."
+                      },
+                      "response": [
+                        {
+                          "id": "4d707621-92d4-4c27-ad7f-e65f2daf8284",
+                          "name": "Checkout session",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"default\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/betas/checkout-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "betas",
+                                "checkout-sessions"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"url\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:17.000Z",
+                          "updatedAt": "2026-07-28T02:49:17.000Z",
+                          "uid": "35240-4d707621-92d4-4c27-ad7f-e65f2daf8284"
+                        },
+                        {
+                          "id": "071d11bb-d651-4be0-ac73-54701da479be",
+                          "name": "Authentication Failed",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"default\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/betas/checkout-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "betas",
+                                "checkout-sessions"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:17.000Z",
+                          "updatedAt": "2026-07-28T02:49:17.000Z",
+                          "uid": "35240-071d11bb-d651-4be0-ac73-54701da479be"
+                        },
+                        {
+                          "id": "a5e1ca86-b912-4a7a-830b-ce0376115e56",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"default\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/betas/checkout-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "betas",
+                                "checkout-sessions"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"status\": \"<double>\",\n  \"fields\": {\n    \"laboris0\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    },\n    \"sunt__6\": {\n      \"message\": \"<string>\",\n      \"value\": {}\n    }\n  },\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:17.000Z",
+                          "updatedAt": "2026-07-28T02:49:17.000Z",
+                          "uid": "35240-a5e1ca86-b912-4a7a-830b-ce0376115e56"
+                        },
+                        {
+                          "id": "1537220d-9368-41aa-86d4-85e2e9c65b70",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"default\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/betas/checkout-sessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "betas",
+                                "checkout-sessions"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:49:17.000Z",
+                          "updatedAt": "2026-07-28T02:49:17.000Z",
+                          "uid": "35240-1537220d-9368-41aa-86d4-85e2e9c65b70"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:49:17.000Z",
+                      "updatedAt": "2026-07-28T02:49:17.000Z",
+                      "uid": "35240-1db90824-6dbb-44b0-ad3f-38a7f397cfef"
+                    }
+                  ],
+                  "id": "5d2d2d56-729a-43ec-9d58-3b8307b05b0c",
+                  "createdAt": "2026-07-28T02:49:17.000Z",
+                  "updatedAt": "2026-07-28T02:49:17.000Z",
+                  "uid": "35240-5d2d2d56-729a-43ec-9d58-3b8307b05b0c"
+                }
+              ],
+              "id": "fed04248-6b6f-4c9d-95b0-3038dab5f8bc",
+              "createdAt": "2026-07-28T02:49:17.000Z",
+              "updatedAt": "2026-07-28T02:49:17.000Z",
+              "uid": "35240-fed04248-6b6f-4c9d-95b0-3038dab5f8bc"
+            }
+          ],
+          "id": "a3f7e91f-2e66-4143-b401-783a861e955d",
+          "createdAt": "2026-07-28T02:49:17.000Z",
+          "updatedAt": "2026-07-28T02:49:17.000Z",
+          "uid": "35240-a3f7e91f-2e66-4143-b401-783a861e955d"
+        }
+      ],
+      "id": "116ef0f2-c4f1-47be-b8cc-276b940797e5",
+      "createdAt": "2026-07-28T02:49:17.000Z",
+      "updatedAt": "2026-07-28T02:49:17.000Z",
+      "uid": "35240-116ef0f2-c4f1-47be-b8cc-276b940797e5"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

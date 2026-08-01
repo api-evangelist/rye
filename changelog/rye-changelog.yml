@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/api-v2/changelog
+description: >-
+  Dated changelog for the Rye Universal Checkout API, captured from the published
+  changelog page. Recent window only - see the live page for full history.
+scheme: dated
+current_version: '1.0.5'
+entries:
+  - date: '2026-04-13'
+    breaking: false
+    additions:
+      - Support for x402 payments (pay-per-request over USDC).
+      - New endpoint for programmatic drawdown top-ups (create on-demand top-up invoice).
+    fixes:
+      - Tracking events for Amazon orders now update continuously.
+      - Clearer error when an Amazon product is not found (product_not_found).
+      - Card authorization now released when a checkout intent expires, so shoppers are refunded sooner.
+      - Fixed intermittent webhook delivery failures.

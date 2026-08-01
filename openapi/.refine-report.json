@@ -1,0 +1,38 @@
+{
+  "provider": "rye",
+  "sources": [
+    "rye-betas-api-openapi.yml",
+    "rye-billing-api-openapi.yml",
+    "rye-brands-api-openapi.yml",
+    "rye-checkout-intents-api-openapi.yml",
+    "rye-commissions-api-openapi.yml",
+    "rye-events-api-openapi.yml",
+    "rye-merchant-connectors-api-openapi.yml",
+    "rye-orders-api-openapi.yml",
+    "rye-payment-gateways-api-openapi.yml",
+    "rye-products-api-openapi.yml",
+    "rye-returns-api-openapi.yml",
+    "rye-shipments-api-openapi.yml",
+    "rye-test-helpers-api-openapi.yml"
+  ],
+  "outputs": [
+    "rye-betas-api-openapi.yml",
+    "rye-billing-api-openapi.yml",
+    "rye-brands-api-openapi.yml",
+    "rye-checkout-intents-api-openapi.yml",
+    "rye-commissions-api-openapi.yml",
+    "rye-events-api-openapi.yml",
+    "rye-merchant-connectors-api-openapi.yml",
+    "rye-orders-api-openapi.yml",
+    "rye-payment-gateways-api-openapi.yml",
+    "rye-products-api-openapi.yml",
+    "rye-returns-api-openapi.yml",
+    "rye-shipments-api-openapi.yml",
+    "rye-test-helpers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

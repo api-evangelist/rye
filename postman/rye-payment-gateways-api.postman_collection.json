@@ -1,0 +1,332 @@
+{
+  "info": {
+    "_postman_id": "e1a5d5aa-9e13-4255-a3fe-03b3e95ce535",
+    "name": "Universal Checkout Betas Payment Gateways API",
+    "description": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:49:31.000Z",
+    "updatedAt": "2026-07-28T02:49:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1a5d5aa-9e13-4255-a3fe-03b3e95ce535"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "payment-gateways",
+              "item": [
+                {
+                  "name": "{gateway}",
+                  "item": [
+                    {
+                      "name": "session",
+                      "item": [
+                        {
+                          "name": "Create payment gateway session",
+                          "id": "879f8613-9656-48ca-ac7a-639dc60c553b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/payment-gateways/:gateway/session",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "payment-gateways",
+                                ":gateway",
+                                "session"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fc0fb516-e5ee-49ec-9148-baf7b1a83546",
+                                  "key": "gateway",
+                                  "value": "basis-theory",
+                                  "description": "(Required) The payment gateway to create a session for"
+                                }
+                              ]
+                            },
+                            "description": "Create a payment gateway session for client-side card tokenization.\n\nReturns short-lived credentials scoped to the authenticated developer.\nUse the credentials with the corresponding gateway's client-side SDK to\ntokenize a card. Tokens created this way are locked to the developer's\ncontainer and cannot be used by other developers."
+                          },
+                          "response": [
+                            {
+                              "id": "8ec68a8d-dc8e-4114-8fc6-094ab9e909dd",
+                              "name": "Gateway-specific session credentials",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/payment-gateways/:gateway/session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "payment-gateways",
+                                    ":gateway",
+                                    "session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "gateway"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"container\": \"<string>\",\n  \"sessionKey\": \"<string>\",\n  \"gateway\": \"basis_theory\"\n}",
+                              "createdAt": "2026-07-28T02:49:32.000Z",
+                              "updatedAt": "2026-07-28T02:49:32.000Z",
+                              "uid": "35240-8ec68a8d-dc8e-4114-8fc6-094ab9e909dd"
+                            },
+                            {
+                              "id": "1b7b7d39-a1b7-406d-bf06-28927820e897",
+                              "name": "Authentication Failed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/payment-gateways/:gateway/session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "payment-gateways",
+                                    ":gateway",
+                                    "session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "gateway"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:32.000Z",
+                              "updatedAt": "2026-07-28T02:49:32.000Z",
+                              "uid": "35240-1b7b7d39-a1b7-406d-bf06-28927820e897"
+                            },
+                            {
+                              "id": "a4af3f97-420c-4ddb-b5a7-904539d29b43",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/payment-gateways/:gateway/session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "payment-gateways",
+                                    ":gateway",
+                                    "session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "gateway"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:32.000Z",
+                              "updatedAt": "2026-07-28T02:49:32.000Z",
+                              "uid": "35240-a4af3f97-420c-4ddb-b5a7-904539d29b43"
+                            },
+                            {
+                              "id": "6bf7b752-dbff-45ce-850b-f46bd95d8c0d",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/payment-gateways/:gateway/session",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "payment-gateways",
+                                    ":gateway",
+                                    "session"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "gateway"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"message\": \"<string>\",\n  \"stack\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:49:32.000Z",
+                              "updatedAt": "2026-07-28T02:49:32.000Z",
+                              "uid": "35240-6bf7b752-dbff-45ce-850b-f46bd95d8c0d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:49:32.000Z",
+                          "updatedAt": "2026-07-28T02:49:32.000Z",
+                          "uid": "35240-879f8613-9656-48ca-ac7a-639dc60c553b"
+                        }
+                      ],
+                      "id": "d9fe40a6-a390-461b-809a-6357a0a74b27",
+                      "createdAt": "2026-07-28T02:49:32.000Z",
+                      "updatedAt": "2026-07-28T02:49:32.000Z",
+                      "uid": "35240-d9fe40a6-a390-461b-809a-6357a0a74b27"
+                    }
+                  ],
+                  "id": "23436f24-bc91-410c-bc25-d52d59f4c1cd",
+                  "createdAt": "2026-07-28T02:49:32.000Z",
+                  "updatedAt": "2026-07-28T02:49:32.000Z",
+                  "uid": "35240-23436f24-bc91-410c-bc25-d52d59f4c1cd"
+                }
+              ],
+              "id": "79f5dd33-c2c2-4996-9fff-5265d782e030",
+              "createdAt": "2026-07-28T02:49:32.000Z",
+              "updatedAt": "2026-07-28T02:49:32.000Z",
+              "uid": "35240-79f5dd33-c2c2-4996-9fff-5265d782e030"
+            }
+          ],
+          "id": "f71719a2-73ac-4ace-bef3-d29937c612ec",
+          "createdAt": "2026-07-28T02:49:32.000Z",
+          "updatedAt": "2026-07-28T02:49:32.000Z",
+          "uid": "35240-f71719a2-73ac-4ace-bef3-d29937c612ec"
+        }
+      ],
+      "id": "dc658e0a-e834-44a5-bcf1-4d24dcf5135a",
+      "createdAt": "2026-07-28T02:49:32.000Z",
+      "updatedAt": "2026-07-28T02:49:32.000Z",
+      "uid": "35240-dc658e0a-e834-44a5-bcf1-4d24dcf5135a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://staging.api.rye.com"
+    }
+  ]
+}

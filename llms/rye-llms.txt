@@ -1,0 +1,98 @@
+# Rye
+
+## Docs
+
+- [Account Registration](https://docs-test.rye.com/docs/api-v2/account-registration.md): Create a Rye account and get API access in seconds from the developer console.
+- [API Comparison: Universal Checkout vs Sync](https://docs-test.rye.com/docs/api-v2/api-comparison.md): Compare Rye's Universal Checkout API and Sync API — features, supported merchants, architecture, and when to use each.
+- [Create checkout session](https://docs-test.rye.com/docs/api-v2/api-reference/betas/create-checkout-session.md): Create a new checkout session.
+- [Cancel top-up invoice](https://docs-test.rye.com/docs/api-v2/api-reference/billing/cancel-top-up-invoice.md): Cancel/void an unpaid top-up invoice. Only invoices in open state can be cancelled.
+- [Create on-demand top-up invoice](https://docs-test.rye.com/docs/api-v2/api-reference/billing/create-on-demand-top-up-invoice.md): Request an on-demand top-up invoice.. Requires drawdown billing to be enabled. Only one unpaid top-up invoice is allowed at a time.
+- [Get billing info](https://docs-test.rye.com/docs/api-v2/api-reference/billing/get-billing-info.md): Get billing configuration and balance for the authenticated developer
+- [Get drawdown balance](https://docs-test.rye.com/docs/api-v2/api-reference/billing/get-drawdown-balance.md): Get current drawdown balance for the authenticated developer
+- [List drawdown transactions](https://docs-test.rye.com/docs/api-v2/api-reference/billing/list-drawdown-transactions.md): List drawdown balance transactions for the authenticated developer
+- [Setup drawdown billing](https://docs-test.rye.com/docs/api-v2/api-reference/billing/setup-drawdown-billing.md): Set up or update drawdown billing for the authenticated developer
+- [Retrieve brand](https://docs-test.rye.com/docs/api-v2/api-reference/brands/retrieve-brand.md): Retrieve brand information by domain name
+- [Confirm checkout intent](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/confirm-checkout-intent.md): Confirm a checkout intent with provided payment information
+- [Create checkout intent](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/create-checkout-intent.md): Create a checkout intent with the given request body.
+- [List checkout intents](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/list-checkout-intents.md): Retrieve a paginated list of checkout intents
+- [List shipments for checkout intent](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/list-shipments-for-checkout-intent.md): List shipments for a checkout intent
+- [Purchase product](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/purchase-product.md): Create a checkout intent and immediately trigger the purchase workflow.
+- [Retrieve checkout intent](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/retrieve-checkout-intent.md): Retrieve a checkout intent by id
+- [Retrieve order](https://docs-test.rye.com/docs/api-v2/api-reference/checkout-intents/retrieve-order.md): Retrieve the order associated with a checkout intent.
+- [List commissions](https://docs-test.rye.com/docs/api-v2/api-reference/commissions/list-commissions.md): List commissions for the authenticated developer
+- [Retrieve commission](https://docs-test.rye.com/docs/api-v2/api-reference/commissions/retrieve-commission.md): Retrieve a commission by id
+- [List events](https://docs-test.rye.com/docs/api-v2/api-reference/events/list-events.md): Retrieve a paginated list of events.
+- [Retrieve event](https://docs-test.rye.com/docs/api-v2/api-reference/events/retrieve-event.md): Retrieves an event by ID.
+- [Trigger event](https://docs-test.rye.com/docs/api-v2/api-reference/events/trigger-event.md): Trigger a webhook event for a product on demand, in the shape your registered destinations would normally receive. Use during integration testing to exercise your handlers without waiting for an upstream update.
+- [Create merchant connector installation link](https://docs-test.rye.com/docs/api-v2/api-reference/merchant-connectors/create-merchant-connector-installation-link.md): Generate an installation link for a merchant connector (e.g. Shopify).
+- [Cancel order](https://docs-test.rye.com/docs/api-v2/api-reference/orders/cancel-order.md): Request cancellation of an order.
+- [Get order](https://docs-test.rye.com/docs/api-v2/api-reference/orders/get-order.md): Retrieve an order by id.
+- [List orders](https://docs-test.rye.com/docs/api-v2/api-reference/orders/list-orders.md): List orders for the authenticated developer with cursor-based pagination.
+- [Create payment gateway session](https://docs-test.rye.com/docs/api-v2/api-reference/payment-gateways/create-payment-gateway-session.md): Create a payment gateway session for client-side card tokenization.
+- [List product subscriptions](https://docs-test.rye.com/docs/api-v2/api-reference/products/list-product-subscriptions.md): Retrieve product subscription rules.
+- [Lookup product](https://docs-test.rye.com/docs/api-v2/api-reference/products/lookup-product.md): Lookup a product's information by URL.
+- [Subscribe to product events](https://docs-test.rye.com/docs/api-v2/api-reference/products/subscribe-to-product-events.md): Subscribe to product events for one integrated Shopify URL.
+- [Unsubscribe from product events](https://docs-test.rye.com/docs/api-v2/api-reference/products/unsubscribe-from-product-events.md): Unsubscribe from product events for one integrated Shopify URL.
+- [Create return](https://docs-test.rye.com/docs/api-v2/api-reference/returns/create-return.md): Create a return for a completed order. Whole-order returns only — the order's line items are enumerated for you. The return is submitted for approval and then progresses asynchronously toward the refund; poll the returned return id (or listen for webhooks) to follow its state.
+- [Get return](https://docs-test.rye.com/docs/api-v2/api-reference/returns/get-return.md): Fetch a Return by id. Tenancy is scoped to the authenticated developer.
+- [List shipments](https://docs-test.rye.com/docs/api-v2/api-reference/shipments/list-shipments.md): Retrieve a paginated list of shipments
+- [Retrieve shipment by id](https://docs-test.rye.com/docs/api-v2/api-reference/shipments/retrieve-shipment-by-id.md): Retrieve a shipment by id
+- [Advance simulated shipment](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/advance-simulated-shipment.md): Advance the simulated shipment for a checkout intent. To trigger delayed or canceled shipping scenarios, create the checkout intent with a matching shipping and delivery test product: https://rye.com/docs/api-v2/testing/test-products#shipping-&-delivery
+- [Approve simulated return](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/approve-simulated-return.md): Approve a simulated return.
+- [Create simulated return](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/create-simulated-return.md): Create a simulated return for an order, then drive it through its lifecycle with the approve/deny/refund/fail helpers below.
+- [Deny simulated return](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/deny-simulated-return.md): Deny a simulated return.
+- [Fail simulated return](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/fail-simulated-return.md): Mark a simulated return as failed.
+- [Refund simulated return](https://docs-test.rye.com/docs/api-v2/api-reference/test-helpers/refund-simulated-return.md): Refund a simulated return using the order total as the simulated refund amount.
+- [Authorization](https://docs-test.rye.com/docs/api-v2/authorization.md): Authenticate requests to the Rye API using your API key in the Authorization header.
+- [Submit Orders to Best Buy](https://docs-test.rye.com/docs/api-v2/best-buy.md): How to get approved and submit orders to Best Buy through Rye's Universal Checkout API.
+- [Changelog](https://docs-test.rye.com/docs/api-v2/changelog.md)
+- [Checkout Intent Lifecycle](https://docs-test.rye.com/docs/api-v2/checkout-intent-lifecycle.md): Understand the states a Checkout Intent progresses through, from creation and offer retrieval to order placement and completion.
+- [API Limitations](https://docs-test.rye.com/docs/api-v2/developer-notes.md): This page outlines the current limitations to keep in mind when integrating with the API.
+- [Environments](https://docs-test.rye.com/docs/api-v2/environments.md): Staging and production environments for the Rye API. Start in staging to test without real orders, then go live in production.
+- [Handling API Errors](https://docs-test.rye.com/docs/api-v2/errors.md): HTTP status codes, error messages, and resolution steps for common Rye API errors.
+- [Build an AI chat storefront with Rye and Stripe in Next.js](https://docs-test.rye.com/docs/api-v2/example-flows/chat-storefront.md): Build a conversational AI storefront where users discover and purchase products through chat, using Rye's checkout API and Stripe.
+- [Quickstart: Send an Order to Any Merchant](https://docs-test.rye.com/docs/api-v2/example-flows/simple-checkout.md): Learn how to integrate the Rye API, from setting up your account to submitting your first order. The example uses Shopify, but the same process works with Amazon, non-Shopify stores, and other merchants.
+- [Single Step Checkout](https://docs-test.rye.com/docs/api-v2/example-flows/single-step-checkout.md): Create and confirm an order in a single API call using Rye's fire-and-forget Purchase endpoint.
+- [Go Live with Rye: Production Checklist](https://docs-test.rye.com/docs/api-v2/go-live.md): Learn how to move your Rye integration from staging to production.
+- [Rye API: Enable Your Users to Buy Any Product](https://docs-test.rye.com/docs/api-v2/introduction.md): Turn any product URL into a completed checkout. Rye handles pricing, tax, shipping, and order placement across thousands of merchants.
+- [Build with Rye Using AI](https://docs-test.rye.com/docs/api-v2/llm-quickstart.md): Use AI coding assistants to understand and integrate Rye's Universal Checkout API.
+- [Build an Ecommerce App with Lovable](https://docs-test.rye.com/docs/api-v2/lovable-rye-tutorial.md): Build a full ecommerce app using Lovable and Rye's Universal Checkout API with Supabase Edge Functions.
+- [Migrate from V1](https://docs-test.rye.com/docs/api-v2/migrate-from-v1.md): Guide for migrating from the Sync API to the Universal Checkout API.
+- [Payment Providers](https://docs-test.rye.com/docs/api-v2/payment-providers.md): Rye supports multiple payment providers for processing payments. Choose the provider that best fits your integration needs.
+- [Basis Theory Elements](https://docs-test.rye.com/docs/api-v2/payment-providers/basis-theory.md): Use Basis Theory Elements to securely tokenize card information for Rye checkout intents.
+- [Drawdown](https://docs-test.rye.com/docs/api-v2/payment-providers/drawdown.md): Pay for orders using your pre-funded Rye account balance — no card tokenization required.
+- [Stripe](https://docs-test.rye.com/docs/api-v2/payment-providers/stripe.md): Use Stripe.js to generate card tokens for Rye checkout intents.
+- [Postman Collection](https://docs-test.rye.com/docs/api-v2/postman.md): Import Rye's Postman collection to explore and test the Universal Checkout API.
+- [Promo Codes](https://docs-test.rye.com/docs/api-v2/promo-codes.md): Apply manual or automatically discovered promo codes to reduce checkout costs with Rye's Universal Checkout API.
+- [Rate Limits](https://docs-test.rye.com/docs/api-v2/rate-limits.md): How Rye's Universal Checkout API enforces rate limits, the response headers we return, and recommended client behavior.
+- [Returns](https://docs-test.rye.com/docs/api-v2/returns.md): Open a return against a completed order and follow it through to the shopper's refund.
+- [RyeBot Allowlisting](https://docs-test.rye.com/docs/api-v2/ryebot.md): How merchants can allowlist RyeBot, the automated agent Rye uses to retrieve offers and place orders.
+- [SDKs](https://docs-test.rye.com/docs/api-v2/sdk.md): <div className="flex flex-row items-start gap-2">   <div>Official Rye SDKs for TypeScript, Python, and Java with polling helpers and error handling.</div>   <a href="https://app.getpostman.com/run-collection/41015610-24cc0f8a-4b7f-4aa2-9f52-8d7ba30a67b7?action=collection%2Ffork&source=rip_markdown&c…
+- [Security](https://docs-test.rye.com/docs/api-v2/security.md): Our security practices and compliance posture.
+- [Support](https://docs-test.rye.com/docs/api-v2/support.md)
+- [Test Products](https://docs-test.rye.com/docs/api-v2/testing/test-products.md): Test products and edge-case scenarios for stress-testing checkout flows.
+- [Create a Test Store](https://docs-test.rye.com/docs/api-v2/testing/with-shopify.md): Set up a Shopify development store to test the full order lifecycle through Rye.
+- [Variants](https://docs-test.rye.com/docs/api-v2/variants.md): Specify product variants like size and color when placing orders, using deep-link URLs or the variantSelections field.
+- [Webhooks](https://docs-test.rye.com/docs/api-v2/webhooks.md): Receive real-time notifications when checkout intent state changes occur.
+- [Types of events](https://docs-test.rye.com/docs/api-v2/webhooks/types.md): This page documents all the types of webhook events that are sent by Rye.
+- [x402](https://docs-test.rye.com/docs/api-v2/x402/overview.md): Use the Rye API from a crypto wallet over x402 — no API key, pay per request in USDC.
+- [Quickstart with AgentCash](https://docs-test.rye.com/docs/api-v2/x402/quickstart.md): Buy a product from any merchant using the AgentCash SDK and pay with USDC over x402.
+- [Endpoint Reference](https://docs-test.rye.com/docs/api-v2/x402/reference.md): Request and response shapes for each x402 Agent API endpoint, with raw HTTP examples.
+- [Components](https://docs-test.rye.com/docs/rewards/components.md): Reference for every component in Rewards UI v1. Each entry covers what it is, the install command, and a minimal example.
+- [Integration cookbook](https://docs-test.rye.com/docs/rewards/cookbook.md): End-to-end patterns for wiring Rewards UI components against the Universal Checkout API.
+- [Install](https://docs-test.rye.com/docs/rewards/install.md): Add Rewards UI components to your app via the shadcn CLI. Source files copy into your repo — you own them from then on.
+- [Rewards UI](https://docs-test.rye.com/docs/rewards/introduction.md): Drop-in React components for points-redemption, mixed-tender checkout, and post-purchase tracking flows built on Rye's Universal Checkout API.
+- [Payment flows](https://docs-test.rye.com/docs/rewards/payment-flows.md): Charge your users in points, fiat, or a mix — while paying Rye via drawdown. Rye is agnostic to how you collect funds from the user.
+- [Building & syncing a product catalog](https://docs-test.rye.com/docs/rewards/product-catalog.md): Pick products from the Rye catalog, populate your own database, and keep it in sync with real-time webhooks plus a daily reconciliation job.
+- [Legacy Documentation](https://docs-test.rye.com/docs/sync-api-docs.md)
+
+## OpenAPI Specs
+
+- [openapi.documented](https://app.stainless.com/api/spec/documented/checkout-intents/openapi.documented.yml)
+- [pnpm-lock](https://docs-test.rye.com/docs/pnpm-lock.yaml)
+- [package](https://docs-test.rye.com/docs/package.json)
+- [openapi](https://docs-test.rye.com/docs/api-reference/openapi.json)
+
+## Optional
+
+- [Rye Status](https://ryestatus.com)

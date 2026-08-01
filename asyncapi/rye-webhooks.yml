@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+source: https://rye.com/docs/api-v2/webhooks
+spec_type: Webhooks
+description: >-
+  Rye delivers real-time webhooks when checkout-intent state transitions and
+  other resource events occur. Payloads are thin events - {id, object, type,
+  createdAt, source:{type,id}} - so consumers fetch the resource by source.id for
+  authoritative state (some events, e.g. product.updated, also carry a data
+  snapshot). Endpoints are configured in the Rye Console and verified via a
+  challenge handshake. Rye publishes no AsyncAPI document; this captures the
+  webhook catalog.
+transport: https
+delivery: thin-event (POST to your endpoint)
+setup:
+  console: https://console.rye.com/account
+  verification: >-
+    On save, Rye posts a webhook_endpoint.verification_challenge; respond with
+    { "challenge": <source.id> }.
+signing:
+  algorithm: HMAC-SHA256
+  header: x-rye-signature
+  format: v0=<hex>
+  secret: HMAC secret key from the Rye Console (Webhooks section)
+  sdk_helper: client.events.unwrap(body, signatureHeader, secret)
+headers:
+  - {name: x-rye-signature, description: HMAC-SHA256 signature over the raw body}
+  - {name: x-rye-event-id, description: Unique event ID}
+  - {name: x-rye-timestamp, description: Unix timestamp (seconds) of delivery}
+  - {name: x-rye-topic, description: The event topic}
+docs_types: https://rye.com/docs/api-v2/webhooks/types
+events:
+  - type: webhook_endpoint.verification_challenge
+    description: Sent once to verify a newly configured endpoint.
+  - type: checkout_intent.retrieving_offer
+    description: Intent is retrieving an offer for the product.
+  - type: checkout_intent.requires_action
+    description: Intent requires action (e.g. payment confirmation).
+  - type: checkout_intent.awaiting_confirmation
+    description: Offer resolved; intent awaiting confirmation.
+  - type: checkout_intent.placing_order
+    description: Order is being placed by Rye's agent.
+  - type: checkout_intent.completed
+    description: Checkout intent completed and order placed.
+  - type: checkout_intent.failed
+    description: Checkout intent failed (see failureReason.code).
+  - type: product.updated
+    description: A subscribed product changed; carries a resource snapshot in data.
