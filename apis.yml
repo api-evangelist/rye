@@ -260,6 +260,8 @@ apis:
   - type: GettingStarted
     url: https://rye.com/docs/api-v2/example-flows/simple-checkout
 common:
+- type: Overlay
+  url: overlays/rye-checkout-intents-overlay.yaml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/rye/overview
 - type: DeveloperPortal
