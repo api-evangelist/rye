@@ -1,0 +1,315 @@
+{
+  "item": [
+    {
+      "id": "bbe94f9d-d2ee-4b7f-8d0c-581ea2e0f976",
+      "name": "Betas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77b91335-26c8-4bb0-a447-636b8a191cb6",
+          "name": "Create checkout session",
+          "request": {
+            "name": "Create checkout session",
+            "description": {
+              "content": "Create a new checkout session.\n\nCheckout sessions are hosted checkout forms your shoppers can use to complete their purchases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "betas",
+                "checkout-sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"<string>\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"<string>\",\n  \"layout\": \"<string>\",\n  \"buyer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"province\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3ecd83e-635e-4744-b04d-3d026397b6c0",
+              "name": "Checkout session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "betas",
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"order-1234\",\n  \"layout\": \"<string>\",\n  \"buyer\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address1\": \"123 Main St\",\n    \"address2\": \"Apt 1\",\n    \"city\": \"New York\",\n    \"province\": \"NY\",\n    \"country\": \"US\",\n    \"postalCode\": \"10001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3eb09ecb-853d-453f-adf1-8b3b8db19d25",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "betas",
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"order-1234\",\n  \"layout\": \"<string>\",\n  \"buyer\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address1\": \"123 Main St\",\n    \"address2\": \"Apt 1\",\n    \"city\": \"New York\",\n    \"province\": \"NY\",\n    \"country\": \"US\",\n    \"postalCode\": \"10001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01ae1cd3-93b0-40e8-9c52-4c9b70358db0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "betas",
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"order-1234\",\n  \"layout\": \"<string>\",\n  \"buyer\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address1\": \"123 Main St\",\n    \"address2\": \"Apt 1\",\n    \"city\": \"New York\",\n    \"province\": \"NY\",\n    \"country\": \"US\",\n    \"postalCode\": \"10001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6199.53169571904,\n  \"fields\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_2\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_3\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  },\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6edb09d-bb1f-4d5d-8156-6c2661a5c40e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "betas",
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ],\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"referenceId\": \"order-1234\",\n  \"layout\": \"<string>\",\n  \"buyer\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address1\": \"123 Main St\",\n    \"address2\": \"Apt 1\",\n    \"city\": \"New York\",\n    \"province\": \"NY\",\n    \"country\": \"US\",\n    \"postalCode\": \"10001\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://staging.api.rye.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9f60fbb-98d9-4e93-967b-096a7a2f13d7",
+    "name": "Universal Checkout Betas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+      "type": "text/plain"
+    }
+  }
+}

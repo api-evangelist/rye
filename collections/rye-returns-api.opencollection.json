@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Returns API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/returns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a return for a completed order. Whole-order returns only — the\norder's line items are enumerated for you. The return is submitted for\napproval and then progresses asynchronously toward the refund; poll the\nreturned return id (or listen for webhooks) to follow its state."
+        },
+        {
+          "info": {
+            "name": "Get return",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/returns/:returnId",
+            "params": [
+              {
+                "name": "returnId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a Return by id. Tenancy is scoped to the authenticated developer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

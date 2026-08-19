@@ -1,0 +1,2197 @@
+{
+  "item": [
+    {
+      "id": "1ae74520-f536-4527-aa44-123a256d3446",
+      "name": "Checkout Intents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "befb4768-5d28-42bd-9e03-94b495ea3aae",
+          "name": "List checkout intents",
+          "request": {
+            "name": "List checkout intents",
+            "description": {
+              "content": "Retrieve a paginated list of checkout intents\n\nEnables developers to query checkout intents associated with their account, with filters and cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return (default 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04dee4f3-90b3-48f3-9476-6bac35b21e8b",
+              "name": "Paginated checkout intents response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": false,\n    \"hasNextPage\": true,\n    \"endCursor\": \"string\",\n    \"startCursor\": \"string\"\n  },\n  \"data\": [\n    {\n      \"buyer\": {\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"lastName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"firstName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"createdAt\": \"1946-12-23T07:19:32.524Z\",\n      \"id\": \"string\",\n      \"productUrl\": \"string\",\n      \"quantity\": 2788,\n      \"state\": \"retrieving_offer\",\n      \"referenceId\": \"order-1234\",\n      \"discoverPromoCodes\": false,\n      \"constraints\": {\n        \"offerRetrievalEffort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxShippingPrice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxTotalPrice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"promoCodes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"variantSelections\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    {\n      \"buyer\": {\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"province\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"lastName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"firstName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"createdAt\": \"1954-10-30T06:28:48.713Z\",\n      \"id\": \"string\",\n      \"productUrl\": \"string\",\n      \"quantity\": 1392,\n      \"state\": \"retrieving_offer\",\n      \"referenceId\": \"order-1234\",\n      \"discoverPromoCodes\": true,\n      \"constraints\": {\n        \"offerRetrievalEffort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxShippingPrice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxTotalPrice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"promoCodes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"variantSelections\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "302647dd-3cd8-49c6-bda8-a56de48a3313",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2631717b-4d26-4f87-a4a3-f52384129a14",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82137232-bf28-49c6-bc7d-68859dea9bf8",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6044.744403068073,\n  \"fields\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_2\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  },\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce094c0a-64f0-46ac-83d4-fc1ab76c7e19",
+          "name": "Create checkout intent",
+          "request": {
+            "name": "Create checkout intent",
+            "description": {
+              "content": "Create a checkout intent with the given request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"quantity\": \"<integer>\",\n  \"productUrl\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"<string>\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e17634d3-c1f3-48e9-a2a3-4fac11102430",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"quantity\": 1,\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"createdAt\": \"2016-05-26T15:50:00.560Z\",\n  \"id\": \"string\",\n  \"productUrl\": \"string\",\n  \"quantity\": 8692,\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": false,\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d120d21e-c7af-4694-afe8-37bc49db6e4e",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"quantity\": 1,\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d77621b-8041-418c-b1d9-8ee509ef630d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"quantity\": 1,\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6044.744403068073,\n  \"fields\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_2\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  },\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62b40c13-488b-4895-b0a7-bbb57a288aba",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"quantity\": 1,\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e8379f1-fb06-4fef-99da-ba41bea21688",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"quantity\": 1,\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8aeb6c87-1d23-441b-8705-851eba991615",
+          "name": "Retrieve checkout intent",
+          "request": {
+            "name": "Retrieve checkout intent",
+            "description": {
+              "content": "Retrieve a checkout intent by id\n\nReturns checkout intent information if the lookup succeeds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the checkout intent to look up"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54b878af-dffe-44a5-959d-938ad432441e",
+              "name": "Checkout intent information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"createdAt\": \"2016-05-26T15:50:00.560Z\",\n  \"id\": \"string\",\n  \"productUrl\": \"string\",\n  \"quantity\": 8692,\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": false,\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b56c265f-cca8-430f-aa03-cf28f86d0763",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3cafebb-e67b-4b21-b931-c47dc2f4a3b5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dda8c8de-ed5f-4af0-8f96-914353ae12ce",
+          "name": "Retrieve order",
+          "request": {
+            "name": "Retrieve order",
+            "description": {
+              "content": "Retrieve the order associated with a checkout intent.\n\nReturns the single order created when the checkout intent reached the\n`completed` state. 404 if the intent has not produced an order yet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents",
+                ":id",
+                "order"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the checkout intent to look up"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05314d65-34ef-4e4c-8bc4-88f8821a4988",
+              "name": "The order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"checkoutIntentId\": \"ci_aaa8af5c5aae4c0e8ef0172c26c65c13\",\n  \"createdAt\": \"2026-03-25T00:00:00Z\",\n  \"updatedAt\": \"2026-03-27T00:00:00Z\",\n  \"cancellation\": {\n    \"checkoutIntentId\": \"string\",\n    \"createdAt\": \"1997-10-25T11:21:22.487Z\",\n    \"id\": \"string\",\n    \"marketplaceOrderId\": \"string\",\n    \"reason\": {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"state\": \"requested\"\n  },\n  \"referenceId\": \"order-1234\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a1fef6c-5aa9-4065-a6c3-c3e2b485b99f",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cabf135b-0e22-4503-a118-05a598e8987f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9720d5ea-7b5c-4871-b2df-933041d776b9",
+          "name": "Confirm checkout intent",
+          "request": {
+            "name": "Confirm checkout intent",
+            "description": {
+              "content": "Confirm a checkout intent with provided payment information\n\nConfirm means we have buyer's name, address and payment info, so we can\nmove forward to place the order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents",
+                ":id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the checkout intent to confirm"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1afd9dac-43c0-42d8-8069-530a55df9c6c",
+              "name": "The confirmed checkout intent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to confirm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"createdAt\": \"2016-05-26T15:50:00.560Z\",\n  \"id\": \"string\",\n  \"productUrl\": \"string\",\n  \"quantity\": 8692,\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": false,\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69c48979-499b-45bc-921f-75cfc3d1dfcc",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to confirm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c5cea2d-8037-4c14-a8d9-0d0dc679c0e2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to confirm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "273491cc-6135-4eab-8697-4ea42f703e8d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to confirm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\",\n  \"state\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ce9c45b-d116-4d5d-ac51-5ac78238d7d8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent to confirm"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbe86b47-e0ea-47bf-8ca8-9c61783eb465",
+          "name": "List shipments for checkout intent",
+          "request": {
+            "name": "List shipments for checkout intent",
+            "description": {
+              "content": "List shipments for a checkout intent",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents",
+                ":id",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return (default 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the checkout intent"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "693206a5-2127-4c96-a9cb-f6a05f6395ad",
+              "name": "Shipments list response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageInfo\": {\n    \"hasPreviousPage\": false,\n    \"hasNextPage\": true,\n    \"endCursor\": \"string\",\n    \"startCursor\": \"string\"\n  },\n  \"data\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1abc3b8e-cf15-417e-9e24-6cfba6c79093",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ce562be-d9cb-4b81-94ce-fa06bb36e4ca",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d238050-d0b4-4f9f-9d7d-1597f694b49a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the checkout intent"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6044.744403068073,\n  \"fields\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_2\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  },\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8be7f9d-90d1-47a3-a7b1-a30e77599137",
+          "name": "Purchase product",
+          "request": {
+            "name": "Purchase product",
+            "description": {
+              "content": "Create a checkout intent and immediately trigger the purchase workflow.\n\nThis is a \"fire-and-forget\" endpoint that combines create + confirm in one step.\nThe workflow handles offer retrieval, payment authorization, and order placement\nasynchronously. Poll the GET endpoint to check status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "checkout-intents",
+                "purchase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"province\": \"<string>\",\n    \"city\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"address2\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"productUrl\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"referenceId\": \"<string>\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"<string>\",\n    \"maxShippingPrice\": \"<integer>\",\n    \"maxTotalPrice\": \"<integer>\"\n  },\n  \"promoCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd8f9c56-74b6-452b-9160-7086c3d1de4b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"createdAt\": \"2016-05-26T15:50:00.560Z\",\n  \"id\": \"string\",\n  \"productUrl\": \"string\",\n  \"quantity\": 8692,\n  \"state\": \"retrieving_offer\",\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": false,\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be7ba6c3-b399-4ff3-b25e-dafbf4d78ca3",
+              "name": "Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84564099-0ee9-4c48-9382-94b87f0b879f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6044.744403068073,\n  \"fields\": {\n    \"key_0\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_1\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    },\n    \"key_2\": {\n      \"message\": \"string\",\n      \"value\": \"\"\n    }\n  },\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "197c0f71-d722-4b67-9aec-a0ec43bc1ada",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4e6e726-3644-4ee7-9e1b-ffc1677c6aa7",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "checkout-intents",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyer\": {\n    \"postalCode\": \"10001\",\n    \"country\": \"US\",\n    \"province\": \"NY\",\n    \"city\": \"New York\",\n    \"address1\": \"123 Main St\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"lastName\": \"Doe\",\n    \"firstName\": \"John\",\n    \"address2\": \"Apt 1\"\n  },\n  \"paymentMethod\": {\n    \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n    \"type\": \"stripe_token\"\n  },\n  \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n  \"quantity\": 1,\n  \"referenceId\": \"order-1234\",\n  \"discoverPromoCodes\": \"<boolean>\",\n  \"constraints\": {\n    \"offerRetrievalEffort\": \"max\",\n    \"maxShippingPrice\": 500,\n    \"maxTotalPrice\": 100000\n  },\n  \"promoCodes\": [\n    \"SAVE20\",\n    \"SAVE20\"\n  ],\n  \"variantSelections\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"Size, Color, etc.\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"message\": \"string\",\n  \"stack\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://staging.api.rye.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "51935a23-7f99-427f-b86d-2b9c708dda02",
+    "name": "Universal Checkout Betas Checkout Intents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.\n\nView the [Rye API docs](https://docs.rye.com).\n\nContact Support:\n Name: Rye\n Email: dev@rye.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Merchant Connectors API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create merchant connector installation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/merchant-connectors/:connector/installation-link",
+            "params": [
+              {
+                "name": "connector",
+                "value": "",
+                "type": "path",
+                "description": "The merchant connector to generate an installation link for"
+              },
+              {
+                "name": "storeUrl",
+                "value": "",
+                "type": "query",
+                "description": "Domain or URL of the merchant store to generate the installation link for"
+              },
+              {
+                "name": "private",
+                "value": "",
+                "type": "query",
+                "description": "If true, the merchant onboarded via this link is exclusive to the calling developer"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate an installation link for a merchant connector (e.g. Shopify).\n\nThe returned URL begins the connector's OAuth handshake. Direct the\nmerchant to it; once they authorize the Rye app, the connector redirects\nback to Rye to complete the install. The merchant is attributed to the\ncalling developer and becomes available for checkout via this account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

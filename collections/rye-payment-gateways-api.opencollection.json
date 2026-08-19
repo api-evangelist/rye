@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Payment Gateways API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Gateways",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create payment gateway session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/payment-gateways/:gateway/session",
+            "params": [
+              {
+                "name": "gateway",
+                "value": "",
+                "type": "path",
+                "description": "The payment gateway to create a session for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a payment gateway session for client-side card tokenization.\n\nReturns short-lived credentials scoped to the authenticated developer.\nUse the credentials with the corresponding gateway's client-side SDK to\ntokenize a card. Tokens created this way are locked to the developer's\ncontainer and cannot be used by other developers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

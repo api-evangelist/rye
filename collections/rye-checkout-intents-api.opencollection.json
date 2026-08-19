@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Checkout Intents API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout Intents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checkout intents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return (default 100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated list of checkout intents\n\nEnables developers to query checkout intents associated with their account, with filters and cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Create checkout intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a checkout intent with the given request body."
+        },
+        {
+          "info": {
+            "name": "Retrieve checkout intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the checkout intent to look up"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a checkout intent by id\n\nReturns checkout intent information if the lookup succeeds."
+        },
+        {
+          "info": {
+            "name": "Retrieve order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents/:id/order",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the checkout intent to look up"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the order associated with a checkout intent.\n\nReturns the single order created when the checkout intent reached the\n`completed` state. 404 if the intent has not produced an order yet."
+        },
+        {
+          "info": {
+            "name": "Confirm checkout intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents/:id/confirm",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the checkout intent to confirm"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Confirm a checkout intent with provided payment information\n\nConfirm means we have buyer's name, address and payment info, so we can\nmove forward to place the order."
+        },
+        {
+          "info": {
+            "name": "List shipments for checkout intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents/:id/shipments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the checkout intent"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return (default 100)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List shipments for a checkout intent"
+        },
+        {
+          "info": {
+            "name": "Purchase product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/checkout-intents/purchase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a checkout intent and immediately trigger the purchase workflow.\n\nThis is a \"fire-and-forget\" endpoint that combines create + confirm in one step.\nThe workflow handles offer retrieval, payment authorization, and order placement\nasynchronously. Poll the GET endpoint to check status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

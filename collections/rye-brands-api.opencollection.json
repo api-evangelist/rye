@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Brands API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/brands/domain/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "The domain name to look up (e.g. \"aloyoga.com\", \"www.amazon.com\")"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve brand information by domain name\n\nLook up a brand by its domain name (e.g. \"aloyoga.com\" or \"www.amazon.com\").\nReturns brand information including the marketplace type if the lookup succeeds."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

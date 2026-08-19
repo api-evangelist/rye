@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Products API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/products/lookup",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lookup a product's information by URL."
+        },
+        {
+          "info": {
+            "name": "List product subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/products/subscriptions",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve product subscription rules."
+        },
+        {
+          "info": {
+            "name": "Subscribe to product events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/products/subscribe",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Subscribe to product events from a store."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe from product events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/products/unsubscribe",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Unsubscribe from product events from a store."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

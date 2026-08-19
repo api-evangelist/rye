@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Betas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create checkout session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/betas/checkout-sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new checkout session.\n\nCheckout sessions are hosted checkout forms your shoppers can use to complete their purchases."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

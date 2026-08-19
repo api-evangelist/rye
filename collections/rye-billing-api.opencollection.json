@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Universal Checkout Betas Billing API",
+    "version": "1.0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get drawdown balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/billing/balance",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get current drawdown balance for the authenticated developer"
+        },
+        {
+          "info": {
+            "name": "Get billing info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/billing",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get billing configuration and balance for the authenticated developer"
+        },
+        {
+          "info": {
+            "name": "Setup drawdown billing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/billing/drawdown",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Set up or update drawdown billing for the authenticated developer"
+        },
+        {
+          "info": {
+            "name": "Create on-demand top-up invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://staging.api.rye.com/api/v1/billing/drawdown/topup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request an on-demand top-up invoice..\nRequires drawdown billing to be enabled. Only one unpaid top-up invoice\nis allowed at a time."
+        },
+        {
+          "info": {
+            "name": "Cancel top-up invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://staging.api.rye.com/api/v1/billing/drawdown/topup/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The Stripe invoice ID to cancel"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel/void an unpaid top-up invoice.\nOnly invoices in open state can be cancelled."
+        },
+        {
+          "info": {
+            "name": "List drawdown transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://staging.api.rye.com/api/v1/billing/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transactions to return (default 20)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination (transaction ID to start after)"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination (transaction ID to end before)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List drawdown balance transactions for the authenticated developer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
