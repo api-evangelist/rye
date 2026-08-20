@@ -137,6 +137,8 @@ apis:
   humanURL: https://rye.com/docs/api-v2/introduction
   baseURL: https://api.rye.com/api/v1/
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -169,6 +171,8 @@ apis:
   humanURL: https://rye.com/docs/api-v2/introduction
   baseURL: https://api.rye.com/api/v1/
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -201,6 +205,8 @@ apis:
   humanURL: https://rye.com/docs/api-v2/introduction
   baseURL: https://api.rye.com/api/v1/
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
