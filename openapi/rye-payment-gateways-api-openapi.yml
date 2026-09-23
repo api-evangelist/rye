@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Universal Checkout Betas Payment Gateways API
+  title: Universal Checkout Payment Gateways API
   version: 1.0.5
   description: 'Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.
 
 
-    View the [Rye API docs](https://docs.rye.com).'
+    View the Rye API docs.'
   termsOfService: https://rye.com/terms-of-service
   license:
     name: UNLICENSED
@@ -84,23 +84,6 @@ components:
       type: string
       enum:
       - basis-theory
-      nullable: false
-    PaymentGatewaySession:
-      properties:
-        container:
-          type: string
-        sessionKey:
-          type: string
-        gateway:
-          type: string
-          enum:
-          - basis_theory
-          nullable: false
-      required:
-      - container
-      - sessionKey
-      - gateway
-      type: object
     AuthenticationError:
       properties:
         name:
@@ -114,6 +97,21 @@ components:
       - message
       type: object
       additionalProperties: false
+    PaymentGatewaySession:
+      properties:
+        container:
+          type: string
+        sessionKey:
+          type: string
+        gateway:
+          type: string
+          enum:
+          - basis_theory
+      required:
+      - container
+      - sessionKey
+      - gateway
+      type: object
     RuntimeError:
       properties:
         name:

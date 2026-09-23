@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Universal Checkout Betas Brands API
+  title: Universal Checkout Brands API
   version: 1.0.5
   description: 'Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.
 
 
-    View the [Rye API docs](https://docs.rye.com).'
+    View the Rye API docs.'
   termsOfService: https://rye.com/terms-of-service
   license:
     name: UNLICENSED
@@ -82,19 +82,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/brands/domain/$DOMAIN \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
     ValidateError:
       properties:
         name:
@@ -115,6 +102,19 @@ components:
       - fields
       type: object
       additionalProperties: false
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     Marketplace:
       enum:
       - AMAZON
@@ -123,12 +123,19 @@ components:
       - SEPHORA
       - UNKNOWN
       type: string
-    Domain:
-      type: string
-      example: shop.aloyoga.com
-      format: hostname
-      description: Represents a valid domain name string.
-      pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
+    RuntimeError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     Brand:
       properties:
         supported:
@@ -147,30 +154,6 @@ components:
       - marketplace
       - id
       type: object
-    RuntimeError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     NotFoundError:
       properties:
         name:
@@ -184,6 +167,23 @@ components:
       - message
       type: object
       additionalProperties: false
+    Domain:
+      type: string
+      example: shop.aloyoga.com
+      format: hostname
+      description: Represents a valid domain name string.
+      pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
   securitySchemes:
     bearerAuth:
       type: apiKey

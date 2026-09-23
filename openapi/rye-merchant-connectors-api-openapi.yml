@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Universal Checkout Betas Merchant Connectors API
+  title: Universal Checkout Merchant Connectors API
   version: 1.0.5
   description: 'Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.
 
 
-    View the [Rye API docs](https://docs.rye.com).'
+    View the Rye API docs.'
   termsOfService: https://rye.com/terms-of-service
   license:
     name: UNLICENSED
@@ -98,20 +98,23 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/merchant-connectors/$CONNECTOR/installation-link \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    NotImplementedError:
+    ShopifyInstallationLink:
       properties:
-        name:
+        url:
           type: string
-        message:
+          description: 'URL to redirect the merchant to in order to install the Rye app on
+
+            their merchant platform.'
+        connector:
           type: string
-        stack:
-          type: string
+          enum:
+          - shopify
+          description: The merchant connector this installation link was generated for.
       required:
-      - name
-      - message
+      - url
+      - connector
       type: object
-      additionalProperties: false
-    AuthenticationError:
+    NotImplementedError:
       properties:
         name:
           type: string
@@ -144,6 +147,19 @@ components:
       - fields
       type: object
       additionalProperties: false
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     RuntimeError:
       properties:
         name:
@@ -157,6 +173,17 @@ components:
       - message
       type: object
       additionalProperties: false
+    MerchantConnector:
+      type: string
+      enum:
+      - shopify
+      description: 'A merchant connector is a Rye integration with a third-party merchant
+
+        platform (e.g. Shopify) that lets developers onboard merchants to Rye.
+
+        Today only Shopify is supported; this union expands as we add support
+
+        for additional connectors (Woocommerce, BigCommerce, etc.).'
     MerchantConnectorInstallationLink:
       $ref: '#/components/schemas/ShopifyInstallationLink'
       description: A merchant connector installation link.
@@ -171,35 +198,6 @@ components:
         required:
         - message
         type: object
-    ShopifyInstallationLink:
-      properties:
-        url:
-          type: string
-          description: 'URL to redirect the merchant to in order to install the Rye app on
-
-            their merchant platform.'
-        connector:
-          type: string
-          enum:
-          - shopify
-          nullable: false
-          description: The merchant connector this installation link was generated for.
-      required:
-      - url
-      - connector
-      type: object
-    MerchantConnector:
-      type: string
-      enum:
-      - shopify
-      nullable: false
-      description: 'A merchant connector is a Rye integration with a third-party merchant
-
-        platform (e.g. Shopify) that lets developers onboard merchants to Rye.
-
-        Today only Shopify is supported; this union expands as we add support
-
-        for additional connectors (Woocommerce, BigCommerce, etc.).'
   securitySchemes:
     bearerAuth:
       type: apiKey

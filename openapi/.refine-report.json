@@ -1,19 +1,7 @@
 {
   "provider": "rye",
   "sources": [
-    "rye-betas-api-openapi.yml",
-    "rye-billing-api-openapi.yml",
-    "rye-brands-api-openapi.yml",
-    "rye-checkout-intents-api-openapi.yml",
-    "rye-commissions-api-openapi.yml",
-    "rye-events-api-openapi.yml",
-    "rye-merchant-connectors-api-openapi.yml",
-    "rye-orders-api-openapi.yml",
-    "rye-payment-gateways-api-openapi.yml",
-    "rye-products-api-openapi.yml",
-    "rye-returns-api-openapi.yml",
-    "rye-shipments-api-openapi.yml",
-    "rye-test-helpers-api-openapi.yml"
+    "_original/rye-checkout-intents-openapi-original.yml"
   ],
   "outputs": [
     "rye-betas-api-openapi.yml",
@@ -33,6 +21,37 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "rye-checkout-intents-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Betas",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Billing",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Brands",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Checkout Intents",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Commissions",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Events",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Merchant Connectors",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Orders",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Payment Gateways",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Products",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Returns",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Shipments",
+    "rye-checkout-intents-openapi-original.yml: declared missing tag: Test Helpers",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "rye-betas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-brands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-checkout-intents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-commissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-merchant-connectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-payment-gateways-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-returns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-shipments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rye-test-helpers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

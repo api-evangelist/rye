@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Universal Checkout Betas Commissions API
+  title: Universal Checkout Commissions API
   version: 1.0.5
   description: 'Turn any product URL into a completed checkout. Instantly retrieve price, tax, and shipping for any product, and let users buy without ever leaving your native AI experience.
 
 
-    View the [Rye API docs](https://docs.rye.com).'
+    View the Rye API docs.'
   termsOfService: https://rye.com/terms-of-service
   license:
     name: UNLICENSED
@@ -143,19 +143,19 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/commissions \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    AuthenticationError:
+    Money:
       properties:
-        name:
+        currencyCode:
           type: string
-        message:
-          type: string
-        stack:
-          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
       required:
-      - name
-      - message
+      - currencyCode
+      - amountSubunits
       type: object
-      additionalProperties: false
     ValidateError:
       properties:
         name:
@@ -176,6 +176,19 @@ components:
       - fields
       type: object
       additionalProperties: false
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     CommissionStatus:
       type: string
       enum:
@@ -186,17 +199,6 @@ components:
       - refunded
       - expired
       description: Lifecycle status of a commission record.
-    CommissionType:
-      type: string
-      enum:
-      - surcharge
-      - promo_arbitrage
-      - discount_code
-      - affiliate
-      - out_of_band
-      description: 'Type of commission earned on an order. Canonical definition used by
-
-        both the API contract and the internal `@rye-com/ci-commissions` package.'
     CommissionListResponse:
       properties:
         pageInfo:
@@ -226,19 +228,23 @@ components:
         `after` query parameter to walk forward; use `pageInfo.startCursor` as the
 
         next page''s `before` query parameter to walk backward.'
-    Money:
-      properties:
-        currencyCode:
-          type: string
-          example: USD
-        amountSubunits:
-          type: integer
-          format: int32
-          example: 1500
-      required:
-      - currencyCode
-      - amountSubunits
-      type: object
+    SettlementDirection:
+      type: string
+      enum:
+      - rye_owes_developer
+      - developer_owes_rye
+      description: 'Direction of settlement: who owes whom once the commission is finalized.'
+    CommissionType:
+      type: string
+      enum:
+      - surcharge
+      - promo_arbitrage
+      - discount_code
+      - affiliate
+      - out_of_band
+      description: 'Type of commission earned on an order. Canonical definition used by
+
+        both the API contract and the internal `@rye-com/ci-commissions` package.'
     NotFoundError:
       properties:
         name:
@@ -263,12 +269,6 @@ components:
         required:
         - message
         type: object
-    SettlementDirection:
-      type: string
-      enum:
-      - rye_owes_developer
-      - developer_owes_rye
-      description: 'Direction of settlement: who owes whom once the commission is finalized.'
     CommissionResponse:
       properties:
         finalizedAt:
