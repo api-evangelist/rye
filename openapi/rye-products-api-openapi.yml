@@ -253,39 +253,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/products/unsubscribe \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"type\": \"store\",\n          \"url\": \"https://store.com\"\n        }'"
 components:
   schemas:
-    ValidateError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
-      required:
-      - name
-      - message
-      - status
-      - fields
-      type: object
-      additionalProperties: false
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
     VariantDimension:
       properties:
         values:
@@ -311,34 +278,11 @@ components:
       - message
       type: object
       additionalProperties: false
-    ProductSubscriptionRequest:
-      properties:
-        url:
-          type: string
-          description: Store or product URL to subscribe or unsubscribe.
-          example: https://store.com
-        type:
-          $ref: '#/components/schemas/ProductSubscriptionTargetType'
-          description: Scope of the subscription change.
-      required:
-      - url
-      - type
-      type: object
-    TooManyRequestsError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        retryAfter:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
+    ProductSubscriptionTargetType:
+      type: string
+      enum:
+      - store
+      - product
     NotFoundError:
       properties:
         name:
@@ -352,48 +296,30 @@ components:
       - message
       type: object
       additionalProperties: false
-    ProductSubscriptionResponse:
-      anyOf:
-      - $ref: '#/components/schemas/ProductSubscriptionProductResponse'
-      - $ref: '#/components/schemas/ProductSubscriptionStoreResponse'
-    VariantSelection:
-      properties:
-        value:
-          anyOf:
-          - type: string
-          - type: number
-            format: double
-          example: Small, Red, XS, L, etc.
-          maxLength: 60
-        label:
-          type: string
-          example: Size, Color, etc.
-          maxLength: 30
-      required:
-      - value
-      - label
+    FieldErrors:
+      properties: {}
       type: object
-    ProductSubscriptionProductResponse:
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    TooManyRequestsError:
       properties:
-        type:
+        name:
           type: string
-          enum:
-          - product
-          description: Scope of the subscription change.
-        id:
+        message:
           type: string
-          description: Product id.
-        url:
+        stack:
           type: string
-          description: Product subscription URL.
-        subscribed:
-          type: boolean
-          description: Whether the resolved product is subscribed after the mutation.
+        retryAfter:
+          type: string
       required:
-      - type
-      - id
-      - url
-      - subscribed
+      - name
+      - message
       type: object
       additionalProperties: false
     ProductVariant:
@@ -431,6 +357,37 @@ components:
       - sku
       - id
       type: object
+    ProductImage:
+      properties:
+        isFeatured:
+          type: boolean
+          example: true
+        url:
+          type: string
+          example: https://example.com/images/product-123.jpg
+      required:
+      - isFeatured
+      - url
+      type: object
+    ProductAvailability:
+      type: string
+      enum:
+      - in_stock
+      - out_of_stock
+      - preorder
+      - backorder
+      - unknown
+      description: 'The availability status of a product.
+
+        - `in_stock`: Product is available for immediate purchase
+
+        - `out_of_stock`: Product is currently unavailable
+
+        - `preorder`: Product is available for pre-order before release
+
+        - `backorder`: Product is temporarily out of stock but can be ordered
+
+        - `unknown`: Availability could not be determined'
     ProductSubscriptionStoreResponse:
       properties:
         type:
@@ -454,75 +411,6 @@ components:
       - subscribed
       type: object
       additionalProperties: false
-    ProductAvailability:
-      type: string
-      enum:
-      - in_stock
-      - out_of_stock
-      - preorder
-      - backorder
-      - unknown
-      description: 'The availability status of a product.
-
-        - `in_stock`: Product is available for immediate purchase
-
-        - `out_of_stock`: Product is currently unavailable
-
-        - `preorder`: Product is available for pre-order before release
-
-        - `backorder`: Product is temporarily out of stock but can be ordered
-
-        - `unknown`: Availability could not be determined'
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    ProductSubscriptionTargetType:
-      type: string
-      enum:
-      - store
-      - product
-    Money:
-      properties:
-        currencyCode:
-          type: string
-          example: USD
-        amountSubunits:
-          type: integer
-          format: int32
-          example: 1500
-      required:
-      - currencyCode
-      - amountSubunits
-      type: object
-    ProductImage:
-      properties:
-        isFeatured:
-          type: boolean
-          example: true
-        url:
-          type: string
-          example: https://example.com/images/product-123.jpg
-      required:
-      - isFeatured
-      - url
-      type: object
-    ListProductSubscriptionsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ProductSubscriptionResponse'
-          type: array
-      required:
-      - data
-      type: object
     Product:
       properties:
         variants:
@@ -590,6 +478,118 @@ components:
       - retailer
       - url
       - id
+      type: object
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    ProductSubscriptionResponse:
+      anyOf:
+      - $ref: '#/components/schemas/ProductSubscriptionProductResponse'
+      - $ref: '#/components/schemas/ProductSubscriptionStoreResponse'
+    ProductSubscriptionProductResponse:
+      properties:
+        type:
+          type: string
+          enum:
+          - product
+          description: Scope of the subscription change.
+        id:
+          type: string
+          description: Product id.
+        url:
+          type: string
+          description: Product subscription URL.
+        subscribed:
+          type: boolean
+          description: Whether the resolved product is subscribed after the mutation.
+      required:
+      - type
+      - id
+      - url
+      - subscribed
+      type: object
+      additionalProperties: false
+    Money:
+      properties:
+        currencyCode:
+          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
+      required:
+      - currencyCode
+      - amountSubunits
+      type: object
+    ListProductSubscriptionsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ProductSubscriptionResponse'
+          type: array
+      required:
+      - data
+      type: object
+    ProductSubscriptionRequest:
+      properties:
+        url:
+          type: string
+          description: Store or product URL to subscribe or unsubscribe.
+          example: https://store.com
+        type:
+          $ref: '#/components/schemas/ProductSubscriptionTargetType'
+          description: Scope of the subscription change.
+      required:
+      - url
+      - type
+      type: object
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    VariantSelection:
+      properties:
+        value:
+          anyOf:
+          - type: string
+          - type: number
+            format: double
+          example: Small, Red, XS, L, etc.
+          maxLength: 60
+        label:
+          type: string
+          example: Size, Color, etc.
+          maxLength: 30
+      required:
+      - value
+      - label
       type: object
   securitySchemes:
     bearerAuth:

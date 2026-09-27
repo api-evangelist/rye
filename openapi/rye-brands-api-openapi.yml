@@ -82,39 +82,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/brands/domain/$DOMAIN \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    ValidateError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
-      required:
-      - name
-      - message
-      - status
-      - fields
-      type: object
-      additionalProperties: false
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
     Marketplace:
       enum:
       - AMAZON
@@ -136,6 +103,43 @@ components:
       - message
       type: object
       additionalProperties: false
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
     Brand:
       properties:
         supported:
@@ -154,7 +158,7 @@ components:
       - marketplace
       - id
       type: object
-    NotFoundError:
+    ValidateError:
       properties:
         name:
           type: string
@@ -162,9 +166,16 @@ components:
           type: string
         stack:
           type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
       required:
       - name
       - message
+      - status
+      - fields
       type: object
       additionalProperties: false
     Domain:
@@ -173,17 +184,6 @@ components:
       format: hostname
       description: Represents a valid domain name string.
       pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
   securitySchemes:
     bearerAuth:
       type: apiKey

@@ -353,38 +353,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/billing/transactions \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    Omit_Invoice.amount-or-bankTransferDetails_:
-      $ref: '#/components/schemas/Pick_Invoice.Exclude_keyofInvoice.amount-or-bankTransferDetails__'
-      description: Construct a type with the properties of T except for those in type K.
-    InvoiceStatus:
-      type: string
-      enum:
-      - draft
-      - open
-      - paid
-      - uncollectible
-      - void
-      - unknown
-    TransactionResponse:
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        metadata:
-          $ref: '#/components/schemas/Record_string.string_'
-        description:
-          type: string
-          example: 'Balance debit for order #12345'
-        amount:
-          $ref: '#/components/schemas/Money'
-        id:
-          type: string
-          example: cbtxn_abc123
-      required:
-      - createdAt
-      - amount
-      - id
-      type: object
     SetupDrawdownParams:
       properties:
         chargeAutomatically:
@@ -415,6 +383,50 @@ components:
       - minBalanceSubunits
       - targetBalanceSubunits
       type: object
+    BankTransferDetails:
+      description: Vendor-agnostic bank transfer details for push-based payment
+      properties:
+        routingNumber:
+          type: string
+        accountNumber:
+          type: string
+        bankName:
+          type: string
+        accountHolderName:
+          type: string
+      required:
+      - routingNumber
+      - accountNumber
+      - bankName
+      - accountHolderName
+      type: object
+      additionalProperties: false
+    Money:
+      properties:
+        currencyCode:
+          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
+      required:
+      - currencyCode
+      - amountSubunits
+      type: object
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     CreateTopUpParams:
       properties:
         chargeAutomatically:
@@ -432,97 +444,27 @@ components:
       required:
       - amountSubunits
       type: object
-    Invoice:
-      properties:
-        bankTransferDetails:
-          $ref: '#/components/schemas/BankTransferDetails'
-        url:
-          type:
-          - string
-          - 'null'
-          example: https://invoice.stripe.com/i/acct_xxx/test_xxx
-        amount:
-          $ref: '#/components/schemas/Money'
-        status:
-          $ref: '#/components/schemas/InvoiceStatus'
-        id:
-          type: string
-          example: in_abc123
-      required:
-      - bankTransferDetails
-      - url
-      - amount
-      - status
-      - id
-      type: object
-    Money:
-      properties:
-        currencyCode:
-          type: string
-          example: USD
-        amountSubunits:
-          type: integer
-          format: int32
-          example: 1500
-      required:
-      - currencyCode
-      - amountSubunits
-      type: object
-    ValidateError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
-      required:
-      - name
-      - message
-      - status
-      - fields
-      type: object
-      additionalProperties: false
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    Record_string.string_:
+    FieldErrors:
       properties: {}
+      type: object
       additionalProperties:
-        type: string
-      type: object
-      description: Construct a type with a set of properties K of type T
-    Pick_Invoice.Exclude_keyofInvoice.amount-or-bankTransferDetails__:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    BalanceResponse:
       properties:
-        id:
-          type: string
-          example: in_abc123
-        status:
-          $ref: '#/components/schemas/InvoiceStatus'
-        url:
-          type: string
-          example: https://invoice.stripe.com/i/acct_xxx/test_xxx
+        drawdownEnabled:
+          type: boolean
+        balance:
+          $ref: '#/components/schemas/Money'
       required:
-      - id
-      - status
-      - url
+      - drawdownEnabled
+      - balance
       type: object
-      description: From T, pick a set of properties whose keys are in the union K
     BillingResponse:
       properties:
         drawdown:
@@ -563,6 +505,12 @@ components:
       required:
       - drawdown
       type: object
+    Record_string.string_:
+      properties: {}
+      additionalProperties:
+        type: string
+      type: object
+      description: Construct a type with a set of properties K of type T
     TransactionsResponse:
       properties:
         pageInfo:
@@ -589,16 +537,6 @@ components:
       - pageInfo
       - data
       type: object
-    BalanceResponse:
-      properties:
-        drawdownEnabled:
-          type: boolean
-        balance:
-          $ref: '#/components/schemas/Money'
-      required:
-      - drawdownEnabled
-      - balance
-      type: object
     DuplicateInvoice:
       allOf:
       - $ref: '#/components/schemas/Omit_Invoice.amount-or-bankTransferDetails_'
@@ -614,35 +552,97 @@ components:
         - amount
         type: object
       description: Degraded invoice returned when full details are unavailable (e.g. Stripe fetch failed)
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    BankTransferDetails:
-      description: Vendor-agnostic bank transfer details for push-based payment
+    InvoiceStatus:
+      type: string
+      enum:
+      - draft
+      - open
+      - paid
+      - uncollectible
+      - void
+      - unknown
+    Omit_Invoice.amount-or-bankTransferDetails_:
+      $ref: '#/components/schemas/Pick_Invoice.Exclude_keyofInvoice.amount-or-bankTransferDetails__'
+      description: Construct a type with the properties of T except for those in type K.
+    Invoice:
       properties:
-        routingNumber:
+        bankTransferDetails:
+          $ref: '#/components/schemas/BankTransferDetails'
+        url:
+          type:
+          - string
+          - 'null'
+          example: https://invoice.stripe.com/i/acct_xxx/test_xxx
+        amount:
+          $ref: '#/components/schemas/Money'
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        id:
           type: string
-        accountNumber:
-          type: string
-        bankName:
-          type: string
-        accountHolderName:
-          type: string
+          example: in_abc123
       required:
-      - routingNumber
-      - accountNumber
-      - bankName
-      - accountHolderName
+      - bankTransferDetails
+      - url
+      - amount
+      - status
+      - id
+      type: object
+    TransactionResponse:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          $ref: '#/components/schemas/Record_string.string_'
+        description:
+          type: string
+          example: 'Balance debit for order #12345'
+        amount:
+          $ref: '#/components/schemas/Money'
+        id:
+          type: string
+          example: cbtxn_abc123
+      required:
+      - createdAt
+      - amount
+      - id
+      type: object
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
       type: object
       additionalProperties: false
+    Pick_Invoice.Exclude_keyofInvoice.amount-or-bankTransferDetails__:
+      properties:
+        id:
+          type: string
+          example: in_abc123
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        url:
+          type: string
+          example: https://invoice.stripe.com/i/acct_xxx/test_xxx
+      required:
+      - id
+      - status
+      - url
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
   securitySchemes:
     bearerAuth:
       type: apiKey
