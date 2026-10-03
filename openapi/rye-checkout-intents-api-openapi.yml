@@ -465,77 +465,19 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/checkout-intents/purchase \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"buyer\": {\n            \"address1\": \"123 Main St\",\n            \"city\": \"New York\",\n            \"country\": \"US\",\n            \"email\": \"john.doe@example.com\",\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"phone\": \"1234567890\",\n            \"postalCode\": \"10001\",\n            \"province\": \"NY\"\n          },\n          \"paymentMethod\": {\n            \"stripeToken\": \"tok_1RkrWWHGDlstla3f1Fc7ZrhH\",\n            \"type\": \"stripe_token\"\n          },\n          \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n          \"quantity\": 1,\n          \"referenceId\": \"order-1234\"\n        }'"
 components:
   schemas:
-    WithStatus_BaseShipmentWithTracking.shipped_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - shipped
-        required:
-        - status
-        type: object
-    OutForDeliveryShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
-      title: Out for Delivery
-    ShippingOption:
+    BasisTheoryPaymentMethod:
       properties:
-        deliveryEstimate:
-          allOf:
-          - $ref: '#/components/schemas/DeliveryEstimate'
-        discount:
-          $ref: '#/components/schemas/Money'
-        cost:
-          $ref: '#/components/schemas/Money'
-        id:
+        basisTheoryToken:
           type: string
-      required:
-      - cost
-      - id
-      type: object
-    ShipmentStatus:
-      type: string
-      enum:
-      - out_for_delivery
-      - delivered
-      - shipped
-      - canceled
-      - delayed
-      - ordered
-    RetrievingOfferCheckoutIntent:
-      allOf:
-      - $ref: '#/components/schemas/BaseCheckoutIntent'
-      - properties:
-          state:
-            type: string
-            enum:
-            - retrieving_offer
-        required:
-        - state
-        type: object
-      title: Retrieving Offer
-    CompletedCancellation:
-      allOf:
-      - $ref: '#/components/schemas/BaseCancellation'
-      - properties:
-          state:
-            type: string
-            enum:
-            - completed
-        required:
-        - state
-        type: object
-    DrawdownPaymentMethod:
-      properties:
         type:
           type: string
           enum:
-          - drawdown
+          - basis_theory_token
       required:
+      - basisTheoryToken
       - type
       type: object
-      title: Drawdown
+      title: Basis Theory
     DeliveredShipment:
       allOf:
       - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
@@ -547,83 +489,7 @@ components:
         - deliveredAt
         type: object
       title: Delivered
-    OrderResponse:
-      description: 'Represents a completed order. Orders are created after a checkout intent reaches
-
-        the `completed` state.'
-      properties:
-        id:
-          type: string
-        checkoutIntentId:
-          type: string
-          description: ID of the checkout intent that was responsible for creating this order.
-          example: ci_aaa8af5c5aae4c0e8ef0172c26c65c13
-        createdAt:
-          type: string
-          description: Timestamp the order was persisted to Rye.
-          example: '2026-03-25T00:00:00Z'
-        updatedAt:
-          type: string
-          description: Timestamp the order was last updated at
-          example: '2026-03-27T00:00:00Z'
-        referenceId:
-          type: string
-          description: 'The `referenceId` you supplied on the checkout intent, echoed back so you
-
-            can reconcile this order against your own records. Absent when none was
-
-            supplied.'
-          example: order-1234
-        cancellation:
-          allOf:
-          - $ref: '#/components/schemas/Cancellation'
-          description: 'The cancellation for this order, or `null` if none has been requested.
-
-            Populated by joining the separate cancellations collection on the order''s
-
-            marketplace order id.'
-      required:
-      - id
-      - checkoutIntentId
-      - createdAt
-      - updatedAt
-      - cancellation
-      type: object
-      additionalProperties: false
-    CheckoutIntentPurchaseParams:
-      allOf:
-      - $ref: '#/components/schemas/CheckoutIntentPostParams'
-      - $ref: '#/components/schemas/CheckoutIntentConfirmParams'
-      description: 'Post body for the purchase endpoint - combines create + confirm in one step.
-
-        Triggers the durable workflow that handles offer retrieval and order placement.'
-    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - out_for_delivery
-        required:
-        - status
-        type: object
-    StripeTokenPaymentMethod:
-      properties:
-        stripeToken:
-          type: string
-          example: tok_1RkrWWHGDlstla3f1Fc7ZrhH
-        type:
-          type: string
-          enum:
-          - stripe_token
-          example: stripe_token
-      required:
-      - stripeToken
-      - type
-      type: object
-      title: Stripe
-    InvalidCheckoutIntentStateError:
+    AuthenticationError:
       properties:
         name:
           type: string
@@ -631,65 +497,15 @@ components:
           type: string
         stack:
           type: string
-        state:
-          type: string
       required:
       - name
       - message
       type: object
       additionalProperties: false
-    TrackingEvent:
-      properties:
-        status:
-          $ref: '#/components/schemas/ShipmentStatus'
-        location:
-          $ref: '#/components/schemas/EventLocation'
-        timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TrackingEventTimestamp'
-        description:
-          type:
-          - string
-          - 'null'
-      required:
-      - status
-      - location
-      - timestamp
-      - description
-      type: object
-    CancellationReason:
-      properties:
-        message:
-          type: string
-          description: 'Optional free-text note explaining the cancellation, forwarded to the
-
-            merchant when possible.'
-          maxLength: 256
-        code:
-          $ref: '#/components/schemas/CancellationReasonCode'
-      required:
-      - code
-      type: object
-    PaymentMethod:
-      anyOf:
-      - $ref: '#/components/schemas/StripeTokenPaymentMethod'
-      - $ref: '#/components/schemas/BasisTheoryPaymentMethod'
-      - $ref: '#/components/schemas/DrawdownPaymentMethod'
-      - $ref: '#/components/schemas/X402PaymentMethod'
-    Shipment:
-      $ref: '#/components/schemas/ShipmentUnion'
-    RequestedCancellation:
-      allOf:
-      - $ref: '#/components/schemas/BaseCancellation'
-      - properties:
-          state:
-            type: string
-            enum:
-            - requested
-        required:
-        - state
-        type: object
-    ValidateError:
+    OrderedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
+      title: Ordered
+    NotFoundError:
       properties:
         name:
           type: string
@@ -697,169 +513,11 @@ components:
           type: string
         stack:
           type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
       required:
       - name
       - message
-      - status
-      - fields
       type: object
       additionalProperties: false
-    ShipmentsListResponse:
-      properties:
-        pageInfo:
-          properties:
-            endCursor:
-              type: string
-            startCursor:
-              type: string
-            hasPreviousPage:
-              type: boolean
-            hasNextPage:
-              type: boolean
-          required:
-          - hasPreviousPage
-          - hasNextPage
-          type: object
-        data:
-          items:
-            $ref: '#/components/schemas/Shipment'
-          type: array
-      required:
-      - pageInfo
-      - data
-      type: object
-    CheckoutIntentPostParams:
-      properties:
-        referenceId:
-          type: string
-          example: order-1234
-          maxLength: 255
-        discoverPromoCodes:
-          type: boolean
-        constraints:
-          $ref: '#/components/schemas/CheckoutConstraints'
-        promoCodes:
-          items:
-            $ref: '#/components/schemas/PromoCode'
-          type: array
-          maxItems: 16
-        variantSelections:
-          items:
-            $ref: '#/components/schemas/VariantSelection'
-          type: array
-        buyer:
-          $ref: '#/components/schemas/Buyer'
-        quantity:
-          type: integer
-          format: int32
-          example: 1
-          minimum: 0
-        productUrl:
-          type: string
-          example: https://www.amazon.com/dp/B0DFC9MT8Q
-      required:
-      - buyer
-      - quantity
-      - productUrl
-      type: object
-    VariantSelection:
-      properties:
-        value:
-          anyOf:
-          - type: string
-          - type: number
-            format: double
-          example: Small, Red, XS, L, etc.
-          maxLength: 60
-        label:
-          type: string
-          example: Size, Color, etc.
-          maxLength: 30
-      required:
-      - value
-      - label
-      type: object
-    ShipmentTracking:
-      properties:
-        carrierName:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        deliveryDate:
-          allOf:
-          - $ref: '#/components/schemas/DeliveryDate'
-        url:
-          type:
-          - string
-          - 'null'
-      required:
-      - number
-      type: object
-    WithStatus_BaseShipment.ordered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - ordered
-        required:
-        - status
-        type: object
-    CancellationReasonCode:
-      type: string
-      enum:
-      - requested_by_customer
-      - fraud
-      - inventory
-      - payment_issue
-      - staff_error
-      - other
-    X402NextAction:
-      properties:
-        x402:
-          properties:
-            expiresAt:
-              type: string
-            recipient:
-              type: string
-            currency:
-              type: string
-              enum:
-              - USDC
-            maxAmountRequired:
-              type: string
-            network:
-              type: string
-            scheme:
-              type: string
-              enum:
-              - exact
-          required:
-          - expiresAt
-          - recipient
-          - currency
-          - maxAmountRequired
-          - network
-          - scheme
-          type: object
-        type:
-          type: string
-          enum:
-          - x402
-      required:
-      - x402
-      - type
-      type: object
     PlacingOrderCheckoutIntent:
       allOf:
       - $ref: '#/components/schemas/BaseCheckoutIntent'
@@ -878,98 +536,71 @@ components:
         - state
         type: object
       title: Placing Order
-    ShipmentWithoutTrackingUnion:
-      anyOf:
-      - $ref: '#/components/schemas/OrderedShipment'
-      - $ref: '#/components/schemas/CanceledShipment'
-      description: Shipments without tracking information
-      title: Without Tracking
-    BaseShipmentWithTracking:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - $ref: '#/components/schemas/ShippingDetails'
-    AmazonUnavailableError:
+    NextAction:
+      $ref: '#/components/schemas/X402NextAction'
+    ShippingDetails:
       properties:
-        name:
+        trackingEvents:
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+          type: array
+        shippedAt:
           type: string
-        message:
+          format: date-time
+        tracking:
+          $ref: '#/components/schemas/ShipmentTracking'
+        externalId:
           type: string
-        stack:
-          type: string
+          description: The external ID is provided by the marketplace and matches the shipment to their system.
       required:
-      - name
-      - message
+      - trackingEvents
+      - shippedAt
+      - tracking
+      - externalId
       type: object
-      additionalProperties: false
-    ShipmentWithTrackingUnion:
+    FailureReasonCode:
+      type: string
+      enum:
+      - unknown
+      - checkout_intent_expired
+      - payment_failed
+      - payment_cvc_expired
+      - insufficient_stock
+      - product_out_of_stock
+      - offer_retrieval_failed
+      - order_placement_failed
+      - developer_not_found
+      - missing_shipping_method
+      - unsupported_currency
+      - invalid_input
+      - incorrect_cost_breakdown
+      - unsupported_store_no_guest_checkout
+      - workflow_invocation_failed
+      - variant_selections_invalid
+      - variant_selections_required
+      - form_validation_error
+      - captcha_blocked
+      - bot_protection_blocked
+      - constraint_total_price_exceeded
+      - constraint_shipping_cost_exceeded
+      - promo_code_discovery_not_enabled
+      - product_not_found
+      description: Type derived from runtime array - always in sync
+    ShipmentUnion:
       anyOf:
-      - $ref: '#/components/schemas/ShippedShipment'
-      - $ref: '#/components/schemas/DeliveredShipment'
-      - $ref: '#/components/schemas/DelayedShipment'
-      - $ref: '#/components/schemas/OutForDeliveryShipment'
-      description: Shipments that have tracking information (shipped, delayed, or delivered states)
-      title: With Tracking
-    CompletedCheckoutIntent:
+      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
+      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
+    RequestedCancellation:
       allOf:
-      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - $ref: '#/components/schemas/BaseCancellation'
       - properties:
-          estimatedDeliveryDate:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            deprecated: true
-          orderId:
-            type:
-            - string
-            - 'null'
-          paymentMethod:
-            $ref: '#/components/schemas/PaymentMethod'
-          offer:
-            $ref: '#/components/schemas/Offer'
           state:
             type: string
             enum:
-            - completed
+            - requested
         required:
-        - orderId
-        - paymentMethod
-        - offer
         - state
         type: object
-      title: Completed
-    CancellationDenialReason:
-      properties:
-        code:
-          $ref: '#/components/schemas/CancellationDenialReasonCode'
-        message:
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    CheckoutIntent:
-      anyOf:
-      - $ref: '#/components/schemas/RetrievingOfferCheckoutIntent'
-      - $ref: '#/components/schemas/AwaitingConfirmationCheckoutIntent'
-      - $ref: '#/components/schemas/RequiresActionCheckoutIntent'
-      - $ref: '#/components/schemas/PlacingOrderCheckoutIntent'
-      - $ref: '#/components/schemas/CompletedCheckoutIntent'
-      - $ref: '#/components/schemas/FailedCheckoutIntent'
-    CommissionPotential:
-      properties:
-        estimate:
-          type: boolean
-        amount:
-          $ref: '#/components/schemas/Money'
-      required:
-      - estimate
-      - amount
-      type: object
-      description: The commission a developer would earn if this offer is placed.
-    ShippedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
-      title: Shipped
     Buyer:
       properties:
         postalCode:
@@ -1020,461 +651,9 @@ components:
       - lastName
       - firstName
       type: object
-    CheckoutIntentState:
-      type: string
-      enum:
-      - completed
-      - failed
-      - retrieving_offer
-      - awaiting_confirmation
-      - requires_action
-      - placing_order
-    ShipmentUnion:
-      anyOf:
-      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
-      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
-    AwaitingConfirmationCheckoutIntent:
-      allOf:
-      - $ref: '#/components/schemas/BaseCheckoutIntent'
-      - properties:
-          paymentMethod:
-            $ref: '#/components/schemas/PaymentMethod'
-          offer:
-            $ref: '#/components/schemas/Offer'
-          state:
-            type: string
-            enum:
-            - awaiting_confirmation
-        required:
-        - offer
-        - state
-        type: object
-      title: Awaiting Confirmation
-    CheckoutIntentListResponse:
-      properties:
-        pageInfo:
-          properties:
-            endCursor:
-              type: string
-            startCursor:
-              type: string
-            hasPreviousPage:
-              type: boolean
-            hasNextPage:
-              type: boolean
-          required:
-          - hasPreviousPage
-          - hasNextPage
-          type: object
-        data:
-          items:
-            $ref: '#/components/schemas/CheckoutIntent'
-          type: array
-      required:
-      - pageInfo
-      - data
-      type: object
-    BaseShipment:
-      properties:
-        updatedAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-        marketplaceOrderId:
-          type: string
-        checkoutIntentId:
-          type: string
-        id:
-          type: string
-      required:
-      - updatedAt
-      - createdAt
-      - marketplaceOrderId
-      - checkoutIntentId
-      - id
-      type: object
-    RuntimeError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    Offer:
-      properties:
-        commission:
-          $ref: '#/components/schemas/CommissionPotential'
-        shipping:
-          $ref: '#/components/schemas/Shipping'
-        cost:
-          $ref: '#/components/schemas/Cost'
-        appliedPromoCodes:
-          items:
-            type: string
-          type: array
-      required:
-      - shipping
-      - cost
-      type: object
-    NotFoundError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    WithStatus_BaseShipmentWithTracking.delivered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - delivered
-        required:
-        - status
-        type: object
-    NextAction:
-      $ref: '#/components/schemas/X402NextAction'
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    CheckoutIntentConfirmParams:
-      properties:
-        paymentMethod:
-          $ref: '#/components/schemas/PaymentMethod'
-      required:
-      - paymentMethod
-      type: object
-    EventLocation:
-      properties:
-        country:
-          type:
-          - string
-          - 'null'
-        province:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-      type: object
-    FailureReasonCode:
-      type: string
-      enum:
-      - unknown
-      - checkout_intent_expired
-      - payment_failed
-      - payment_cvc_expired
-      - insufficient_stock
-      - product_out_of_stock
-      - offer_retrieval_failed
-      - order_placement_failed
-      - developer_not_found
-      - missing_shipping_method
-      - unsupported_currency
-      - invalid_input
-      - incorrect_cost_breakdown
-      - unsupported_store_no_guest_checkout
-      - workflow_invocation_failed
-      - variant_selections_invalid
-      - variant_selections_required
-      - form_validation_error
-      - captcha_blocked
-      - bot_protection_blocked
-      - constraint_total_price_exceeded
-      - constraint_shipping_cost_exceeded
-      - promo_code_discovery_not_enabled
-      - product_not_found
-      description: Type derived from runtime array - always in sync
-    CheckoutConstraints:
-      properties:
-        offerRetrievalEffort:
-          $ref: '#/components/schemas/OfferRetrievalEffort'
-          example: max
-        maxShippingPrice:
-          type: integer
-          format: int32
-          example: 500
-          minimum: 0
-        maxTotalPrice:
-          type: integer
-          format: int32
-          example: 100000
-          minimum: 0
-      type: object
-    OfferRetrievalEffort:
-      type: string
-      enum:
-      - max
-      - low
-      description: 'Controls how much effort the system should spend retrieving an offer.
-
-        - ''max'': Full effort including AI agent fallback (slower, higher success rate)
-
-        - ''low'': Fast API-only retrieval, fails if API unavailable (faster, lower success rate)
-
-
-        Default: ''max'''
-    CancellationDenialReasonCode:
-      type: string
-      enum:
-      - other
-      - already_shipped
-      - non_cancellable_item
-      - cancellation_window_expired
-    FailedCheckoutIntent:
-      allOf:
-      - $ref: '#/components/schemas/BaseCheckoutIntent'
-      - properties:
-          failureReason:
-            $ref: '#/components/schemas/FailureReason'
-          paymentMethod:
-            $ref: '#/components/schemas/PaymentMethod'
-          offer:
-            $ref: '#/components/schemas/Offer'
-          state:
-            type: string
-            enum:
-            - failed
-        required:
-        - failureReason
-        - state
-        type: object
-      title: Failed
-    CanceledShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
-      title: Canceled
-    WithStatus_BaseShipment.canceled_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - canceled
-        required:
-        - status
-        type: object
-    DeliveryEstimate:
-      properties:
-        latest:
-          type: string
-          format: date-time
-          description: Latest date that items will be delivered by.
-          example: '2026-03-28T00:00:00Z'
-        earliest:
-          type: string
-          format: date-time
-          description: Earliest date that items will be delivered by.
-          example: '2026-03-25T00:00:00Z'
-      type: object
-      description: 'Estimated range of dates that items will be delivered in. At least one of
-
-        `earliest` or `latest` are guaranteed to be set.
-
-
-        Interpretation:
-
-
-        * If both `earliest` and `latest` are set, then the delivery estimate is the range between the two dates.
-
-        * If only `earliest` is set, then the delivery estimate is any date after that date.
-
-        * If only `latest` is set, then the delivery estimate is any date before that date.'
-    BasisTheoryPaymentMethod:
-      properties:
-        basisTheoryToken:
-          type: string
-        type:
-          type: string
-          enum:
-          - basis_theory_token
-      required:
-      - basisTheoryToken
-      - type
-      type: object
-      title: Basis Theory
-    Cancellation:
-      anyOf:
-      - $ref: '#/components/schemas/RequestedCancellation'
-      - $ref: '#/components/schemas/CompletedCancellation'
-      - $ref: '#/components/schemas/DeniedCancellation'
-    BaseCancellation:
-      properties:
-        reason:
-          $ref: '#/components/schemas/CancellationReason'
-        marketplaceOrderId:
-          type: string
-        checkoutIntentId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-      required:
-      - reason
-      - marketplaceOrderId
-      - checkoutIntentId
-      - createdAt
-      - id
-      type: object
-    ShippingDetails:
-      properties:
-        trackingEvents:
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
-          type: array
-        shippedAt:
-          type: string
-          format: date-time
-        tracking:
-          $ref: '#/components/schemas/ShipmentTracking'
-        externalId:
-          type: string
-          description: The external ID is provided by the marketplace and matches the shipment to their system.
-      required:
-      - trackingEvents
-      - shippedAt
-      - tracking
-      - externalId
-      type: object
-    PromoCode:
-      type: string
-      example: SAVE20
-      description: 'Promo code string with validation constraints.
-
-        - Must contain only letters, digits, underscores, or hyphens
-
-        - Maximum length of 32 characters'
-      pattern: ^[a-zA-Z0-9_\-]+$
-      maxLength: 32
-    OrderedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
-      title: Ordered
-    Cost:
-      properties:
-        total:
-          $ref: '#/components/schemas/Money'
-        surcharge:
-          $ref: '#/components/schemas/Money'
-        discount:
-          $ref: '#/components/schemas/Money'
-        tax:
-          $ref: '#/components/schemas/Money'
-        shipping:
-          $ref: '#/components/schemas/Money'
-        subtotal:
-          $ref: '#/components/schemas/Money'
-      required:
-      - total
-      - subtotal
-      type: object
-    RequiresActionCheckoutIntent:
-      allOf:
-      - $ref: '#/components/schemas/BaseCheckoutIntent'
-      - properties:
-          nextAction:
-            $ref: '#/components/schemas/NextAction'
-          paymentMethod:
-            $ref: '#/components/schemas/PaymentMethod'
-          offer:
-            $ref: '#/components/schemas/Offer'
-          state:
-            type: string
-            enum:
-            - requires_action
-        required:
-        - nextAction
-        - paymentMethod
-        - offer
-        - state
-        type: object
-      title: Requires Action
-    DeniedCancellation:
-      allOf:
-      - $ref: '#/components/schemas/BaseCancellation'
-      - properties:
-          denialReason:
-            $ref: '#/components/schemas/CancellationDenialReason'
-          state:
-            type: string
-            enum:
-            - denied
-        required:
-        - denialReason
-        - state
-        type: object
     DelayedShipment:
       $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
       title: Delayed
-    DeliveryDate:
-      properties:
-        estimated:
-          type: string
-          format: date-time
-      required:
-      - estimated
-      type: object
-    FailureReason:
-      properties:
-        message:
-          type: string
-        code:
-          $ref: '#/components/schemas/FailureReasonCode'
-      required:
-      - message
-      - code
-      type: object
-    Shipping:
-      properties:
-        availableOptions:
-          items:
-            $ref: '#/components/schemas/ShippingOption'
-          type: array
-        selectedOptionId:
-          type: string
-      required:
-      - availableOptions
-      type: object
     BaseCheckoutIntent:
       properties:
         referenceId:
@@ -1513,17 +692,297 @@ components:
       - createdAt
       - id
       type: object
-    WithStatus_BaseShipmentWithTracking.delayed_:
+    WithStatus_BaseShipment.canceled_:
       allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - $ref: '#/components/schemas/BaseShipment'
       - properties:
           status:
             type: string
             enum:
-            - delayed
+            - canceled
         required:
         - status
         type: object
+    DeliveryDate:
+      properties:
+        estimated:
+          type: string
+          format: date-time
+      required:
+      - estimated
+      type: object
+    CancellationDenialReasonCode:
+      type: string
+      enum:
+      - other
+      - already_shipped
+      - non_cancellable_item
+      - cancellation_window_expired
+    TrackingEventTimestamp:
+      properties:
+        local:
+          type: string
+          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
+        utc:
+          type: string
+          format: date-time
+          description: UTC timestamp
+      required:
+      - local
+      - utc
+      type: object
+    EventLocation:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        province:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+      type: object
+    Offer:
+      properties:
+        commission:
+          $ref: '#/components/schemas/CommissionPotential'
+        shipping:
+          $ref: '#/components/schemas/Shipping'
+        cost:
+          $ref: '#/components/schemas/Cost'
+        appliedPromoCodes:
+          items:
+            type: string
+          type: array
+      required:
+      - shipping
+      - cost
+      type: object
+    CancellationReason:
+      properties:
+        message:
+          type: string
+          description: 'Optional free-text note explaining the cancellation, forwarded to the
+
+            merchant when possible.'
+          maxLength: 256
+        code:
+          $ref: '#/components/schemas/CancellationReasonCode'
+      required:
+      - code
+      type: object
+    AmazonUnavailableError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    FailureReason:
+      properties:
+        message:
+          type: string
+        code:
+          $ref: '#/components/schemas/FailureReasonCode'
+      required:
+      - message
+      - code
+      type: object
+    VariantSelection:
+      properties:
+        value:
+          anyOf:
+          - type: string
+          - type: number
+            format: double
+          example: Small, Red, XS, L, etc.
+          maxLength: 60
+        label:
+          type: string
+          example: Size, Color, etc.
+          maxLength: 30
+      required:
+      - value
+      - label
+      type: object
+    CheckoutIntentState:
+      type: string
+      enum:
+      - completed
+      - failed
+      - retrieving_offer
+      - awaiting_confirmation
+      - requires_action
+      - placing_order
+    RuntimeError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    CheckoutIntent:
+      anyOf:
+      - $ref: '#/components/schemas/RetrievingOfferCheckoutIntent'
+      - $ref: '#/components/schemas/AwaitingConfirmationCheckoutIntent'
+      - $ref: '#/components/schemas/RequiresActionCheckoutIntent'
+      - $ref: '#/components/schemas/PlacingOrderCheckoutIntent'
+      - $ref: '#/components/schemas/CompletedCheckoutIntent'
+      - $ref: '#/components/schemas/FailedCheckoutIntent'
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    CompletedCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          estimatedDeliveryDate:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            deprecated: true
+          orderId:
+            type:
+            - string
+            - 'null'
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - completed
+        required:
+        - orderId
+        - paymentMethod
+        - offer
+        - state
+        type: object
+      title: Completed
+    RetrievingOfferCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          state:
+            type: string
+            enum:
+            - retrieving_offer
+        required:
+        - state
+        type: object
+      title: Retrieving Offer
+    PromoCode:
+      type: string
+      example: SAVE20
+      description: 'Promo code string with validation constraints.
+
+        - Must contain only letters, digits, underscores, or hyphens
+
+        - Maximum length of 32 characters'
+      pattern: ^[a-zA-Z0-9_\-]+$
+      maxLength: 32
+    ShipmentWithTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShippedShipment'
+      - $ref: '#/components/schemas/DeliveredShipment'
+      - $ref: '#/components/schemas/DelayedShipment'
+      - $ref: '#/components/schemas/OutForDeliveryShipment'
+      description: Shipments that have tracking information (shipped, delayed, or delivered states)
+      title: With Tracking
+    Shipping:
+      properties:
+        availableOptions:
+          items:
+            $ref: '#/components/schemas/ShippingOption'
+          type: array
+        selectedOptionId:
+          type: string
+      required:
+      - availableOptions
+      type: object
+    DeliveryEstimate:
+      properties:
+        latest:
+          type: string
+          format: date-time
+          description: Latest date that items will be delivered by.
+          example: '2026-03-28T00:00:00Z'
+        earliest:
+          type: string
+          format: date-time
+          description: Earliest date that items will be delivered by.
+          example: '2026-03-25T00:00:00Z'
+      type: object
+      description: 'Estimated range of dates that items will be delivered in. At least one of
+
+        `earliest` or `latest` are guaranteed to be set.
+
+
+        Interpretation:
+
+
+        * If both `earliest` and `latest` are set, then the delivery estimate is the range between the two dates.
+
+        * If only `earliest` is set, then the delivery estimate is any date after that date.
+
+        * If only `latest` is set, then the delivery estimate is any date before that date.'
+    CheckoutConstraints:
+      properties:
+        offerRetrievalEffort:
+          $ref: '#/components/schemas/OfferRetrievalEffort'
+          example: max
+        maxShippingPrice:
+          type: integer
+          format: int32
+          example: 500
+          minimum: 0
+        maxTotalPrice:
+          type: integer
+          format: int32
+          example: 100000
+          minimum: 0
+      type: object
+    StripeTokenPaymentMethod:
+      properties:
+        stripeToken:
+          type: string
+          example: tok_1RkrWWHGDlstla3f1Fc7ZrhH
+        type:
+          type: string
+          enum:
+          - stripe_token
+          example: stripe_token
+      required:
+      - stripeToken
+      - type
+      type: object
+      title: Stripe
     Money:
       properties:
         currencyCode:
@@ -1537,6 +996,435 @@ components:
       - currencyCode
       - amountSubunits
       type: object
+    X402NextAction:
+      properties:
+        x402:
+          properties:
+            expiresAt:
+              type: string
+            recipient:
+              type: string
+            currency:
+              type: string
+              enum:
+              - USDC
+            maxAmountRequired:
+              type: string
+            network:
+              type: string
+            scheme:
+              type: string
+              enum:
+              - exact
+          required:
+          - expiresAt
+          - recipient
+          - currency
+          - maxAmountRequired
+          - network
+          - scheme
+          type: object
+        type:
+          type: string
+          enum:
+          - x402
+      required:
+      - x402
+      - type
+      type: object
+    WithStatus_BaseShipmentWithTracking.shipped_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - shipped
+        required:
+        - status
+        type: object
+    AwaitingConfirmationCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - awaiting_confirmation
+        required:
+        - offer
+        - state
+        type: object
+      title: Awaiting Confirmation
+    BaseShipment:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        id:
+          type: string
+      required:
+      - updatedAt
+      - createdAt
+      - marketplaceOrderId
+      - checkoutIntentId
+      - id
+      type: object
+    ShippingOption:
+      properties:
+        deliveryEstimate:
+          allOf:
+          - $ref: '#/components/schemas/DeliveryEstimate'
+        discount:
+          $ref: '#/components/schemas/Money'
+        cost:
+          $ref: '#/components/schemas/Money'
+        id:
+          type: string
+      required:
+      - cost
+      - id
+      type: object
+    CheckoutIntentListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/CheckoutIntent'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+    CancellationReasonCode:
+      type: string
+      enum:
+      - requested_by_customer
+      - fraud
+      - inventory
+      - payment_issue
+      - staff_error
+      - other
+    CommissionPotential:
+      properties:
+        estimate:
+          type: boolean
+        amount:
+          $ref: '#/components/schemas/Money'
+      required:
+      - estimate
+      - amount
+      type: object
+      description: The commission a developer would earn if this offer is placed.
+    ShipmentsListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/Shipment'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+    BaseCancellation:
+      properties:
+        reason:
+          $ref: '#/components/schemas/CancellationReason'
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+      required:
+      - reason
+      - marketplaceOrderId
+      - checkoutIntentId
+      - createdAt
+      - id
+      type: object
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - out_for_delivery
+        required:
+        - status
+        type: object
+    DeniedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          denialReason:
+            $ref: '#/components/schemas/CancellationDenialReason'
+          state:
+            type: string
+            enum:
+            - denied
+        required:
+        - denialReason
+        - state
+        type: object
+    InvalidCheckoutIntentStateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        state:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    ShipmentWithoutTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/OrderedShipment'
+      - $ref: '#/components/schemas/CanceledShipment'
+      description: Shipments without tracking information
+      title: Without Tracking
+    OutForDeliveryShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
+      title: Out for Delivery
+    TrackingEvent:
+      properties:
+        status:
+          $ref: '#/components/schemas/ShipmentStatus'
+        location:
+          $ref: '#/components/schemas/EventLocation'
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/TrackingEventTimestamp'
+        description:
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - location
+      - timestamp
+      - description
+      type: object
+    Shipment:
+      $ref: '#/components/schemas/ShipmentUnion'
+    PaymentMethod:
+      anyOf:
+      - $ref: '#/components/schemas/StripeTokenPaymentMethod'
+      - $ref: '#/components/schemas/BasisTheoryPaymentMethod'
+      - $ref: '#/components/schemas/DrawdownPaymentMethod'
+      - $ref: '#/components/schemas/X402PaymentMethod'
+    OfferRetrievalEffort:
+      type: string
+      enum:
+      - max
+      - low
+      description: 'Controls how much effort the system should spend retrieving an offer.
+
+        - ''max'': Full effort including AI agent fallback (slower, higher success rate)
+
+        - ''low'': Fast API-only retrieval, fails if API unavailable (faster, lower success rate)
+
+
+        Default: ''max'''
+    CompletedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          state:
+            type: string
+            enum:
+            - completed
+        required:
+        - state
+        type: object
+    CheckoutIntentPurchaseParams:
+      allOf:
+      - $ref: '#/components/schemas/CheckoutIntentPostParams'
+      - $ref: '#/components/schemas/CheckoutIntentConfirmParams'
+      description: 'Post body for the purchase endpoint - combines create + confirm in one step.
+
+        Triggers the durable workflow that handles offer retrieval and order placement.'
+    Cost:
+      properties:
+        total:
+          $ref: '#/components/schemas/Money'
+        surcharge:
+          $ref: '#/components/schemas/Money'
+        discount:
+          $ref: '#/components/schemas/Money'
+        tax:
+          $ref: '#/components/schemas/Money'
+        shipping:
+          $ref: '#/components/schemas/Money'
+        subtotal:
+          $ref: '#/components/schemas/Money'
+      required:
+      - total
+      - subtotal
+      type: object
+    ShipmentStatus:
+      type: string
+      enum:
+      - out_for_delivery
+      - delivered
+      - shipped
+      - canceled
+      - delayed
+      - ordered
+    CanceledShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
+      title: Canceled
+    FailedCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          failureReason:
+            $ref: '#/components/schemas/FailureReason'
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - failed
+        required:
+        - failureReason
+        - state
+        type: object
+      title: Failed
+    ShippedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
+      title: Shipped
+    WithStatus_BaseShipmentWithTracking.delayed_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delayed
+        required:
+        - status
+        type: object
+    RequiresActionCheckoutIntent:
+      allOf:
+      - $ref: '#/components/schemas/BaseCheckoutIntent'
+      - properties:
+          nextAction:
+            $ref: '#/components/schemas/NextAction'
+          paymentMethod:
+            $ref: '#/components/schemas/PaymentMethod'
+          offer:
+            $ref: '#/components/schemas/Offer'
+          state:
+            type: string
+            enum:
+            - requires_action
+        required:
+        - nextAction
+        - paymentMethod
+        - offer
+        - state
+        type: object
+      title: Requires Action
+    ShipmentTracking:
+      properties:
+        carrierName:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        deliveryDate:
+          allOf:
+          - $ref: '#/components/schemas/DeliveryDate'
+        url:
+          type:
+          - string
+          - 'null'
+      required:
+      - number
+      type: object
+    DrawdownPaymentMethod:
+      properties:
+        type:
+          type: string
+          enum:
+          - drawdown
+      required:
+      - type
+      type: object
+      title: Drawdown
     X402PaymentMethod:
       properties:
         network:
@@ -1554,19 +1442,131 @@ components:
       - type
       type: object
       title: X402
-    TrackingEventTimestamp:
+    CheckoutIntentPostParams:
       properties:
-        local:
+        referenceId:
           type: string
-          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
-        utc:
+          example: order-1234
+          maxLength: 255
+        discoverPromoCodes:
+          type: boolean
+        constraints:
+          $ref: '#/components/schemas/CheckoutConstraints'
+        promoCodes:
+          items:
+            $ref: '#/components/schemas/PromoCode'
+          type: array
+          maxItems: 16
+        variantSelections:
+          items:
+            $ref: '#/components/schemas/VariantSelection'
+          type: array
+        buyer:
+          $ref: '#/components/schemas/Buyer'
+        quantity:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 0
+        productUrl:
           type: string
-          format: date-time
-          description: UTC timestamp
+          example: https://www.amazon.com/dp/B0DFC9MT8Q
       required:
-      - local
-      - utc
+      - buyer
+      - quantity
+      - productUrl
       type: object
+    WithStatus_BaseShipment.ordered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
+            type: string
+            enum:
+            - ordered
+        required:
+        - status
+        type: object
+    Cancellation:
+      anyOf:
+      - $ref: '#/components/schemas/RequestedCancellation'
+      - $ref: '#/components/schemas/CompletedCancellation'
+      - $ref: '#/components/schemas/DeniedCancellation'
+    BaseShipmentWithTracking:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - $ref: '#/components/schemas/ShippingDetails'
+    CancellationDenialReason:
+      properties:
+        code:
+          $ref: '#/components/schemas/CancellationDenialReasonCode'
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    WithStatus_BaseShipmentWithTracking.delivered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delivered
+        required:
+        - status
+        type: object
+    CheckoutIntentConfirmParams:
+      properties:
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+      required:
+      - paymentMethod
+      type: object
+    OrderResponse:
+      description: 'Represents a completed order. Orders are created after a checkout intent reaches
+
+        the `completed` state.'
+      properties:
+        id:
+          type: string
+        checkoutIntentId:
+          type: string
+          description: ID of the checkout intent that was responsible for creating this order.
+          example: ci_aaa8af5c5aae4c0e8ef0172c26c65c13
+        createdAt:
+          type: string
+          description: Timestamp the order was persisted to Rye.
+          example: '2026-03-25T00:00:00Z'
+        updatedAt:
+          type: string
+          description: Timestamp the order was last updated at
+          example: '2026-03-27T00:00:00Z'
+        referenceId:
+          type: string
+          description: 'The `referenceId` you supplied on the checkout intent, echoed back so you
+
+            can reconcile this order against your own records. Absent when none was
+
+            supplied.'
+          example: order-1234
+        cancellation:
+          allOf:
+          - $ref: '#/components/schemas/Cancellation'
+          description: 'The cancellation for this order, or `null` if none has been requested.
+
+            Populated by joining the separate cancellations collection on the order''s
+
+            marketplace order id.'
+      required:
+      - id
+      - checkoutIntentId
+      - createdAt
+      - updatedAt
+      - cancellation
+      type: object
+      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: apiKey

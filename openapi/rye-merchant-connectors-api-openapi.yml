@@ -98,18 +98,7 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/merchant-connectors/$CONNECTOR/installation-link \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    MerchantConnector:
-      type: string
-      enum:
-      - shopify
-      description: 'A merchant connector is a Rye integration with a third-party merchant
-
-        platform (e.g. Shopify) that lets developers onboard merchants to Rye.
-
-        Today only Shopify is supported; this union expands as we add support
-
-        for additional connectors (Woocommerce, BigCommerce, etc.).'
-    RuntimeError:
+    AuthenticationError:
       properties:
         name:
           type: string
@@ -122,7 +111,10 @@ components:
       - message
       type: object
       additionalProperties: false
-    AuthenticationError:
+    MerchantConnectorInstallationLink:
+      $ref: '#/components/schemas/ShopifyInstallationLink'
+      description: A merchant connector installation link.
+    RuntimeError:
       properties:
         name:
           type: string
@@ -146,9 +138,35 @@ components:
         required:
         - message
         type: object
-    MerchantConnectorInstallationLink:
-      $ref: '#/components/schemas/ShopifyInstallationLink'
-      description: A merchant connector installation link.
+    ShopifyInstallationLink:
+      properties:
+        url:
+          type: string
+          description: 'URL to redirect the merchant to in order to install the Rye app on
+
+            their merchant platform.'
+        connector:
+          type: string
+          enum:
+          - shopify
+          description: The merchant connector this installation link was generated for.
+      required:
+      - url
+      - connector
+      type: object
+    NotImplementedError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     ValidateError:
       properties:
         name:
@@ -169,35 +187,17 @@ components:
       - fields
       type: object
       additionalProperties: false
-    NotImplementedError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    ShopifyInstallationLink:
-      properties:
-        url:
-          type: string
-          description: 'URL to redirect the merchant to in order to install the Rye app on
+    MerchantConnector:
+      type: string
+      enum:
+      - shopify
+      description: 'A merchant connector is a Rye integration with a third-party merchant
 
-            their merchant platform.'
-        connector:
-          type: string
-          enum:
-          - shopify
-          description: The merchant connector this installation link was generated for.
-      required:
-      - url
-      - connector
-      type: object
+        platform (e.g. Shopify) that lets developers onboard merchants to Rye.
+
+        Today only Shopify is supported; this union expands as we add support
+
+        for additional connectors (Woocommerce, BigCommerce, etc.).'
   securitySchemes:
     bearerAuth:
       type: apiKey

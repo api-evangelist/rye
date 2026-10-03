@@ -95,11 +95,7 @@ components:
       - sessionKey
       - gateway
       type: object
-    PaymentGateway:
-      type: string
-      enum:
-      - basis-theory
-    RuntimeError:
+    AuthenticationError:
       properties:
         name:
           type: string
@@ -112,7 +108,11 @@ components:
       - message
       type: object
       additionalProperties: false
-    AuthenticationError:
+    PaymentGateway:
+      type: string
+      enum:
+      - basis-theory
+    RuntimeError:
       properties:
         name:
           type: string

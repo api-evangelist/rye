@@ -127,6 +127,90 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/returns/$RETURN_ID \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
+    ReturnDeclineReason:
+      type: string
+      enum:
+      - final_sale
+      - return_period_ended
+      - other
+      description: 'Why a merchant declined a return:
+
+
+        - `final_sale` — the item was sold as final sale and is not returnable.
+
+        - `return_period_ended` — the return window had already closed.
+
+        - `other` — declined for another reason; see the accompanying note.'
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    ReturnReason:
+      type: string
+      enum:
+      - defective
+      - wrong_item
+      - unwanted
+      - color
+      - not_as_described
+      - size_too_large
+      - size_too_small
+      - style
+      - other
+      description: 'Reason a shopper is returning an order, supplied on the create-return call:
+
+        `defective` (arrived damaged or faulty), `wrong_item` (not what was ordered),
+
+        `unwanted` (changed their mind), `color` / `size_too_large` /
+
+        `size_too_small` / `style` (wrong color, size, or style), `not_as_described`
+
+        (differs from the listing), and `other` (anything else).'
+    ReturnDenialResponse:
+      properties:
+        note:
+          type: string
+          description: Optional human-readable detail from the merchant.
+        reason:
+          $ref: '#/components/schemas/ReturnDeclineReason'
+          description: Machine-readable decline reason.
+      required:
+      - reason
+      type: object
+      description: Why a return was declined by the merchant.
+    RuntimeError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
     NextActionResponse:
       properties:
         shipItemsToMerchant:
@@ -159,70 +243,27 @@ components:
         only for `ship_items_to_merchant`; a `no_action_required` approval skips
 
         straight to `processing`.'
-    ReturnFailureCode:
+    NextActionType:
       type: string
       enum:
-      - drawdown_credit_failed
-      - merchant_unreachable
-      - other
-      description: "Discriminator for the `failure` sub-object on a `failed` Return:\n\n- `drawdown_credit_failed` — the merchant refund succeeded but Rye could not\n  credit it back; the refund still reached the shopper.\n- `merchant_unreachable` — the marketplace did not respond before the\n  processing deadline.\n- `other` — an uncategorized failure; see `message` for detail.\n\nSwitch on this exhaustively to handle every failure mode."
-    ReturnTimeline:
-      properties:
-        failedAt:
-          type: string
-          format: date-time
-          description: When the return failed. Present only on `failed`.
-        deniedAt:
-          type: string
-          format: date-time
-          description: When the return was denied. Present only on `denied`.
-        refundedAt:
-          type: string
-          format: date-time
-          description: When the refund was fully reconciled and the Return reached `refunded`.
-        refundIssuedAt:
-          type: string
-          format: date-time
-          description: When the merchant issued the refund on its side.
-        returnApprovedAt:
-          type: string
-          format: date-time
-          description: When the merchant approved the return.
-        requestedAt:
-          type: string
-          format: date-time
-          description: When the return was requested. Always present.
-      required:
-      - requestedAt
-      type: object
-      description: 'Per-transition timestamps for a Return. `requestedAt` is always set; the rest
+      - ship_items_to_merchant
+      - no_action_required
+      description: 'Discriminator for {@link NextActionResponse }: `ship_items_to_merchant` (the
 
-        fill in as the Return advances and reflect the path it actually took (a
+        shopper must return the items with the provided label) or
 
-        `denied` Return has `deniedAt` but never `refundedAt`).'
-    ReturnState:
-      type: string
-      enum:
-      - requested
-      - requires_action
-      - processing
-      - refunded
-      - denied
-      - failed
-      description: "Lifecycle state of a Return:\n\n- `requested` — submitted to the merchant, awaiting approval.\n- `requires_action` — approved; the shopper must ship the items back.\n- `processing` — approved and in flight (items shipped, or no shipping\n  required), awaiting the refund.\n- `refunded` — terminal; the refund has been issued and reconciled.\n- `denied` — terminal; the merchant declined the return.\n- `failed` — terminal; the return could not be completed."
-    RuntimeError:
+        `no_action_required` (a keep-the-item / no-ship approval — the shopper just
+
+        waits for the refund).'
+    ShippingLabel:
       properties:
-        name:
+        url:
           type: string
-        message:
-          type: string
-        stack:
-          type: string
+          description: URL to the downloadable/printable label.
       required:
-      - name
-      - message
+      - url
       type: object
-      additionalProperties: false
+      description: A prepaid return shipping label the shopper uses to send items back.
     NotFoundError:
       properties:
         name:
@@ -236,30 +277,21 @@ components:
       - message
       type: object
       additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    ReturnFailureResponse:
+    ReturnPostParams:
       properties:
-        message:
+        reason:
+          $ref: '#/components/schemas/ReturnReason'
+          description: Reason for the return.
+        orderId:
           type: string
-          description: Human-readable, stable summary of the failure.
-        code:
-          $ref: '#/components/schemas/ReturnFailureCode'
-          description: Machine-readable failure code; switch on this.
+          description: Rye order id (`order_<32 hex>`) of the order being returned.
       required:
-      - message
-      - code
+      - reason
+      - orderId
       type: object
-      description: Details of a failed return.
+      description: 'Request body for `POST /api/v1/returns`. Whole-order returns only —
+
+        server enumerates the order''s line items at create time.'
     RefundResponse:
       properties:
         shopperRefundTotal:
@@ -278,73 +310,16 @@ components:
       - id
       type: object
       description: A single refund issued against a `refunded` Return.
-    ReturnReason:
+    ReturnState:
       type: string
       enum:
-      - defective
-      - wrong_item
-      - unwanted
-      - color
-      - not_as_described
-      - size_too_large
-      - size_too_small
-      - style
-      - other
-      description: 'Reason a shopper is returning an order, supplied on the create-return call:
-
-        `defective` (arrived damaged or faulty), `wrong_item` (not what was ordered),
-
-        `unwanted` (changed their mind), `color` / `size_too_large` /
-
-        `size_too_small` / `style` (wrong color, size, or style), `not_as_described`
-
-        (differs from the listing), and `other` (anything else).'
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    ReturnDenialResponse:
-      properties:
-        note:
-          type: string
-          description: Optional human-readable detail from the merchant.
-        reason:
-          $ref: '#/components/schemas/ReturnDeclineReason'
-          description: Machine-readable decline reason.
-      required:
-      - reason
-      type: object
-      description: Why a return was declined by the merchant.
-    ShippingLabel:
-      properties:
-        url:
-          type: string
-          description: URL to the downloadable/printable label.
-      required:
-      - url
-      type: object
-      description: A prepaid return shipping label the shopper uses to send items back.
-    NextActionType:
-      type: string
-      enum:
-      - ship_items_to_merchant
-      - no_action_required
-      description: 'Discriminator for {@link NextActionResponse }: `ship_items_to_merchant` (the
-
-        shopper must return the items with the provided label) or
-
-        `no_action_required` (a keep-the-item / no-ship approval — the shopper just
-
-        waits for the refund).'
+      - requested
+      - requires_action
+      - processing
+      - refunded
+      - denied
+      - failed
+      description: "Lifecycle state of a Return:\n\n- `requested` — submitted to the merchant, awaiting approval.\n- `requires_action` — approved; the shopper must ship the items back.\n- `processing` — approved and in flight (items shipped, or no shipping\n  required), awaiting the refund.\n- `refunded` — terminal; the refund has been issued and reconciled.\n- `denied` — terminal; the merchant declined the return.\n- `failed` — terminal; the return could not be completed."
     Money:
       properties:
         currencyCode:
@@ -358,21 +333,46 @@ components:
       - currencyCode
       - amountSubunits
       type: object
-    ReturnPostParams:
+    ReturnFailureCode:
+      type: string
+      enum:
+      - drawdown_credit_failed
+      - merchant_unreachable
+      - other
+      description: "Discriminator for the `failure` sub-object on a `failed` Return:\n\n- `drawdown_credit_failed` — the merchant refund succeeded but Rye could not\n  credit it back; the refund still reached the shopper.\n- `merchant_unreachable` — the marketplace did not respond before the\n  processing deadline.\n- `other` — an uncategorized failure; see `message` for detail.\n\nSwitch on this exhaustively to handle every failure mode."
+    ReturnFailureResponse:
       properties:
-        reason:
-          $ref: '#/components/schemas/ReturnReason'
-          description: Reason for the return.
-        orderId:
+        message:
           type: string
-          description: Rye order id (`order_<32 hex>`) of the order being returned.
+          description: Human-readable, stable summary of the failure.
+        code:
+          $ref: '#/components/schemas/ReturnFailureCode'
+          description: Machine-readable failure code; switch on this.
       required:
-      - reason
-      - orderId
+      - message
+      - code
       type: object
-      description: 'Request body for `POST /api/v1/returns`. Whole-order returns only —
-
-        server enumerates the order''s line items at create time.'
+      description: Details of a failed return.
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
     ReturnResponse:
       properties:
         updatedAt:
@@ -436,40 +436,40 @@ components:
         `denial`, `failure`, and `refunds` is populated; `nextAction` is set once the
 
         Return is approved (see {@link NextActionResponse}).'
-    ReturnDeclineReason:
-      type: string
-      enum:
-      - final_sale
-      - return_period_ended
-      - other
-      description: 'Why a merchant declined a return:
-
-
-        - `final_sale` — the item was sold as final sale and is not returnable.
-
-        - `return_period_ended` — the return window had already closed.
-
-        - `other` — declined for another reason; see the accompanying note.'
-    ValidateError:
+    ReturnTimeline:
       properties:
-        name:
+        failedAt:
           type: string
-        message:
+          format: date-time
+          description: When the return failed. Present only on `failed`.
+        deniedAt:
           type: string
-        stack:
+          format: date-time
+          description: When the return was denied. Present only on `denied`.
+        refundedAt:
           type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
+          format: date-time
+          description: When the refund was fully reconciled and the Return reached `refunded`.
+        refundIssuedAt:
+          type: string
+          format: date-time
+          description: When the merchant issued the refund on its side.
+        returnApprovedAt:
+          type: string
+          format: date-time
+          description: When the merchant approved the return.
+        requestedAt:
+          type: string
+          format: date-time
+          description: When the return was requested. Always present.
       required:
-      - name
-      - message
-      - status
-      - fields
+      - requestedAt
       type: object
-      additionalProperties: false
+      description: 'Per-transition timestamps for a Return. `requestedAt` is always set; the rest
+
+        fill in as the Return advances and reflect the path it actually took (a
+
+        `denied` Return has `deniedAt` but never `refundedAt`).'
   securitySchemes:
     bearerAuth:
       type: apiKey

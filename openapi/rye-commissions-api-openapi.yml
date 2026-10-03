@@ -143,29 +143,48 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/commissions \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    CommissionStatus:
-      type: string
-      enum:
-      - pending
-      - confirmed
-      - updated
-      - finalized
-      - refunded
-      - expired
-      description: Lifecycle status of a commission record.
-    Money:
+    NotFoundError:
       properties:
-        currencyCode:
+        name:
           type: string
-          example: USD
-        amountSubunits:
-          type: integer
-          format: int32
-          example: 1500
+        message:
+          type: string
+        stack:
+          type: string
       required:
-      - currencyCode
-      - amountSubunits
+      - name
+      - message
       type: object
+      additionalProperties: false
+    CommissionListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/CommissionResponse'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+      description: 'Paginated commissions response. Use `pageInfo.endCursor` as the next page''s
+
+        `after` query parameter to walk forward; use `pageInfo.startCursor` as the
+
+        next page''s `before` query parameter to walk backward.'
     CommissionResponse:
       properties:
         finalizedAt:
@@ -226,30 +245,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
     SettlementDirection:
       type: string
       enum:
@@ -267,6 +262,40 @@ components:
       description: 'Type of commission earned on an order. Canonical definition used by
 
         both the API contract and the internal `@rye-com/ci-commissions` package.'
+    CommissionStatus:
+      type: string
+      enum:
+      - pending
+      - confirmed
+      - updated
+      - finalized
+      - refunded
+      - expired
+      description: Lifecycle status of a commission record.
+    Money:
+      properties:
+        currencyCode:
+          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
+      required:
+      - currencyCode
+      - amountSubunits
+      type: object
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
     ValidateError:
       properties:
         name:
@@ -287,35 +316,6 @@ components:
       - fields
       type: object
       additionalProperties: false
-    CommissionListResponse:
-      properties:
-        pageInfo:
-          properties:
-            endCursor:
-              type: string
-            startCursor:
-              type: string
-            hasPreviousPage:
-              type: boolean
-            hasNextPage:
-              type: boolean
-          required:
-          - hasPreviousPage
-          - hasNextPage
-          type: object
-        data:
-          items:
-            $ref: '#/components/schemas/CommissionResponse'
-          type: array
-      required:
-      - pageInfo
-      - data
-      type: object
-      description: 'Paginated commissions response. Use `pageInfo.endCursor` as the next page''s
-
-        `after` query parameter to walk forward; use `pageInfo.startCursor` as the
-
-        next page''s `before` query parameter to walk backward.'
   securitySchemes:
     bearerAuth:
       type: apiKey

@@ -82,15 +82,7 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/brands/domain/$DOMAIN \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    Marketplace:
-      enum:
-      - AMAZON
-      - SHOPIFY
-      - BESTBUY
-      - SEPHORA
-      - UNKNOWN
-      type: string
-    RuntimeError:
+    NotFoundError:
       properties:
         name:
           type: string
@@ -103,6 +95,14 @@ components:
       - message
       type: object
       additionalProperties: false
+    Marketplace:
+      enum:
+      - AMAZON
+      - SHOPIFY
+      - BESTBUY
+      - SEPHORA
+      - UNKNOWN
+      type: string
     AuthenticationError:
       properties:
         name:
@@ -116,7 +116,31 @@ components:
       - message
       type: object
       additionalProperties: false
-    NotFoundError:
+    Brand:
+      properties:
+        supported:
+          type: boolean
+          description: 'If `false`, then products from this brand cannot be purchased through the
+
+            Sell Anything API.'
+        marketplace:
+          $ref: '#/components/schemas/Marketplace'
+          description: Indicates what ecommerce platform the brand uses.
+        id:
+          type: string
+          description: A unique identifier for the brand.
+      required:
+      - supported
+      - marketplace
+      - id
+      type: object
+    Domain:
+      type: string
+      example: shop.aloyoga.com
+      format: hostname
+      description: Represents a valid domain name string.
+      pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
+    RuntimeError:
       properties:
         name:
           type: string
@@ -140,24 +164,6 @@ components:
         required:
         - message
         type: object
-    Brand:
-      properties:
-        supported:
-          type: boolean
-          description: 'If `false`, then products from this brand cannot be purchased through the
-
-            Sell Anything API.'
-        marketplace:
-          $ref: '#/components/schemas/Marketplace'
-          description: Indicates what ecommerce platform the brand uses.
-        id:
-          type: string
-          description: A unique identifier for the brand.
-      required:
-      - supported
-      - marketplace
-      - id
-      type: object
     ValidateError:
       properties:
         name:
@@ -178,12 +184,6 @@ components:
       - fields
       type: object
       additionalProperties: false
-    Domain:
-      type: string
-      example: shop.aloyoga.com
-      format: hostname
-      description: Represents a valid domain name string.
-      pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
   securitySchemes:
     bearerAuth:
       type: apiKey
