@@ -152,74 +152,66 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/shipments/$ID \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    DeliveredShipment:
+    BaseShipmentWithTracking:
       allOf:
-      - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
+      - $ref: '#/components/schemas/BaseShipment'
+      - $ref: '#/components/schemas/ShippingDetails'
+    WithStatus_BaseShipment.ordered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
       - properties:
-          deliveredAt:
+          status:
             type: string
-            format: date-time
+            enum:
+            - ordered
         required:
-        - deliveredAt
+        - status
         type: object
-      title: Delivered
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
+    WithStatus_BaseShipment.canceled_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
             type: string
+            enum:
+            - canceled
         required:
-        - message
+        - status
         type: object
+    ShipmentWithoutTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/OrderedShipment'
+      - $ref: '#/components/schemas/CanceledShipment'
+      description: Shipments without tracking information
+      title: Without Tracking
+    ShipmentUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
+      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
     OrderedShipment:
       $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
       title: Ordered
-    ShipmentWithTrackingUnion:
-      anyOf:
-      - $ref: '#/components/schemas/ShippedShipment'
-      - $ref: '#/components/schemas/DeliveredShipment'
-      - $ref: '#/components/schemas/DelayedShipment'
-      - $ref: '#/components/schemas/OutForDeliveryShipment'
-      description: Shipments that have tracking information (shipped, delayed, or delivered states)
-      title: With Tracking
-    NotFoundError:
+    BaseShipment:
       properties:
-        name:
+        updatedAt:
           type: string
-        message:
+          format: date-time
+        createdAt:
           type: string
-        stack:
+          format: date-time
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        id:
           type: string
       required:
-      - name
-      - message
+      - updatedAt
+      - createdAt
+      - marketplaceOrderId
+      - checkoutIntentId
+      - id
       type: object
-      additionalProperties: false
-    ShipmentStatus:
-      type: string
-      enum:
-      - out_for_delivery
-      - delivered
-      - shipped
-      - canceled
-      - delayed
-      - ordered
     ShipmentsListResponse:
       properties:
         pageInfo:
@@ -244,33 +236,10 @@ components:
       - pageInfo
       - data
       type: object
-    CanceledShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
-      title: Canceled
-    ShippedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
-      title: Shipped
-    ShippingDetails:
-      properties:
-        trackingEvents:
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
-          type: array
-        shippedAt:
-          type: string
-          format: date-time
-        tracking:
-          $ref: '#/components/schemas/ShipmentTracking'
-        externalId:
-          type: string
-          description: The external ID is provided by the marketplace and matches the shipment to their system.
-      required:
-      - trackingEvents
-      - shippedAt
-      - tracking
-      - externalId
-      type: object
-    ValidateError:
+    DelayedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
+      title: Delayed
+    NotFoundError:
       properties:
         name:
           type: string
@@ -278,29 +247,21 @@ components:
           type: string
         stack:
           type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
       required:
       - name
       - message
-      - status
-      - fields
       type: object
       additionalProperties: false
-    WithStatus_BaseShipmentWithTracking.delayed_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - delayed
-        required:
-        - status
-        type: object
+    Shipment:
+      $ref: '#/components/schemas/ShipmentUnion'
+    DeliveryDate:
+      properties:
+        estimated:
+          type: string
+          format: date-time
+      required:
+      - estimated
+      type: object
     ShipmentTracking:
       properties:
         carrierName:
@@ -321,117 +282,34 @@ components:
       required:
       - number
       type: object
-    ShipmentUnion:
-      anyOf:
-      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
-      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
-    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
+    ShippingDetails:
+      properties:
+        trackingEvents:
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+          type: array
+        shippedAt:
+          type: string
+          format: date-time
+        tracking:
+          $ref: '#/components/schemas/ShipmentTracking'
+        externalId:
+          type: string
+          description: The external ID is provided by the marketplace and matches the shipment to their system.
+      required:
+      - trackingEvents
+      - shippedAt
+      - tracking
+      - externalId
+      type: object
+    WithStatus_BaseShipmentWithTracking.delayed_:
       allOf:
       - $ref: '#/components/schemas/BaseShipmentWithTracking'
       - properties:
           status:
             type: string
             enum:
-            - out_for_delivery
-        required:
-        - status
-        type: object
-    WithStatus_BaseShipmentWithTracking.shipped_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - shipped
-        required:
-        - status
-        type: object
-    DelayedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
-      title: Delayed
-    WithStatus_BaseShipment.ordered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - ordered
-        required:
-        - status
-        type: object
-    WithStatus_BaseShipment.canceled_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - canceled
-        required:
-        - status
-        type: object
-    DeliveryDate:
-      properties:
-        estimated:
-          type: string
-          format: date-time
-      required:
-      - estimated
-      type: object
-    BaseShipmentWithTracking:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - $ref: '#/components/schemas/ShippingDetails'
-    BaseShipment:
-      properties:
-        updatedAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-        marketplaceOrderId:
-          type: string
-        checkoutIntentId:
-          type: string
-        id:
-          type: string
-      required:
-      - updatedAt
-      - createdAt
-      - marketplaceOrderId
-      - checkoutIntentId
-      - id
-      type: object
-    TrackingEventTimestamp:
-      properties:
-        local:
-          type: string
-          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
-        utc:
-          type: string
-          format: date-time
-          description: UTC timestamp
-      required:
-      - local
-      - utc
-      type: object
-    ShipmentWithoutTrackingUnion:
-      anyOf:
-      - $ref: '#/components/schemas/OrderedShipment'
-      - $ref: '#/components/schemas/CanceledShipment'
-      description: Shipments without tracking information
-      title: Without Tracking
-    WithStatus_BaseShipmentWithTracking.delivered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - delivered
+            - delayed
         required:
         - status
         type: object
@@ -450,9 +328,32 @@ components:
           - string
           - 'null'
       type: object
-    OutForDeliveryShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
-      title: Out for Delivery
+    CanceledShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
+      title: Canceled
+    ShippedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
+      title: Shipped
+    WithStatus_BaseShipmentWithTracking.shipped_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - shipped
+        required:
+        - status
+        type: object
+    ShipmentStatus:
+      type: string
+      enum:
+      - out_for_delivery
+      - delivered
+      - shipped
+      - canceled
+      - delayed
+      - ordered
     TrackingEvent:
       properties:
         status:
@@ -472,8 +373,107 @@ components:
       - timestamp
       - description
       type: object
-    Shipment:
-      $ref: '#/components/schemas/ShipmentUnion'
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    TrackingEventTimestamp:
+      properties:
+        local:
+          type: string
+          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
+        utc:
+          type: string
+          format: date-time
+          description: UTC timestamp
+      required:
+      - local
+      - utc
+      type: object
+    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - out_for_delivery
+        required:
+        - status
+        type: object
+    OutForDeliveryShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
+      title: Out for Delivery
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    ShipmentWithTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShippedShipment'
+      - $ref: '#/components/schemas/DeliveredShipment'
+      - $ref: '#/components/schemas/DelayedShipment'
+      - $ref: '#/components/schemas/OutForDeliveryShipment'
+      description: Shipments that have tracking information (shipped, delayed, or delivered states)
+      title: With Tracking
+    DeliveredShipment:
+      allOf:
+      - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
+      - properties:
+          deliveredAt:
+            type: string
+            format: date-time
+        required:
+        - deliveredAt
+        type: object
+      title: Delivered
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    WithStatus_BaseShipmentWithTracking.delivered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delivered
+        required:
+        - status
+        type: object
   securitySchemes:
     bearerAuth:
       type: apiKey

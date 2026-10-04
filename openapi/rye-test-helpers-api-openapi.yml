@@ -247,137 +247,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/test-helpers/returns/$RETURN_ID/fail \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{}'"
 components:
   schemas:
-    ReturnDeclineReason:
-      type: string
-      enum:
-      - final_sale
-      - return_period_ended
-      - other
-      description: 'Why a merchant declined a return:
-
-
-        - `final_sale` — the item was sold as final sale and is not returnable.
-
-        - `return_period_ended` — the return window had already closed.
-
-        - `other` — declined for another reason; see the accompanying note.'
-    DeliveredShipment:
-      allOf:
-      - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
-      - properties:
-          deliveredAt:
-            type: string
-            format: date-time
-        required:
-        - deliveredAt
-        type: object
-      title: Delivered
-    ReturnReason:
-      type: string
-      enum:
-      - defective
-      - wrong_item
-      - unwanted
-      - color
-      - not_as_described
-      - size_too_large
-      - size_too_small
-      - style
-      - other
-      description: 'Reason a shopper is returning an order, supplied on the create-return call:
-
-        `defective` (arrived damaged or faulty), `wrong_item` (not what was ordered),
-
-        `unwanted` (changed their mind), `color` / `size_too_large` /
-
-        `size_too_small` / `style` (wrong color, size, or style), `not_as_described`
-
-        (differs from the listing), and `other` (anything else).'
-    ReturnDenialResponse:
-      properties:
-        note:
-          type: string
-          description: Optional human-readable detail from the merchant.
-        reason:
-          $ref: '#/components/schemas/ReturnDeclineReason'
-          description: Machine-readable decline reason.
-      required:
-      - reason
-      type: object
-      description: Why a return was declined by the merchant.
-    NextActionResponse:
-      properties:
-        shipItemsToMerchant:
-          properties:
-            label:
-              $ref: '#/components/schemas/ShippingLabel'
-          required:
-          - label
-          type: object
-          description: Prepaid return label. Present only when `type` is `ship_items_to_merchant`.
-        type:
-          $ref: '#/components/schemas/NextActionType'
-          description: Discriminator for the action the shopper must take.
-      required:
-      - type
-      type: object
-      description: 'What the shopper has to do next to complete the return. Present once the
-
-        Return is approved.
-
-
-        `type` is the discriminator: `ship_items_to_merchant` carries the matching
-
-        `shipItemsToMerchant` payload (a prepaid label); `no_action_required` means
-
-        the merchant approved a keep-the-item / no-ship return and the shopper just
-
-        waits for the refund (no payload). The `requires_action` state is reached
-
-        only for `ship_items_to_merchant`; a `no_action_required` approval skips
-
-        straight to `processing`.'
-    NextActionType:
-      type: string
-      enum:
-      - ship_items_to_merchant
-      - no_action_required
-      description: 'Discriminator for {@link NextActionResponse }: `ship_items_to_merchant` (the
-
-        shopper must return the items with the provided label) or
-
-        `no_action_required` (a keep-the-item / no-ship approval — the shopper just
-
-        waits for the refund).'
-    ShippingLabel:
-      properties:
-        url:
-          type: string
-          description: URL to the downloadable/printable label.
-      required:
-      - url
-      type: object
-      description: A prepaid return shipping label the shopper uses to send items back.
-    OrderedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
-      title: Ordered
-    ShipmentWithTrackingUnion:
-      anyOf:
-      - $ref: '#/components/schemas/ShippedShipment'
-      - $ref: '#/components/schemas/DeliveredShipment'
-      - $ref: '#/components/schemas/DelayedShipment'
-      - $ref: '#/components/schemas/OutForDeliveryShipment'
-      description: Shipments that have tracking information (shipped, delayed, or delivered states)
-      title: With Tracking
-    ShipmentStatus:
-      type: string
-      enum:
-      - out_for_delivery
-      - delivered
-      - shipped
-      - canceled
-      - delayed
-      - ordered
     RefundResponse:
       properties:
         shopperRefundTotal:
@@ -396,19 +265,56 @@ components:
       - id
       type: object
       description: A single refund issued against a `refunded` Return.
-    ReturnState:
+    BaseShipmentWithTracking:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - $ref: '#/components/schemas/ShippingDetails'
+    WithStatus_BaseShipment.ordered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
+            type: string
+            enum:
+            - ordered
+        required:
+        - status
+        type: object
+    CostBearer:
       type: string
       enum:
-      - requested
-      - requires_action
-      - processing
-      - refunded
-      - denied
-      - failed
-      description: "Lifecycle state of a Return:\n\n- `requested` — submitted to the merchant, awaiting approval.\n- `requires_action` — approved; the shopper must ship the items back.\n- `processing` — approved and in flight (items shipped, or no shipping\n  required), awaiting the refund.\n- `refunded` — terminal; the refund has been issued and reconciled.\n- `denied` — terminal; the merchant declined the return.\n- `failed` — terminal; the return could not be completed."
-    CanceledShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
-      title: Canceled
+      - shopper
+      - developer
+      - rye
+      description: "Who absorbs the merchant-retained shortfall `S` on a return — the gap\nbetween what the merchant was charged and what it refunded (restocking fees,\nreturn shipping, partials). Selected per-developer via the\n`refundCostBearingStrategy` flag and resolved into this enum by the\ndurable-workers cost-policy adapter.\n\n- `shopper` (default): the shopper eats `S`. Both anchors reconstruct from\n  the merchant refund, so a short merchant refund shrinks the shopper refund\n  and developer credit in lockstep.\n- `developer`: the shopper is made whole at the original charge `C`; the\n  developer's deposit is credited only what Rye recovered (the merchant\n  anchor), so the developer absorbs `S`.\n- `rye`: the shopper is made whole at `C` and the developer's full drawdown\n  debit `D` is restored, so Rye absorbs `S`."
+    WithStatus_BaseShipment.canceled_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipment'
+      - properties:
+          status:
+            type: string
+            enum:
+            - canceled
+        required:
+        - status
+        type: object
+    FailReturnRequest:
+      properties:
+        note:
+          type: string
+      type: object
+    RefundReturnRequest:
+      properties:
+        costBearer:
+          $ref: '#/components/schemas/CostBearer'
+          description: Defaults to `shopper`.
+      type: object
+    ShipmentWithoutTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/OrderedShipment'
+      - $ref: '#/components/schemas/CanceledShipment'
+      description: Shipments without tracking information
+      title: Without Tracking
     Money:
       properties:
         currencyCode:
@@ -422,9 +328,64 @@ components:
       - currencyCode
       - amountSubunits
       type: object
-    ShippedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
-      title: Shipped
+    ShipmentUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
+      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
+    OrderedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.ordered_'
+      title: Ordered
+    CreateSimulatedReturnRequest:
+      properties:
+        lineItems:
+          items:
+            $ref: '#/components/schemas/SimulatedReturnLineItem'
+          type: array
+          description: Subset of order line items to return. Defaults to every order item at full quantity.
+        reason:
+          $ref: '#/components/schemas/ReturnReason'
+          description: Defaults to `other` when omitted.
+        orderId:
+          type: string
+          description: Rye order id (`oi_<hex>` / `order_<hex>`) to open the simulated return against.
+      required:
+      - orderId
+      type: object
+    BaseShipment:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        marketplaceOrderId:
+          type: string
+        checkoutIntentId:
+          type: string
+        id:
+          type: string
+      required:
+      - updatedAt
+      - createdAt
+      - marketplaceOrderId
+      - checkoutIntentId
+      - id
+      type: object
+    SimulatedReturnLineItem:
+      properties:
+        quantity:
+          type: integer
+          format: int32
+          description: Units of this line item to return.
+          minimum: 1
+        orderLineItemId:
+          type: string
+          description: Order line item id (`oi_<hex>`) to return.
+      required:
+      - quantity
+      - orderLineItemId
+      type: object
     ReturnFailureCode:
       type: string
       enum:
@@ -432,50 +393,38 @@ components:
       - merchant_unreachable
       - other
       description: "Discriminator for the `failure` sub-object on a `failed` Return:\n\n- `drawdown_credit_failed` — the merchant refund succeeded but Rye could not\n  credit it back; the refund still reached the shopper.\n- `merchant_unreachable` — the marketplace did not respond before the\n  processing deadline.\n- `other` — an uncategorized failure; see `message` for detail.\n\nSwitch on this exhaustively to handle every failure mode."
-    ShippingDetails:
+    DelayedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
+      title: Delayed
+    ReturnDenialResponse:
       properties:
-        trackingEvents:
-          items:
-            $ref: '#/components/schemas/TrackingEvent'
-          type: array
-        shippedAt:
+        note:
+          type: string
+          description: Optional human-readable detail from the merchant.
+        reason:
+          $ref: '#/components/schemas/ReturnDeclineReason'
+          description: Machine-readable decline reason.
+      required:
+      - reason
+      type: object
+      description: Why a return was declined by the merchant.
+    AdvanceShipmentResponse:
+      properties:
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+      required:
+      - shipment
+      type: object
+    Shipment:
+      $ref: '#/components/schemas/ShipmentUnion'
+    DeliveryDate:
+      properties:
+        estimated:
           type: string
           format: date-time
-        tracking:
-          $ref: '#/components/schemas/ShipmentTracking'
-        externalId:
-          type: string
-          description: The external ID is provided by the marketplace and matches the shipment to their system.
       required:
-      - trackingEvents
-      - shippedAt
-      - tracking
-      - externalId
+      - estimated
       type: object
-    ReturnFailureResponse:
-      properties:
-        message:
-          type: string
-          description: Human-readable, stable summary of the failure.
-        code:
-          $ref: '#/components/schemas/ReturnFailureCode'
-          description: Machine-readable failure code; switch on this.
-      required:
-      - message
-      - code
-      type: object
-      description: Details of a failed return.
-    WithStatus_BaseShipmentWithTracking.delayed_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - delayed
-        required:
-        - status
-        type: object
     ShipmentTracking:
       properties:
         carrierName:
@@ -496,72 +445,6 @@ components:
       required:
       - number
       type: object
-    ShipmentUnion:
-      anyOf:
-      - $ref: '#/components/schemas/ShipmentWithTrackingUnion'
-      - $ref: '#/components/schemas/ShipmentWithoutTrackingUnion'
-    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - out_for_delivery
-        required:
-        - status
-        type: object
-    WithStatus_BaseShipmentWithTracking.shipped_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - shipped
-        required:
-        - status
-        type: object
-    ApproveReturnRequest:
-      properties:
-        nextAction:
-          $ref: '#/components/schemas/NextActionType'
-          description: '`ship_items_to_merchant` lands the return in `requires_action` with a stub
-
-            shipping label; `no_action_required` lands it directly in `processing`.
-
-            Defaults to `ship_items_to_merchant`.'
-      type: object
-    CreateSimulatedReturnRequest:
-      properties:
-        lineItems:
-          items:
-            $ref: '#/components/schemas/SimulatedReturnLineItem'
-          type: array
-          description: Subset of order line items to return. Defaults to every order item at full quantity.
-        reason:
-          $ref: '#/components/schemas/ReturnReason'
-          description: Defaults to `other` when omitted.
-        orderId:
-          type: string
-          description: Rye order id (`oi_<hex>` / `order_<hex>`) to open the simulated return against.
-      required:
-      - orderId
-      type: object
-    DelayedShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delayed_'
-      title: Delayed
-    WithStatus_BaseShipment.ordered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - ordered
-        required:
-        - status
-        type: object
     ReturnResponse:
       properties:
         updatedAt:
@@ -625,160 +508,6 @@ components:
         `denial`, `failure`, and `refunds` is populated; `nextAction` is set once the
 
         Return is approved (see {@link NextActionResponse}).'
-    WithStatus_BaseShipment.canceled_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - properties:
-          status:
-            type: string
-            enum:
-            - canceled
-        required:
-        - status
-        type: object
-    DeliveryDate:
-      properties:
-        estimated:
-          type: string
-          format: date-time
-      required:
-      - estimated
-      type: object
-    BaseShipmentWithTracking:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipment'
-      - $ref: '#/components/schemas/ShippingDetails'
-    BaseShipment:
-      properties:
-        updatedAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-        marketplaceOrderId:
-          type: string
-        checkoutIntentId:
-          type: string
-        id:
-          type: string
-      required:
-      - updatedAt
-      - createdAt
-      - marketplaceOrderId
-      - checkoutIntentId
-      - id
-      type: object
-    DenyReturnRequest:
-      properties:
-        note:
-          type: string
-        reason:
-          $ref: '#/components/schemas/ReturnDeclineReason'
-          description: Defaults to `other`.
-      type: object
-    AdvanceShipmentResponse:
-      properties:
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-      required:
-      - shipment
-      type: object
-    CostBearer:
-      type: string
-      enum:
-      - shopper
-      - developer
-      - rye
-      description: "Who absorbs the merchant-retained shortfall `S` on a return — the gap\nbetween what the merchant was charged and what it refunded (restocking fees,\nreturn shipping, partials). Selected per-developer via the\n`refundCostBearingStrategy` flag and resolved into this enum by the\ndurable-workers cost-policy adapter.\n\n- `shopper` (default): the shopper eats `S`. Both anchors reconstruct from\n  the merchant refund, so a short merchant refund shrinks the shopper refund\n  and developer credit in lockstep.\n- `developer`: the shopper is made whole at the original charge `C`; the\n  developer's deposit is credited only what Rye recovered (the merchant\n  anchor), so the developer absorbs `S`.\n- `rye`: the shopper is made whole at `C` and the developer's full drawdown\n  debit `D` is restored, so Rye absorbs `S`."
-    TrackingEventTimestamp:
-      properties:
-        local:
-          type: string
-          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
-        utc:
-          type: string
-          format: date-time
-          description: UTC timestamp
-      required:
-      - local
-      - utc
-      type: object
-    SimulatedReturnLineItem:
-      properties:
-        quantity:
-          type: integer
-          format: int32
-          description: Units of this line item to return.
-          minimum: 1
-        orderLineItemId:
-          type: string
-          description: Order line item id (`oi_<hex>`) to return.
-      required:
-      - quantity
-      - orderLineItemId
-      type: object
-    ShipmentWithoutTrackingUnion:
-      anyOf:
-      - $ref: '#/components/schemas/OrderedShipment'
-      - $ref: '#/components/schemas/CanceledShipment'
-      description: Shipments without tracking information
-      title: Without Tracking
-    WithStatus_BaseShipmentWithTracking.delivered_:
-      allOf:
-      - $ref: '#/components/schemas/BaseShipmentWithTracking'
-      - properties:
-          status:
-            type: string
-            enum:
-            - delivered
-        required:
-        - status
-        type: object
-    EventLocation:
-      properties:
-        country:
-          type:
-          - string
-          - 'null'
-        province:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-      type: object
-    OutForDeliveryShipment:
-      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
-      title: Out for Delivery
-    TrackingEvent:
-      properties:
-        status:
-          $ref: '#/components/schemas/ShipmentStatus'
-        location:
-          $ref: '#/components/schemas/EventLocation'
-        timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TrackingEventTimestamp'
-        description:
-          type:
-          - string
-          - 'null'
-      required:
-      - status
-      - location
-      - timestamp
-      - description
-      type: object
-    FailReturnRequest:
-      properties:
-        note:
-          type: string
-      type: object
-    Shipment:
-      $ref: '#/components/schemas/ShipmentUnion'
     ReturnTimeline:
       properties:
         failedAt:
@@ -813,12 +542,283 @@ components:
         fill in as the Return advances and reflect the path it actually took (a
 
         `denied` Return has `deniedAt` but never `refundedAt`).'
-    RefundReturnRequest:
+    ShippingDetails:
       properties:
-        costBearer:
-          $ref: '#/components/schemas/CostBearer'
-          description: Defaults to `shopper`.
+        trackingEvents:
+          items:
+            $ref: '#/components/schemas/TrackingEvent'
+          type: array
+        shippedAt:
+          type: string
+          format: date-time
+        tracking:
+          $ref: '#/components/schemas/ShipmentTracking'
+        externalId:
+          type: string
+          description: The external ID is provided by the marketplace and matches the shipment to their system.
+      required:
+      - trackingEvents
+      - shippedAt
+      - tracking
+      - externalId
       type: object
+    WithStatus_BaseShipmentWithTracking.delayed_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delayed
+        required:
+        - status
+        type: object
+    DenyReturnRequest:
+      properties:
+        note:
+          type: string
+        reason:
+          $ref: '#/components/schemas/ReturnDeclineReason'
+          description: Defaults to `other`.
+      type: object
+    EventLocation:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        province:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+      type: object
+    CanceledShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipment.canceled_'
+      title: Canceled
+    ShippedShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.shipped_'
+      title: Shipped
+    WithStatus_BaseShipmentWithTracking.shipped_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - shipped
+        required:
+        - status
+        type: object
+    ShipmentStatus:
+      type: string
+      enum:
+      - out_for_delivery
+      - delivered
+      - shipped
+      - canceled
+      - delayed
+      - ordered
+    NextActionResponse:
+      properties:
+        shipItemsToMerchant:
+          properties:
+            label:
+              $ref: '#/components/schemas/ShippingLabel'
+          required:
+          - label
+          type: object
+          description: Prepaid return label. Present only when `type` is `ship_items_to_merchant`.
+        type:
+          $ref: '#/components/schemas/NextActionType'
+          description: Discriminator for the action the shopper must take.
+      required:
+      - type
+      type: object
+      description: 'What the shopper has to do next to complete the return. Present once the
+
+        Return is approved.
+
+
+        `type` is the discriminator: `ship_items_to_merchant` carries the matching
+
+        `shipItemsToMerchant` payload (a prepaid label); `no_action_required` means
+
+        the merchant approved a keep-the-item / no-ship return and the shopper just
+
+        waits for the refund (no payload). The `requires_action` state is reached
+
+        only for `ship_items_to_merchant`; a `no_action_required` approval skips
+
+        straight to `processing`.'
+    TrackingEvent:
+      properties:
+        status:
+          $ref: '#/components/schemas/ShipmentStatus'
+        location:
+          $ref: '#/components/schemas/EventLocation'
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/TrackingEventTimestamp'
+        description:
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - location
+      - timestamp
+      - description
+      type: object
+    ReturnDeclineReason:
+      type: string
+      enum:
+      - final_sale
+      - return_period_ended
+      - other
+      description: 'Why a merchant declined a return:
+
+
+        - `final_sale` — the item was sold as final sale and is not returnable.
+
+        - `return_period_ended` — the return window had already closed.
+
+        - `other` — declined for another reason; see the accompanying note.'
+    ShippingLabel:
+      properties:
+        url:
+          type: string
+          description: URL to the downloadable/printable label.
+      required:
+      - url
+      type: object
+      description: A prepaid return shipping label the shopper uses to send items back.
+    ReturnState:
+      type: string
+      enum:
+      - requested
+      - requires_action
+      - processing
+      - refunded
+      - denied
+      - failed
+      description: "Lifecycle state of a Return:\n\n- `requested` — submitted to the merchant, awaiting approval.\n- `requires_action` — approved; the shopper must ship the items back.\n- `processing` — approved and in flight (items shipped, or no shipping\n  required), awaiting the refund.\n- `refunded` — terminal; the refund has been issued and reconciled.\n- `denied` — terminal; the merchant declined the return.\n- `failed` — terminal; the return could not be completed."
+    NextActionType:
+      type: string
+      enum:
+      - ship_items_to_merchant
+      - no_action_required
+      description: 'Discriminator for {@link NextActionResponse }: `ship_items_to_merchant` (the
+
+        shopper must return the items with the provided label) or
+
+        `no_action_required` (a keep-the-item / no-ship approval — the shopper just
+
+        waits for the refund).'
+    TrackingEventTimestamp:
+      properties:
+        local:
+          type: string
+          description: ISO 8601 string with timezone offset, e.g. "2025-02-05T17:02:00.000-05:00"
+        utc:
+          type: string
+          format: date-time
+          description: UTC timestamp
+      required:
+      - local
+      - utc
+      type: object
+    WithStatus_BaseShipmentWithTracking.out_for_delivery_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - out_for_delivery
+        required:
+        - status
+        type: object
+    OutForDeliveryShipment:
+      $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.out_for_delivery_'
+      title: Out for Delivery
+    ApproveReturnRequest:
+      properties:
+        nextAction:
+          $ref: '#/components/schemas/NextActionType'
+          description: '`ship_items_to_merchant` lands the return in `requires_action` with a stub
+
+            shipping label; `no_action_required` lands it directly in `processing`.
+
+            Defaults to `ship_items_to_merchant`.'
+      type: object
+    ShipmentWithTrackingUnion:
+      anyOf:
+      - $ref: '#/components/schemas/ShippedShipment'
+      - $ref: '#/components/schemas/DeliveredShipment'
+      - $ref: '#/components/schemas/DelayedShipment'
+      - $ref: '#/components/schemas/OutForDeliveryShipment'
+      description: Shipments that have tracking information (shipped, delayed, or delivered states)
+      title: With Tracking
+    DeliveredShipment:
+      allOf:
+      - $ref: '#/components/schemas/WithStatus_BaseShipmentWithTracking.delivered_'
+      - properties:
+          deliveredAt:
+            type: string
+            format: date-time
+        required:
+        - deliveredAt
+        type: object
+      title: Delivered
+    ReturnFailureResponse:
+      properties:
+        message:
+          type: string
+          description: Human-readable, stable summary of the failure.
+        code:
+          $ref: '#/components/schemas/ReturnFailureCode'
+          description: Machine-readable failure code; switch on this.
+      required:
+      - message
+      - code
+      type: object
+      description: Details of a failed return.
+    ReturnReason:
+      type: string
+      enum:
+      - defective
+      - wrong_item
+      - unwanted
+      - color
+      - not_as_described
+      - size_too_large
+      - size_too_small
+      - style
+      - other
+      description: 'Reason a shopper is returning an order, supplied on the create-return call:
+
+        `defective` (arrived damaged or faulty), `wrong_item` (not what was ordered),
+
+        `unwanted` (changed their mind), `color` / `size_too_large` /
+
+        `size_too_small` / `style` (wrong color, size, or style), `not_as_described`
+
+        (differs from the listing), and `other` (anything else).'
+    WithStatus_BaseShipmentWithTracking.delivered_:
+      allOf:
+      - $ref: '#/components/schemas/BaseShipmentWithTracking'
+      - properties:
+          status:
+            type: string
+            enum:
+            - delivered
+        required:
+        - status
+        type: object
   securitySchemes:
     bearerAuth:
       type: apiKey

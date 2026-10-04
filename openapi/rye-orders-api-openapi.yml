@@ -192,6 +192,9 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/orders/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"reason\": {\n            \"code\": \"requested_by_customer\"\n          }\n        }'"
 components:
   schemas:
+    CancellationRejectionCode:
+      $ref: '#/components/schemas/EnumValues_typeofCancellationRejectionCode_'
+      description: "Reason code for why automatic cancellation is not available/allowed for an order.\n\nNaming convention — `<subject>_<state>`, two namespaces:\n  - `cancellation_*` — about the cancellation policy/feature itself.\n  - `order_*`        — about the order's own state or attributes."
     CancellationReason:
       properties:
         message:
@@ -205,55 +208,53 @@ components:
       required:
       - code
       type: object
-    AuthenticationError:
+    Cancellation:
+      anyOf:
+      - $ref: '#/components/schemas/RequestedCancellation'
+      - $ref: '#/components/schemas/CompletedCancellation'
+      - $ref: '#/components/schemas/DeniedCancellation'
+    OrderCancelParams:
       properties:
-        name:
-          type: string
+        reason:
+          $ref: '#/components/schemas/CancellationReason'
+      required:
+      - reason
+      type: object
+      description: 'Body for `POST /orders/{id}/cancel`. The order id comes from the URL, so the
+
+        caller only supplies the cancellation reason (code + optional note).'
+    CancellationDenialReason:
+      properties:
+        code:
+          $ref: '#/components/schemas/CancellationDenialReasonCode'
         message:
           type: string
-        stack:
-          type: string
       required:
-      - name
+      - code
       - message
       type: object
-      additionalProperties: false
-    OrdersListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-          type: array
-        pageInfo:
-          properties:
-            endCursor:
-              type: string
-            startCursor:
-              type: string
-            hasPreviousPage:
-              type: boolean
-            hasNextPage:
-              type: boolean
-          required:
-          - hasPreviousPage
-          - hasNextPage
-          type: object
-      required:
-      - data
-      - pageInfo
-      type: object
-      additionalProperties: false
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
+    CancellationDenialReasonCode:
+      type: string
+      enum:
+      - other
+      - already_shipped
+      - non_cancellable_item
+      - cancellation_window_expired
+    CancellationNotApplicableCode:
+      anyOf:
+      - $ref: '#/components/schemas/CancellationRejectionCode'
+      - type: string
+        enum:
+        - store_not_integrated
+      description: 'Why a programmatic cancellation was rejected. `store_not_integrated` is our
+
+        own pre-policy gate (not a Shopify store, or no active integration); the
+
+        remaining codes come straight from the store cancellation policy evaluation
+
+        in `@rye-com/rye-data-layer` (disabled, window expired, already
+
+        cancelled/fulfilled, order value above limit).'
     CancellationReasonCode:
       type: string
       enum:
@@ -276,16 +277,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    OrderCancelParams:
-      properties:
-        reason:
-          $ref: '#/components/schemas/CancellationReason'
-      required:
-      - reason
-      type: object
-      description: 'Body for `POST /orders/{id}/cancel`. The order id comes from the URL, so the
-
-        caller only supplies the cancellation reason (code + optional note).'
     BaseCancellation:
       properties:
         reason:
@@ -306,66 +297,6 @@ components:
       - createdAt
       - id
       type: object
-    ValidateError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
-      required:
-      - name
-      - message
-      - status
-      - fields
-      type: object
-      additionalProperties: false
-    CancellationNotApplicableCode:
-      anyOf:
-      - $ref: '#/components/schemas/CancellationRejectionCode'
-      - type: string
-        enum:
-        - store_not_integrated
-      description: 'Why a programmatic cancellation was rejected. `store_not_integrated` is our
-
-        own pre-policy gate (not a Shopify store, or no active integration); the
-
-        remaining codes come straight from the store cancellation policy evaluation
-
-        in `@rye-com/rye-data-layer` (disabled, window expired, already
-
-        cancelled/fulfilled, order value above limit).'
-    RequestedCancellation:
-      allOf:
-      - $ref: '#/components/schemas/BaseCancellation'
-      - properties:
-          state:
-            type: string
-            enum:
-            - requested
-        required:
-        - state
-        type: object
-    DeniedCancellation:
-      allOf:
-      - $ref: '#/components/schemas/BaseCancellation'
-      - properties:
-          denialReason:
-            $ref: '#/components/schemas/CancellationDenialReason'
-          state:
-            type: string
-            enum:
-            - denied
-        required:
-        - denialReason
-        - state
-        type: object
     CancellationNotApplicableError:
       description: 'The order cannot be programmatically cancelled — the store has no active
 
@@ -391,40 +322,17 @@ components:
       - code
       type: object
       additionalProperties: false
-    Cancellation:
-      anyOf:
-      - $ref: '#/components/schemas/RequestedCancellation'
-      - $ref: '#/components/schemas/CompletedCancellation'
-      - $ref: '#/components/schemas/DeniedCancellation'
-    CancellationDenialReasonCode:
-      type: string
-      enum:
-      - other
-      - already_shipped
-      - non_cancellable_item
-      - cancellation_window_expired
-    EnumValues_typeofCancellationRejectionCode_:
-      type: string
-      enum:
-      - cancellation_window_expired
-      - cancellation_disabled
-      - order_already_cancelled
-      - order_already_fulfilled
-      - order_value_above_limit
-      description: The value-union of a {@link stringEnum} — e.g. `'red' | 'blue'`.
-    CancellationDenialReason:
-      properties:
-        code:
-          $ref: '#/components/schemas/CancellationDenialReasonCode'
-        message:
-          type: string
-      required:
-      - code
-      - message
-      type: object
-    CancellationRejectionCode:
-      $ref: '#/components/schemas/EnumValues_typeofCancellationRejectionCode_'
-      description: "Reason code for why automatic cancellation is not available/allowed for an order.\n\nNaming convention — `<subject>_<state>`, two namespaces:\n  - `cancellation_*` — about the cancellation policy/feature itself.\n  - `order_*`        — about the order's own state or attributes."
+    RequestedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          state:
+            type: string
+            enum:
+            - requested
+        required:
+        - state
+        type: object
     OrderResponse:
       description: 'Represents a completed order. Orders are created after a checkout intent reaches
 
@@ -468,6 +376,44 @@ components:
       - cancellation
       type: object
       additionalProperties: false
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    OrdersListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+          type: array
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+      required:
+      - data
+      - pageInfo
+      type: object
+      additionalProperties: false
     CompletedCancellation:
       allOf:
       - $ref: '#/components/schemas/BaseCancellation'
@@ -478,6 +424,60 @@ components:
             - completed
         required:
         - state
+        type: object
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    DeniedCancellation:
+      allOf:
+      - $ref: '#/components/schemas/BaseCancellation'
+      - properties:
+          denialReason:
+            $ref: '#/components/schemas/CancellationDenialReason'
+          state:
+            type: string
+            enum:
+            - denied
+        required:
+        - denialReason
+        - state
+        type: object
+    EnumValues_typeofCancellationRejectionCode_:
+      type: string
+      enum:
+      - cancellation_window_expired
+      - cancellation_disabled
+      - order_already_cancelled
+      - order_already_fulfilled
+      - order_value_above_limit
+      description: The value-union of a {@link stringEnum} — e.g. `'red' | 'blue'`.
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
         type: object
   securitySchemes:
     bearerAuth:

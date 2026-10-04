@@ -143,6 +143,22 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/commissions \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
+    CommissionStatus:
+      type: string
+      enum:
+      - pending
+      - confirmed
+      - updated
+      - finalized
+      - refunded
+      - expired
+      description: Lifecycle status of a commission record.
+    SettlementDirection:
+      type: string
+      enum:
+      - rye_owes_developer
+      - developer_owes_rye
+      description: 'Direction of settlement: who owes whom once the commission is finalized.'
     NotFoundError:
       properties:
         name:
@@ -154,6 +170,26 @@ components:
       required:
       - name
       - message
+      type: object
+      additionalProperties: false
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
       type: object
       additionalProperties: false
     CommissionListResponse:
@@ -232,46 +268,6 @@ components:
       - id
       type: object
       description: A commission earned (or owed) on a completed checkout intent.
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    SettlementDirection:
-      type: string
-      enum:
-      - rye_owes_developer
-      - developer_owes_rye
-      description: 'Direction of settlement: who owes whom once the commission is finalized.'
-    CommissionType:
-      type: string
-      enum:
-      - surcharge
-      - promo_arbitrage
-      - discount_code
-      - affiliate
-      - out_of_band
-      description: 'Type of commission earned on an order. Canonical definition used by
-
-        both the API contract and the internal `@rye-com/ci-commissions` package.'
-    CommissionStatus:
-      type: string
-      enum:
-      - pending
-      - confirmed
-      - updated
-      - finalized
-      - refunded
-      - expired
-      description: Lifecycle status of a commission record.
     Money:
       properties:
         currencyCode:
@@ -296,7 +292,7 @@ components:
         required:
         - message
         type: object
-    ValidateError:
+    AuthenticationError:
       properties:
         name:
           type: string
@@ -304,18 +300,22 @@ components:
           type: string
         stack:
           type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
       required:
       - name
       - message
-      - status
-      - fields
       type: object
       additionalProperties: false
+    CommissionType:
+      type: string
+      enum:
+      - surcharge
+      - promo_arbitrage
+      - discount_code
+      - affiliate
+      - out_of_band
+      description: 'Type of commission earned on an order. Canonical definition used by
+
+        both the API contract and the internal `@rye-com/ci-commissions` package.'
   securitySchemes:
     bearerAuth:
       type: apiKey

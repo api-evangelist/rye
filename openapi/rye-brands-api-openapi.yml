@@ -82,28 +82,7 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/brands/domain/$DOMAIN \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    NotFoundError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    Marketplace:
-      enum:
-      - AMAZON
-      - SHOPIFY
-      - BESTBUY
-      - SEPHORA
-      - UNKNOWN
-      type: string
-    AuthenticationError:
+    RuntimeError:
       properties:
         name:
           type: string
@@ -140,7 +119,35 @@ components:
       format: hostname
       description: Represents a valid domain name string.
       pattern: ^(?=.{1,253}$)(?!\-)([a-zA-Z0-9\-]{1,63}(?<!\-)\.)+[a-zA-Z]{2,63}$
-    RuntimeError:
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    Marketplace:
+      enum:
+      - AMAZON
+      - SHOPIFY
+      - BESTBUY
+      - SEPHORA
+      - UNKNOWN
+      type: string
+    NotFoundError:
       properties:
         name:
           type: string
@@ -164,7 +171,7 @@ components:
         required:
         - message
         type: object
-    ValidateError:
+    AuthenticationError:
       properties:
         name:
           type: string
@@ -172,16 +179,9 @@ components:
           type: string
         stack:
           type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
       required:
       - name
       - message
-      - status
-      - fields
       type: object
       additionalProperties: false
   securitySchemes:
