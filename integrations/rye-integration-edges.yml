@@ -1,0 +1,20 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://n8n.io/integrations/rye/
+checked:
+- https://composio.dev/toolkits/rye
+- https://monid.ai/tools/rye
+- https://n8n.io/integrations/rye/
+- https://zapier.com/apps/rye/integrations
+summary: null
+marketplace_apps:
+- marketplace: n8n
+  channel: open-source-node
+  app: rye
+  url: https://n8n.io/integrations/rye/
+  identity: title
+  pair_pages: 0
+  pairs: []
+edges: []
+templates: []
