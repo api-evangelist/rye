@@ -200,6 +200,126 @@ paths:
               $ref: '#/components/schemas/EventTriggerRequest'
 components:
   schemas:
+    EventTriggerRequest:
+      properties:
+        productUrl:
+          type: string
+          description: Product URL (e.g. `https://flybyjing.com/products/sichuan-chili-crisp`).
+        topic:
+          type: string
+          enum:
+          - product.updated
+          description: The webhook event topic to trigger.
+      required:
+      - productUrl
+      - topic
+      type: object
+      description: 'Request body for `POST /api/v1/events/trigger`. Generates a webhook event
+
+        for the product at the given URL so integrations can be exercised on
+
+        demand without waiting for an upstream update.'
+    ValidateError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+        status:
+          type: number
+          format: double
+        fields:
+          $ref: '#/components/schemas/FieldErrors'
+      required:
+      - name
+      - message
+      - status
+      - fields
+      type: object
+      additionalProperties: false
+    ProductEventType:
+      type: string
+      enum:
+      - product.updated
+      - product.removed
+    ShipmentEventType:
+      type: string
+      enum:
+      - shipment.created
+      - shipment.updated
+    WebhookEndpointEventType:
+      type: string
+      enum:
+      - webhook_endpoint.verification_challenge
+    FieldErrors:
+      properties: {}
+      type: object
+      additionalProperties:
+        properties:
+          value: {}
+          message:
+            type: string
+        required:
+        - message
+        type: object
+    EventSourceType:
+      type: string
+      enum:
+      - checkout_intent
+      - shipment
+      - product
+      - webhook_endpoint
+    EventData:
+      properties: {}
+      additionalProperties: {}
+      type: object
+      description: 'The event data payload. The concrete shape depends on `source.type`.
+
+
+        Refer to [webhook event types](https://docs.rye.com/api-v2/webhooks/types)
+
+        for the payload shape associated with each `source.type`.'
+    AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    EventSource:
+      description: 'A reference to the object which triggered the event.
+
+
+        You should use the API to fetch the full object details.'
+      properties:
+        id:
+          type: string
+          description: ID of the object which triggered the event.
+          example: ci_1234567890
+        type:
+          $ref: '#/components/schemas/EventSourceType'
+          description: Type of the object which triggered the event.
+          example: checkout_intent
+      required:
+      - id
+      - type
+      type: object
+      additionalProperties: false
+    CheckoutIntentEventType:
+      type: string
+      enum:
+      - checkout_intent.offer_retrieved
+      - checkout_intent.offer_failed
+      - checkout_intent.completed
+      - checkout_intent.order_failed
     RuntimeError:
       properties:
         name:
@@ -248,49 +368,6 @@ components:
       - source
       type: object
       additionalProperties: false
-    EventTriggerRequest:
-      properties:
-        productUrl:
-          type: string
-          description: Product URL (e.g. `https://flybyjing.com/products/sichuan-chili-crisp`).
-        topic:
-          type: string
-          enum:
-          - product.updated
-          description: The webhook event topic to trigger.
-      required:
-      - productUrl
-      - topic
-      type: object
-      description: 'Request body for `POST /api/v1/events/trigger`. Generates a webhook event
-
-        for the product at the given URL so integrations can be exercised on
-
-        demand without waiting for an upstream update.'
-    ShipmentEventType:
-      type: string
-      enum:
-      - shipment.created
-      - shipment.updated
-    EventSource:
-      description: 'A reference to the object which triggered the event.
-
-
-        You should use the API to fetch the full object details.'
-      properties:
-        id:
-          type: string
-          description: ID of the object which triggered the event.
-          example: ci_1234567890
-        type:
-          $ref: '#/components/schemas/EventSourceType'
-          description: Type of the object which triggered the event.
-          example: checkout_intent
-      required:
-      - id
-      - type
-      type: object
-      additionalProperties: false
     EventListResponse:
       properties:
         pageInfo:
@@ -315,54 +392,12 @@ components:
       - pageInfo
       - data
       type: object
-    ProductEventType:
-      type: string
-      enum:
-      - product.updated
-      - product.removed
-    EventData:
-      properties: {}
-      additionalProperties: {}
-      type: object
-      description: 'The event data payload. The concrete shape depends on `source.type`.
-
-
-        Refer to [webhook event types](https://docs.rye.com/api-v2/webhooks/types)
-
-        for the payload shape associated with each `source.type`.'
-    ValidateError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-        status:
-          type: number
-          format: double
-        fields:
-          $ref: '#/components/schemas/FieldErrors'
-      required:
-      - name
-      - message
-      - status
-      - fields
-      type: object
-      additionalProperties: false
     EventType:
       anyOf:
       - $ref: '#/components/schemas/CheckoutIntentEventType'
       - $ref: '#/components/schemas/ShipmentEventType'
       - $ref: '#/components/schemas/ProductEventType'
       - $ref: '#/components/schemas/WebhookEndpointEventType'
-    EventSourceType:
-      type: string
-      enum:
-      - checkout_intent
-      - shipment
-      - product
-      - webhook_endpoint
     NotFoundError:
       properties:
         name:
@@ -376,41 +411,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    CheckoutIntentEventType:
-      type: string
-      enum:
-      - checkout_intent.offer_retrieved
-      - checkout_intent.offer_failed
-      - checkout_intent.completed
-      - checkout_intent.order_failed
-    FieldErrors:
-      properties: {}
-      type: object
-      additionalProperties:
-        properties:
-          value: {}
-          message:
-            type: string
-        required:
-        - message
-        type: object
-    AuthenticationError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    WebhookEndpointEventType:
-      type: string
-      enum:
-      - webhook_endpoint.verification_challenge
   securitySchemes:
     bearerAuth:
       type: apiKey

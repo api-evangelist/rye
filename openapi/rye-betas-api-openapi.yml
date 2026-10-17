@@ -76,36 +76,6 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/betas/checkout-sessions \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\" \\\n    -d '{\n          \"productUrl\": \"https://www.amazon.com/dp/B0DFC9MT8Q\",\n          \"quantity\": 1,\n          \"referenceId\": \"order-1234\"\n        }'"
 components:
   schemas:
-    RuntimeError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
-    VariantSelection:
-      properties:
-        value:
-          anyOf:
-          - type: string
-          - type: number
-            format: double
-          example: Small, Red, XS, L, etc.
-          maxLength: 60
-        label:
-          type: string
-          example: Size, Color, etc.
-          maxLength: 30
-      required:
-      - value
-      - label
-      type: object
     Pick_CheckoutIntentPostParams.Exclude_keyofCheckoutIntentPostParams.buyer__:
       properties:
         productUrl:
@@ -138,6 +108,18 @@ components:
       - quantity
       type: object
       description: From T, pick a set of properties whose keys are in the union K
+    CheckoutSession:
+      properties:
+        url:
+          type: string
+          description: URL to send your user to for checkout. This URL is valid for 4 hours.
+      required:
+      - url
+      type: object
+      description: 'A checkout session represents a hosted checkout form that shoppers can use to complete their purchases.
+
+
+        Checkout sessions provide a pre-built UI for collecting payment and shipping information, allowing you to quickly integrate checkout functionality without building your own forms.'
     ValidateError:
       properties:
         name:
@@ -158,18 +140,6 @@ components:
       - fields
       type: object
       additionalProperties: false
-    CheckoutSession:
-      properties:
-        url:
-          type: string
-          description: URL to send your user to for checkout. This URL is valid for 4 hours.
-      required:
-      - url
-      type: object
-      description: 'A checkout session represents a hosted checkout form that shoppers can use to complete their purchases.
-
-
-        Checkout sessions provide a pre-built UI for collecting payment and shipping information, allowing you to quickly integrate checkout functionality without building your own forms.'
     Partial_Buyer_:
       properties:
         firstName:
@@ -222,6 +192,22 @@ components:
         required:
         - message
         type: object
+    CheckoutConstraints:
+      properties:
+        offerRetrievalEffort:
+          $ref: '#/components/schemas/OfferRetrievalEffort'
+          example: max
+        maxShippingPrice:
+          type: integer
+          format: int32
+          example: 500
+          minimum: 0
+        maxTotalPrice:
+          type: integer
+          format: int32
+          example: 100000
+          minimum: 0
+      type: object
     CheckoutSessionPostParams:
       allOf:
       - $ref: '#/components/schemas/Omit_CheckoutIntentPostParams.buyer_'
@@ -250,6 +236,19 @@ components:
       - message
       type: object
       additionalProperties: false
+    RuntimeError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
     Omit_CheckoutIntentPostParams.buyer_:
       $ref: '#/components/schemas/Pick_CheckoutIntentPostParams.Exclude_keyofCheckoutIntentPostParams.buyer__'
       description: Construct a type with the properties of T except for those in type K.
@@ -266,21 +265,22 @@ components:
 
 
         Default: ''max'''
-    CheckoutConstraints:
+    VariantSelection:
       properties:
-        offerRetrievalEffort:
-          $ref: '#/components/schemas/OfferRetrievalEffort'
-          example: max
-        maxShippingPrice:
-          type: integer
-          format: int32
-          example: 500
-          minimum: 0
-        maxTotalPrice:
-          type: integer
-          format: int32
-          example: 100000
-          minimum: 0
+        value:
+          anyOf:
+          - type: string
+          - type: number
+            format: double
+          example: Small, Red, XS, L, etc.
+          maxLength: 60
+        label:
+          type: string
+          example: Size, Color, etc.
+          maxLength: 30
+      required:
+      - value
+      - label
       type: object
   securitySchemes:
     bearerAuth:

@@ -143,35 +143,12 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/commissions \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    CommissionStatus:
-      type: string
-      enum:
-      - pending
-      - confirmed
-      - updated
-      - finalized
-      - refunded
-      - expired
-      description: Lifecycle status of a commission record.
     SettlementDirection:
       type: string
       enum:
       - rye_owes_developer
       - developer_owes_rye
       description: 'Direction of settlement: who owes whom once the commission is finalized.'
-    NotFoundError:
-      properties:
-        name:
-          type: string
-        message:
-          type: string
-        stack:
-          type: string
-      required:
-      - name
-      - message
-      type: object
-      additionalProperties: false
     ValidateError:
       properties:
         name:
@@ -192,35 +169,30 @@ components:
       - fields
       type: object
       additionalProperties: false
-    CommissionListResponse:
+    Money:
       properties:
-        pageInfo:
-          properties:
-            endCursor:
-              type: string
-            startCursor:
-              type: string
-            hasPreviousPage:
-              type: boolean
-            hasNextPage:
-              type: boolean
-          required:
-          - hasPreviousPage
-          - hasNextPage
-          type: object
-        data:
-          items:
-            $ref: '#/components/schemas/CommissionResponse'
-          type: array
+        currencyCode:
+          type: string
+          example: USD
+        amountSubunits:
+          type: integer
+          format: int32
+          example: 1500
       required:
-      - pageInfo
-      - data
+      - currencyCode
+      - amountSubunits
       type: object
-      description: 'Paginated commissions response. Use `pageInfo.endCursor` as the next page''s
+    CommissionType:
+      type: string
+      enum:
+      - surcharge
+      - promo_arbitrage
+      - discount_code
+      - affiliate
+      - out_of_band
+      description: 'Type of commission earned on an order. Canonical definition used by
 
-        `after` query parameter to walk forward; use `pageInfo.startCursor` as the
-
-        next page''s `before` query parameter to walk backward.'
+        both the API contract and the internal `@rye-com/ci-commissions` package.'
     CommissionResponse:
       properties:
         finalizedAt:
@@ -268,19 +240,6 @@ components:
       - id
       type: object
       description: A commission earned (or owed) on a completed checkout intent.
-    Money:
-      properties:
-        currencyCode:
-          type: string
-          example: USD
-        amountSubunits:
-          type: integer
-          format: int32
-          example: 1500
-      required:
-      - currencyCode
-      - amountSubunits
-      type: object
     FieldErrors:
       properties: {}
       type: object
@@ -305,17 +264,58 @@ components:
       - message
       type: object
       additionalProperties: false
-    CommissionType:
+    CommissionListResponse:
+      properties:
+        pageInfo:
+          properties:
+            endCursor:
+              type: string
+            startCursor:
+              type: string
+            hasPreviousPage:
+              type: boolean
+            hasNextPage:
+              type: boolean
+          required:
+          - hasPreviousPage
+          - hasNextPage
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/CommissionResponse'
+          type: array
+      required:
+      - pageInfo
+      - data
+      type: object
+      description: 'Paginated commissions response. Use `pageInfo.endCursor` as the next page''s
+
+        `after` query parameter to walk forward; use `pageInfo.startCursor` as the
+
+        next page''s `before` query parameter to walk backward.'
+    CommissionStatus:
       type: string
       enum:
-      - surcharge
-      - promo_arbitrage
-      - discount_code
-      - affiliate
-      - out_of_band
-      description: 'Type of commission earned on an order. Canonical definition used by
-
-        both the API contract and the internal `@rye-com/ci-commissions` package.'
+      - pending
+      - confirmed
+      - updated
+      - finalized
+      - refunded
+      - expired
+      description: Lifecycle status of a commission record.
+    NotFoundError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: apiKey

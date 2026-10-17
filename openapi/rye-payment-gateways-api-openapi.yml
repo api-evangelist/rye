@@ -80,22 +80,20 @@ paths:
         source: "curl https://staging.api.rye.com/api/v1/payment-gateways/$GATEWAY/session \\\n    -X POST \\\n    -H \"Authorization: Bearer $CHECKOUT_INTENTS_API_KEY\""
 components:
   schemas:
-    PaymentGatewaySession:
-      properties:
-        container:
-          type: string
-        sessionKey:
-          type: string
-        gateway:
-          type: string
-          enum:
-          - basis_theory
-      required:
-      - container
-      - sessionKey
-      - gateway
-      type: object
     AuthenticationError:
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+      - name
+      - message
+      type: object
+      additionalProperties: false
+    RuntimeError:
       properties:
         name:
           type: string
@@ -112,19 +110,21 @@ components:
       type: string
       enum:
       - basis-theory
-    RuntimeError:
+    PaymentGatewaySession:
       properties:
-        name:
+        container:
           type: string
-        message:
+        sessionKey:
           type: string
-        stack:
+        gateway:
           type: string
+          enum:
+          - basis_theory
       required:
-      - name
-      - message
+      - container
+      - sessionKey
+      - gateway
       type: object
-      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: apiKey
