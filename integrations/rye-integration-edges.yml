@@ -3,9 +3,16 @@ method: searched
 source:
 - https://n8n.io/integrations/rye/
 checked:
+- https://api.nuget.org/v3
 - https://composio.dev/toolkits/rye
+- https://crates.io/api/v1
 - https://monid.ai/tools/rye
 - https://n8n.io/integrations/rye/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://zapier.com/apps/rye/integrations
 summary: null
 marketplace_apps:
@@ -16,5 +23,35 @@ marketplace_apps:
   identity: title
   pair_pages: 0
   pairs: []
-edges: []
+edges:
+- partner_name: Maven Central
+  partner: maven-central
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Java/JVM)
+  evidence: https://central.sonatype.com/artifact/com.rye/checkout-intents
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.rye:checkout-intents
+      version: 0.15.0
+      released: '2026-10-02'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.rye/checkout-intents
+      repo_leg: domain:rye.com
+      publisher_leg: groupId:rye.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 templates: []
